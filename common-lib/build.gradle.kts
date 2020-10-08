@@ -6,5 +6,7 @@ plugins {
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 
-    implementation(Libs.stdLib)
+    implementation(Libs.kotlinStdlib)
+
+    implementation(Libs.timber)
 }

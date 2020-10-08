@@ -8,5 +8,14 @@ dependencies {
 
     implementation(project(Modules.commonLib))
 
-    implementation(Libs.stdLib)
+    implementation(Libs.kotlinStdlib)
+
+    implementation(Libs.koinCore)
+
+    implementation(Libs.timber)
+
+    testImplementation(TestLibs.junit)
+    testImplementation(TestLibs.hamcrest)
+    testImplementation(TestLibs.mockk)
+    testImplementation(TestLibs.koin)
 }

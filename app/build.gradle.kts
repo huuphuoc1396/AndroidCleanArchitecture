@@ -5,6 +5,10 @@ plugins {
     kotlin(GradlePlugins.kotlinApt)
 }
 
+apply {
+    plugin(GradlePlugins.navigation)
+}
+
 android {
     compileSdkVersion(Android.targetSdk)
 
@@ -29,6 +33,18 @@ android {
             proguardFiles(BuildType.proguardDebug)
         }
     }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
+    buildFeatures {
+        dataBinding = true
+    }
+
+    androidExtensions {
+        isExperimental = true
+    }
 }
 
 dependencies {
@@ -38,13 +54,43 @@ dependencies {
     implementation(project(Modules.domain))
     implementation(project(Modules.commonLib))
 
-    implementation(Libs.stdLib)
+    implementation(Libs.kotlinStdlib)
     implementation(Libs.androidxCore)
+    implementation(Libs.viewModel)
+    implementation(Libs.liveDataKtx)
+    implementation(Libs.viewModelSavedState)
+
+    implementation(Libs.koinAndroid)
+    implementation(Libs.koinAndroidScope)
+    implementation(Libs.koinViewModel)
+    implementation(Libs.koinFragment)
+
+    implementation(Libs.androidCoroutines)
+
+    implementation(Libs.navigationFragment)
+    implementation(Libs.navigationUi)
+
+    implementation(Libs.annotations)
     implementation(Libs.appCompat)
-    implementation(Libs.constraintLayout)
+    implementation(Libs.constraint)
+    implementation(Libs.cardView)
+    implementation(Libs.material)
+    implementation(Libs.recyclerView)
 
-    testImplementation(Libs.junit)
+    implementation(Libs.timber)
+    implementation(Libs.glide)
+    implementation(Libs.easyPermissions)
 
-    androidTestImplementation(Libs.androidJunit)
-    androidTestImplementation(Libs.espressoCore)
+    kapt(Libs.lifecycleCompiler)
+
+    testImplementation(TestLibs.junit)
+    testImplementation(TestLibs.hamcrest)
+    testImplementation(TestLibs.archTestCore)
+    testImplementation(TestLibs.mockk)
+    testImplementation(TestLibs.androidMockk)
+    testImplementation(TestLibs.robolectric)
+    testImplementation(TestLibs.koin)
+
+    androidTestImplementation(TestLibs.androidTestJunit)
+    androidTestImplementation(TestLibs.espressoCore)
 }

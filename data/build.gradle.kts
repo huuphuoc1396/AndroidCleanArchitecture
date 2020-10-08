@@ -2,6 +2,7 @@ plugins {
     id(GradlePlugins.androidLib)
     kotlin(GradlePlugins.kotlinAndroid)
     kotlin(GradlePlugins.kotlinAndroidExt)
+    kotlin(GradlePlugins.kotlinApt)
 }
 
 android {
@@ -35,11 +36,30 @@ dependencies {
     implementation(project(Modules.domain))
     implementation(project(Modules.commonLib))
 
-    implementation(Libs.stdLib)
+    implementation(Libs.kotlinStdlib)
     implementation(Libs.androidxCore)
 
-    testImplementation(Libs.junit)
+    implementation(Libs.roomRuntime)
+    implementation(Libs.roomKtx)
 
-    androidTestImplementation(Libs.androidJunit)
-    androidTestImplementation(Libs.espressoCore)
+    implementation(Libs.koinAndroid)
+
+    implementation(Libs.timber)
+    implementation(Libs.loggingInterceptor)
+
+    implementation(Libs.retrofit)
+    implementation(Libs.retrofitGson)
+
+    kapt(Libs.roomCompiler)
+
+    testImplementation(TestLibs.junit)
+    testImplementation(TestLibs.hamcrest)
+    testImplementation(TestLibs.mockk)
+    testImplementation(TestLibs.androidMockk)
+    testImplementation(TestLibs.mockWebServer)
+    testImplementation(TestLibs.robolectric)
+    testImplementation(TestLibs.room)
+    testImplementation(TestLibs.koin)
+
+    androidTestImplementation(TestLibs.androidTestJunit)
 }
