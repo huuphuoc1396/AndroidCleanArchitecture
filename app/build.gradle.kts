@@ -65,6 +65,7 @@ dependencies {
     implementation(Libs.koinViewModel)
     implementation(Libs.koinFragment)
 
+    implementation(Libs.coroutinesCore)
     implementation(Libs.androidCoroutines)
 
     implementation(Libs.navigationFragment)

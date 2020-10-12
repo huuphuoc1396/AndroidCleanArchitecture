@@ -39,6 +39,9 @@ dependencies {
     implementation(Libs.kotlinStdlib)
     implementation(Libs.androidxCore)
 
+    implementation(Libs.coroutinesCore)
+    implementation(Libs.androidCoroutines)
+
     implementation(Libs.roomRuntime)
     implementation(Libs.roomKtx)
 

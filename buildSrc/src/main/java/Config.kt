@@ -7,7 +7,7 @@ object Versions {
     internal const val navigation = "2.3.0"
     internal const val room = "2.2.5"
     internal const val koin = "2.2.0-rc-2"
-    internal const val androidCoroutines = "1.3.9"
+    internal const val coroutines = "1.3.9"
 
     // Support
     internal const val annotations = "1.1.0"
@@ -158,7 +158,8 @@ object Libs {
     const val koinFragment = "org.koin:koin-androidx-fragment:${Versions.koin}"
 
     // Coroutines
-    const val androidCoroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.androidCoroutines}"
+    const val coroutinesCore = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}"
+    const val androidCoroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}"
 
     // Support
     const val annotations = "androidx.annotation:annotation:${Versions.annotations}"
