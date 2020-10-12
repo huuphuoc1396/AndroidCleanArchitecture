@@ -1,4 +1,4 @@
-package com.example.domain
+package com.example.lib.usecase
 
 abstract class UseCase<Params : UseCase.Params, Result>() {
 

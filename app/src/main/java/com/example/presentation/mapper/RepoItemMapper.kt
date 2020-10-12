@@ -1,9 +1,9 @@
-package com.example.sampleproject.mapper
+package com.example.presentation.mapper
 
 import com.example.domain.model.Repo
 import com.example.lib.mapper.Mapper
-import com.example.sampleproject.model.OwnerItem
-import com.example.sampleproject.model.RepoItem
+import com.example.presentation.model.OwnerItem
+import com.example.presentation.model.RepoItem
 
 class RepoItemMapper : Mapper<Repo, RepoItem>() {
     override fun map(input: Repo): RepoItem {

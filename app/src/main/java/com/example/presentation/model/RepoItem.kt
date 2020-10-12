@@ -1,4 +1,4 @@
-package com.example.sampleproject.model
+package com.example.presentation.model
 
 data class RepoItem(
     val id: Int,

@@ -1,7 +1,7 @@
-package com.example.sampleproject.di
+package com.example.presentation.di
 
-import com.example.sampleproject.mapper.RepoItemMapper
-import com.example.sampleproject.MainViewModel
+import com.example.presentation.mapper.RepoItemMapper
+import com.example.presentation.MainViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 

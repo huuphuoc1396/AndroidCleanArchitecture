@@ -1,6 +1,6 @@
-package com.example.data.api
+package com.example.data.remote.api
 
-import com.example.data.response.RepoListResponse
+import com.example.data.remote.response.RepoListResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 

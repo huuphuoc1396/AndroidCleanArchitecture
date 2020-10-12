@@ -1,4 +1,4 @@
-package com.example.data.response
+package com.example.data.remote.response
 
 
 import com.google.gson.annotations.SerializedName
@@ -9,7 +9,7 @@ data class RepoListResponse(
     @SerializedName("incomplete_results")
     val incompleteResults: Boolean?,
     @SerializedName("items")
-    val items: List<Item>?
+    val items: List<Item?>?
 ) {
     data class Item(
         @SerializedName("id")

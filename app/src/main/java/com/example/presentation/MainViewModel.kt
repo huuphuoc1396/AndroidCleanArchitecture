@@ -1,10 +1,10 @@
-package com.example.sampleproject
+package com.example.presentation
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.sampleproject.mapper.RepoItemMapper
-import com.example.sampleproject.model.RepoItem
+import com.example.presentation.mapper.RepoItemMapper
+import com.example.presentation.model.RepoItem
 import com.example.domain.usecase.SearchReposUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job

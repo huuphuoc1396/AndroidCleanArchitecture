@@ -1,7 +1,7 @@
 package com.example.data.repository
 
-import com.example.data.api.RepoApi
-import com.example.data.mapper.RepoMapper
+import com.example.data.remote.api.RepoApi
+import com.example.data.remote.mapper.RepoMapper
 import com.example.domain.model.Repo
 import com.example.domain.repository.RepoRepository
 import com.example.lib.result.Result
