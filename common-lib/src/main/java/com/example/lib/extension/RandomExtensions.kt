@@ -9,3 +9,5 @@ fun Random.nextString(length: Int = nextInt(1, 256)): String {
         .map { index -> charPool[index] }
         .joinToString("")
 }
+
+fun Random.nextChar() = Random.nextInt(0, 255).toChar()

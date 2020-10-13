@@ -133,6 +133,7 @@ object TestLibs {
 object Libs {
     // Core
     const val kotlinStdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${Versions.kotlin}"
+    const val kotlinReflect = "org.jetbrains.kotlin:kotlin-reflect:${Versions.kotlin}"
     const val androidxCore = "androidx.core:core-ktx:${Versions.androidxCore}"
 
     // Lifecycle
