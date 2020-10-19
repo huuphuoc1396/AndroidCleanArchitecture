@@ -83,6 +83,7 @@ dependencies {
     implementation(Libs.easyPermissions)
 
     kapt(Libs.lifecycleCompiler)
+    kapt(Libs.glideCompiler)
 
     testImplementation(TestLibs.junit)
     testImplementation(TestLibs.hamcrest)

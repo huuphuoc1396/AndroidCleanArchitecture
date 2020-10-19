@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="repoItem"
+            type="com.example.presentation.model.RepoItem" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="8dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imageRepoThumbnail"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:scaleType="centerCrop"
+            app:imageUrl="@{repoItem.owner.avatarUrl}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textRepoName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="@{repoItem.name}"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            app:layout_constraintBottom_toTopOf="@+id/textOwnerName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageRepoThumbnail"
+            app:layout_constraintTop_toTopOf="@id/imageRepoThumbnail"
+            app:layout_constraintVertical_chainStyle="packed"
+            tools:text="Clean Architecture" />
+
+        <TextView
+            android:id="@+id/textOwnerName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@{@string/by_owner(repoItem.owner.login)}"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            app:layout_constraintBottom_toBottomOf="@id/imageRepoThumbnail"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageRepoThumbnail"
+            app:layout_constraintTop_toBottomOf="@+id/textRepoName"
+            tools:text="by me" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

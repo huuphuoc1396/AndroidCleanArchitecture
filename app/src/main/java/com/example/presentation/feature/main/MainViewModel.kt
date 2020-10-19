@@ -19,7 +19,7 @@ class MainViewModel(
 
     private var searchJob: Job? = null
 
-    val repoItem = MutableLiveData<List<RepoItem>>()
+    val repoItem = MutableLiveData<List<RepoItem>>(listOf())
 
     fun searchRepos(query: String) {
         searchJob?.cancel()

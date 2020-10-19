@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Clean Architecture</string>
+
+    <string name="by_owner">by %s</string>
 </resources>
