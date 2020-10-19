@@ -1,23 +1,12 @@
 package com.example.presentation
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.lifecycle.Observer
-import org.koin.android.ext.android.inject
-import timber.log.Timber
+import com.example.common.BaseActivity
 
-class MainActivity : AppCompatActivity() {
-
-    private val viewModel: MainViewModel by inject()
+class MainActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        viewModel.repoItem.observe(this, Observer {
-            Timber.i("$it")
-        })
-
-        viewModel.searchRepos("android")
     }
 }

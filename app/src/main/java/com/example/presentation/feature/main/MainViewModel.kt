@@ -1,11 +1,11 @@
-package com.example.presentation
+package com.example.presentation.feature.main
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.domain.usecase.SearchReposUseCase
 import com.example.presentation.mapper.RepoItemMapper
 import com.example.presentation.model.RepoItem
-import com.example.domain.usecase.SearchReposUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch

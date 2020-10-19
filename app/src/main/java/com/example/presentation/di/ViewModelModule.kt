@@ -1,11 +1,10 @@
 package com.example.presentation.di
 
-import com.example.presentation.mapper.RepoItemMapper
-import com.example.presentation.MainViewModel
+import com.example.presentation.feature.main.MainViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
-val appModule = module {
+val viewModelModule = module {
 
     viewModel {
         MainViewModel(
@@ -13,6 +12,4 @@ val appModule = module {
             repoItemMapper = get()
         )
     }
-
-    factory { RepoItemMapper() }
 }
