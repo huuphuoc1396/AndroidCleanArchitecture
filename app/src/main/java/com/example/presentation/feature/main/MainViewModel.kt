@@ -1,6 +1,7 @@
 package com.example.presentation.feature.main
 
 import androidx.lifecycle.*
+import com.example.common.base.BaseViewModel
 import com.example.domain.usecase.SearchReposUseCase
 import com.example.lib.exception.CoroutineException
 import com.example.lib.extension.defaultEmpty
@@ -15,12 +16,11 @@ import java.util.*
 class MainViewModel(
     private val searchReposUseCase: SearchReposUseCase,
     private val repoItemMapper: RepoItemMapper
-) : ViewModel() {
+) : BaseViewModel() {
 
     private var searchJob: Job? = null
 
     val repoItem = MutableLiveData<List<RepoItem>>(listOf())
-    val error = MutableLiveData<CoroutineException>()
     val isLoading = MutableLiveData<Boolean>(false)
     val query = MutableLiveData<String>("")
 
@@ -43,7 +43,7 @@ class MainViewModel(
                         isLoading.value = false
                     },
                     error = { exception ->
-                        error.value = exception
+                        handleNetworkError(exception)
                         isLoading.value = false
                     }
                 )
