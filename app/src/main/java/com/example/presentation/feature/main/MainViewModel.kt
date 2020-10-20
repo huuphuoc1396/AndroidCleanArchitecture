@@ -2,14 +2,14 @@ package com.example.presentation.feature.main
 
 import androidx.lifecycle.*
 import com.example.domain.usecase.SearchReposUseCase
-import com.example.lib.extension.orFalse
+import com.example.lib.exception.CoroutineException
+import com.example.lib.extension.defaultEmpty
 import com.example.presentation.mapper.RepoItemMapper
 import com.example.presentation.model.RepoItem
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import timber.log.Timber
 import java.util.*
 
 class MainViewModel(
@@ -20,6 +20,7 @@ class MainViewModel(
     private var searchJob: Job? = null
 
     val repoItem = MutableLiveData<List<RepoItem>>(listOf())
+    val error = MutableLiveData<CoroutineException>()
     val isLoading = MutableLiveData<Boolean>(false)
     val query = MutableLiveData<String>("")
 
@@ -28,7 +29,7 @@ class MainViewModel(
     }
 
     fun searchRepos() {
-        val query = query.value.orEmpty().toLowerCase(Locale.getDefault()).trim()
+        val query = query.value.defaultEmpty().toLowerCase(Locale.getDefault()).trim()
         if (query.isNotEmpty()) {
             searchJob?.cancel()
             searchJob = viewModelScope.launch {
@@ -42,7 +43,7 @@ class MainViewModel(
                         isLoading.value = false
                     },
                     error = { exception ->
-                        Timber.e(exception)
+                        error.value = exception
                         isLoading.value = false
                     }
                 )

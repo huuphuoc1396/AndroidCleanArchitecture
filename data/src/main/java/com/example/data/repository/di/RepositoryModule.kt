@@ -8,7 +8,8 @@ val repositoryModule = module {
     single<RepoRepository> {
         RepoRepositoryImpl(
             repoApi = get(),
-            repoMapper = get()
+            repoMapper = get(),
+            remoteCoroutineExceptionHandler = get()
         )
     }
 }

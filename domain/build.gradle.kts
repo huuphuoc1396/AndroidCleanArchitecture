@@ -11,9 +11,7 @@ dependencies {
     implementation(Libs.kotlinStdlib)
 
     implementation(Libs.coroutinesCore)
-
     implementation(Libs.koinCore)
-
     implementation(Libs.timber)
 
     testImplementation(TestLibs.junit)
