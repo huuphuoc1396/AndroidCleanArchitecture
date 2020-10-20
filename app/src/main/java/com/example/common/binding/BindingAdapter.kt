@@ -1,4 +1,4 @@
-package com.example.common
+package com.example.common.binding
 
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.databinding.BindingAdapter

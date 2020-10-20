@@ -1,7 +1,7 @@
 package com.example.presentation
 
 import android.os.Bundle
-import com.example.common.BaseActivity
+import com.example.common.base.BaseActivity
 
 class MainActivity : BaseActivity() {
 

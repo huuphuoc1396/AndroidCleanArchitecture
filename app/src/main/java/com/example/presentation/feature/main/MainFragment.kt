@@ -10,7 +10,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
-import com.example.common.BaseFragment
+import com.example.common.base.BaseFragment
 import com.example.common.extension.dismissKeyboard
 import com.example.lib.exception.ApiException
 import com.example.lib.exception.CoroutineException
