@@ -63,13 +63,15 @@ dependencies {
     kapt(Libs.roomCompiler)
 
     testImplementation(TestLibs.junit)
+    testImplementation(TestLibs.androidTestJunit)
+    testImplementation(TestLibs.archTestCore)
     testImplementation(TestLibs.hamcrest)
     testImplementation(TestLibs.mockk)
     testImplementation(TestLibs.androidMockk)
-    testImplementation(TestLibs.mockWebServer)
+    testImplementation(TestLibs.koin)
     testImplementation(TestLibs.robolectric)
     testImplementation(TestLibs.room)
-    testImplementation(TestLibs.koin)
+    testImplementation(project(Modules.commonUnitTest))
 
     androidTestImplementation(TestLibs.androidTestJunit)
 }

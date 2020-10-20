@@ -19,8 +19,8 @@ fun <R> Result<R>.assertError(expected: Result.Error) {
         success = {
             Assert.assertTrue(false)
         },
-        error = { exception ->
-            Assert.assertEquals(expected.exception, exception)
+        error = { coroutineException ->
+            Assert.assertEquals(expected.coroutineException, coroutineException)
         }
     )
 }

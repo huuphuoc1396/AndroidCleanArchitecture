@@ -11,11 +11,16 @@ dependencies {
     implementation(Libs.kotlinStdlib)
 
     implementation(Libs.coroutinesCore)
+
     implementation(Libs.koinCore)
+
     implementation(Libs.timber)
 
     testImplementation(TestLibs.junit)
+    testImplementation(TestLibs.androidTestJunit)
+    testImplementation(TestLibs.archTestCore)
     testImplementation(TestLibs.hamcrest)
     testImplementation(TestLibs.mockk)
     testImplementation(TestLibs.koin)
+    testImplementation(project(Modules.commonUnitTest))
 }

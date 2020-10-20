@@ -37,6 +37,7 @@ object Versions {
     internal const val glide = "4.11.0"
     internal const val easyPermission = "3.0.0"
     internal const val chucker = "3.3.0"
+    internal const val leakCanary = "2.5"
 }
 
 object Url {
@@ -74,6 +75,7 @@ object Modules {
     const val data = ":data"
     const val domain = ":domain"
     const val commonLib = ":common-lib"
+    const val commonUnitTest = ":common-unit-test"
 }
 
 object AndroidJUnit {
@@ -121,14 +123,14 @@ object TestLibs {
     const val androidMockk = "io.mockk:mockk-android:${Versions.mockk}"
     const val mockWebServer = "com.squareup.okhttp3:mockwebserver:${Versions.mockWebServer}"
 
+    // Koin
+    const val koin = "org.koin:koin-test:${Versions.koin}"
+
     // Robolectric
     const val robolectric = "org.robolectric:robolectric:${Versions.robolectric}"
 
     // Room
     const val room = "androidx.room:room-testing:${Versions.room}"
-
-    // Koin
-    const val koin = "org.koin:koin-test:${Versions.koin}"
 }
 
 object Libs {
@@ -186,6 +188,10 @@ object Libs {
     // Permission
     const val easyPermissions = "pub.devrel:easypermissions:${Versions.easyPermission}"
 
+    // Chucker
     const val debugChucker = "com.github.chuckerteam.chucker:library:${Versions.chucker}"
     const val releaseChucker = "com.github.chuckerteam.chucker:library-no-op:${Versions.chucker}"
+
+    // Leak Canary
+    const val leakCanary = "com.squareup.leakcanary:leakcanary-android:${Versions.leakCanary}"
 }

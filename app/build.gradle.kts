@@ -87,16 +87,20 @@ dependencies {
     implementation(Libs.glide)
     implementation(Libs.easyPermissions)
 
+    debugImplementation(Libs.leakCanary)
+
     kapt(Libs.lifecycleCompiler)
     kapt(Libs.glideCompiler)
 
     testImplementation(TestLibs.junit)
-    testImplementation(TestLibs.hamcrest)
+    testImplementation(TestLibs.androidTestJunit)
     testImplementation(TestLibs.archTestCore)
+    testImplementation(TestLibs.hamcrest)
     testImplementation(TestLibs.mockk)
     testImplementation(TestLibs.androidMockk)
-    testImplementation(TestLibs.robolectric)
     testImplementation(TestLibs.koin)
+    testImplementation(TestLibs.robolectric)
+    testImplementation(project(Modules.commonUnitTest))
 
     androidTestImplementation(TestLibs.androidTestJunit)
     androidTestImplementation(TestLibs.espressoCore)
