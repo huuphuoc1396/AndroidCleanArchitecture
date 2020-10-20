@@ -19,11 +19,15 @@ android {
 
     buildTypes {
         getByName(BuildType.release) {
+            buildConfigField("String", "BASE_URL", "\"https://api.github.com/\"")
+
             isMinifyEnabled = BuildType.minifyRelease
             proguardFiles(BuildType.proguardRelease)
         }
 
         getByName(BuildType.debug) {
+            buildConfigField("String", "BASE_URL", "\"https://api.github.com/\"")
+
             isMinifyEnabled = BuildType.minifyDebug
             proguardFiles(BuildType.proguardDebug)
         }
@@ -52,6 +56,9 @@ dependencies {
 
     implementation(Libs.retrofit)
     implementation(Libs.retrofitGson)
+
+    debugImplementation(Libs.debugChucker)
+    releaseImplementation(Libs.releaseChucker)
 
     kapt(Libs.roomCompiler)
 

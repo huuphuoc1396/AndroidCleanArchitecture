@@ -36,6 +36,7 @@ object Versions {
     internal const val retrofit = "2.9.0"
     internal const val glide = "4.11.0"
     internal const val easyPermission = "3.0.0"
+    internal const val chucker = "3.3.0"
 }
 
 object Url {
@@ -184,4 +185,7 @@ object Libs {
 
     // Permission
     const val easyPermissions = "pub.devrel:easypermissions:${Versions.easyPermission}"
+
+    const val debugChucker = "com.github.chuckerteam.chucker:library:${Versions.chucker}"
+    const val releaseChucker = "com.github.chuckerteam.chucker:library-no-op:${Versions.chucker}"
 }
