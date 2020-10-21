@@ -57,6 +57,8 @@ dependencies {
     implementation(Libs.retrofit)
     implementation(Libs.retrofitGson)
 
+    implementation(Libs.okHttp3)
+
     debugImplementation(Libs.debugChucker)
     releaseImplementation(Libs.releaseChucker)
 
@@ -68,6 +70,7 @@ dependencies {
     testImplementation(TestLibs.hamcrest)
     testImplementation(TestLibs.mockk)
     testImplementation(TestLibs.androidMockk)
+    testImplementation(TestLibs.mockWebServer)
     testImplementation(TestLibs.koin)
     testImplementation(TestLibs.robolectric)
     testImplementation(TestLibs.room)

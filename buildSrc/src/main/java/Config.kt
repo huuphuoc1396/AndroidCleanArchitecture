@@ -39,6 +39,7 @@ object Versions {
     internal const val chucker = "3.3.0"
     internal const val leakCanary = "2.5"
     internal const val junitDataProvider = "2.6"
+    internal const val okHttp3 = "4.9.0"
 }
 
 object Url {
@@ -205,4 +206,7 @@ object Libs {
 
     // Leak Canary
     const val leakCanary = "com.squareup.leakcanary:leakcanary-android:${Versions.leakCanary}"
+
+    // OkHttp3
+    const val okHttp3 = "com.squareup.okhttp3:okhttp:${Versions.okHttp3}"
 }
