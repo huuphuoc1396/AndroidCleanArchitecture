@@ -36,10 +36,10 @@ class MainViewModel(
             searchJob?.cancel()
             searchJob = viewModelScope.launch {
                 isLoading.value = true
-                val result = withContext(Dispatchers.IO) {
+                val resultWrapper = withContext(Dispatchers.IO) {
                     searchReposUseCase.execute(SearchReposUseCase.Params(query))
                 }
-                result.subscribe(
+                resultWrapper.subscribe(
                     success = { repos ->
                         repoItem.value = repoItemMapper.mapList(repos)
                         isLoading.value = false

@@ -4,11 +4,11 @@ import com.example.lib.exception.CoroutineException
 import com.example.lib.exception.CoroutineExceptionHandler
 import com.example.lib.exception.DefaultCoroutineException
 
-sealed class Result<out R> {
-    data class Success<out T>(val data: T) : Result<T>()
+sealed class ResultWrapper<out R> {
+    data class Success<out T>(val data: T) : ResultWrapper<T>()
     data class Error(
         val coroutineException: CoroutineException
-    ) : Result<Nothing>()
+    ) : ResultWrapper<Nothing>()
 
     val isSuccess get() = this is Success
     val isError get() = this is Error
@@ -23,8 +23,8 @@ sealed class Result<out R> {
     companion object {
         suspend fun <R> safeSuspend(
             coroutineExceptionHandler: CoroutineExceptionHandler?,
-            action: suspend () -> Result<R>
-        ): Result<R> {
+            action: suspend () -> ResultWrapper<R>
+        ): ResultWrapper<R> {
             try {
                 return action()
             } catch (exception: Exception) {

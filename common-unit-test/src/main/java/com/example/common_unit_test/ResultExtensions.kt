@@ -1,9 +1,9 @@
 package com.example.common_unit_test
 
-import com.example.lib.result.Result
+import com.example.lib.result.ResultWrapper
 import org.junit.Assert
 
-fun <R> Result<R>.assertSuccess(expected: Result.Success<R>) {
+fun <R> ResultWrapper<R>.assertSuccess(expected: ResultWrapper.Success<R>) {
     subscribe(
         success = { data ->
             Assert.assertEquals(expected.data, data)
@@ -14,7 +14,7 @@ fun <R> Result<R>.assertSuccess(expected: Result.Success<R>) {
     )
 }
 
-fun <R> Result<R>.assertError(expected: Result.Error) {
+fun <R> ResultWrapper<R>.assertError(expected: ResultWrapper.Error) {
     subscribe(
         success = {
             Assert.assertTrue(false)
@@ -25,7 +25,7 @@ fun <R> Result<R>.assertError(expected: Result.Error) {
     )
 }
 
-fun <R> Result<R>.assertSuccess() {
+fun <R> ResultWrapper<R>.assertSuccess() {
     subscribe(
         success = {
             Assert.assertTrue(true)
@@ -36,7 +36,7 @@ fun <R> Result<R>.assertSuccess() {
     )
 }
 
-fun <R> Result<R>.assertError() {
+fun <R> ResultWrapper<R>.assertError() {
     subscribe(
         success = {
             Assert.assertTrue(false)
