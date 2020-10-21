@@ -19,5 +19,4 @@ class RepoItemMapper : Mapper<Repo, RepoItem>() {
             owner = ownerItem
         )
     }
-
 }
