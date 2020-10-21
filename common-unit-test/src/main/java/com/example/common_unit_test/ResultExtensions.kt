@@ -1,12 +1,13 @@
 package com.example.common_unit_test
 
+import com.example.lib.exception.CoroutineException
 import com.example.lib.result.ResultWrapper
 import org.junit.Assert
 
-fun <R> ResultWrapper<R>.assertSuccess(expected: ResultWrapper.Success<R>) {
+fun <R> ResultWrapper<R>.assertSuccess(expected: R) {
     subscribe(
-        success = { data ->
-            Assert.assertEquals(expected.data, data)
+        success = { actual ->
+            Assert.assertEquals(expected, actual)
         },
         error = {
             Assert.assertTrue(false)
@@ -14,13 +15,13 @@ fun <R> ResultWrapper<R>.assertSuccess(expected: ResultWrapper.Success<R>) {
     )
 }
 
-fun <R> ResultWrapper<R>.assertError(expected: ResultWrapper.Error) {
+fun <R> ResultWrapper<R>.assertError(expected: CoroutineException) {
     subscribe(
         success = {
             Assert.assertTrue(false)
         },
-        error = { coroutineException ->
-            Assert.assertEquals(expected.coroutineException, coroutineException)
+        error = { actual ->
+            Assert.assertEquals(expected, actual)
         }
     )
 }
