@@ -38,6 +38,7 @@ object Versions {
     internal const val easyPermission = "3.0.0"
     internal const val chucker = "3.3.0"
     internal const val leakCanary = "2.5"
+    internal const val junitDataProvider = "2.6"
 }
 
 object Url {
@@ -132,6 +133,10 @@ object TestLibs {
 
     // Room
     const val room = "androidx.room:room-testing:${Versions.room}"
+
+    // JUnit DataProvider
+    const val junitDataProvider =
+        "com.tngtech.junit.dataprovider:junit4-dataprovider:${Versions.junitDataProvider}"
 }
 
 object Libs {

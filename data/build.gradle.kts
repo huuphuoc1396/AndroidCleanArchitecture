@@ -71,6 +71,7 @@ dependencies {
     testImplementation(TestLibs.koin)
     testImplementation(TestLibs.robolectric)
     testImplementation(TestLibs.room)
+    testImplementation(TestLibs.junitDataProvider)
     testImplementation(project(Modules.commonUnitTest))
 
     androidTestImplementation(TestLibs.androidTestJunit)
