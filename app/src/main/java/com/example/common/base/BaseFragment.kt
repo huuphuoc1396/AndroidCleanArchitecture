@@ -9,14 +9,19 @@ import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import com.example.common.livedata.autoCleared
+import com.example.common.viewmodel.NavigationSharedViewModel
 import com.example.lib.exception.ApiException
 import com.example.lib.exception.CoroutineException
 import com.example.presentation.R
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 abstract class BaseFragment<V : ViewDataBinding> : Fragment() {
 
     private var networkErrorDialog: AlertDialog? = null
+
+    private val navigationSharedViewModel: NavigationSharedViewModel by sharedViewModel()
 
     @get:LayoutRes
     abstract val layoutResId: Int
@@ -28,6 +33,10 @@ abstract class BaseFragment<V : ViewDataBinding> : Fragment() {
     }
 
     open fun setBindingVariable() {}
+
+    open fun onBackPressed(): Boolean {
+        return true
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,8 +53,14 @@ abstract class BaseFragment<V : ViewDataBinding> : Fragment() {
         viewDataBinding.lifecycleOwner = viewLifecycleOwner
         viewDataBinding.executePendingBindings()
 
-        getViewModel()?.networkError?.observe(viewLifecycleOwner, { coroutineException ->
+        getViewModel()?.networkError?.observe(viewLifecycleOwner, Observer { coroutineException ->
             handleNetworkError(coroutineException)
+        })
+
+        navigationSharedViewModel.navigationBack.observe(viewLifecycleOwner, Observer {
+            if (onBackPressed()) {
+                activity?.finishAfterTransition()
+            }
         })
     }
 

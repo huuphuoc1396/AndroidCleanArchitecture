@@ -13,6 +13,7 @@ import com.example.presentation.R
 import com.example.presentation.databinding.FragmentMainBinding
 import com.example.presentation.model.RepoItem
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import timber.log.Timber
 
 class MainFragment : BaseFragment<FragmentMainBinding>() {
 
