@@ -17,5 +17,4 @@ class RepoMapper(
             owner = ownerMapper.map(input?.owner)
         )
     }
-
 }

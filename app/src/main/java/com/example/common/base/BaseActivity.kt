@@ -9,6 +9,6 @@ abstract class BaseActivity : AppCompatActivity() {
     private val navigationSharedViewModel: NavigationSharedViewModel by viewModel()
 
     override fun onBackPressed() {
-        navigationSharedViewModel.navigationBack.call()
+        navigationSharedViewModel.backNavigation.call()
     }
 }
