@@ -1,0 +1,36 @@
+{
+  "total_count": 3,
+  "incomplete_results": false,
+  "items": [
+    {
+      "id": 82128465,
+      "name": "Android",
+      "description": "GitHub上最火的Android开源项目,所有开源项目都有详细资料和配套视频",
+      "owner": {
+        "id": 23095877,
+        "login": "open-android",
+        "avatar_url": "https://avatars2.githubusercontent.com/u/23095877?v=4"
+      }
+    },
+    {
+      "id": 12544093,
+      "name": "Android",
+      "description": "Android related examples",
+      "owner": {
+        "id": 3790597,
+        "login": "hmkcode",
+        "avatar_url": "https://avatars3.githubusercontent.com/u/3790597?v=4"
+      }
+    },
+    {
+      "id": 190503465,
+      "name": "hilahi-music",
+      "description": null,
+      "owner": {
+        "id": 21271482,
+        "login": "huuphuoc1396",
+        "avatar_url": "https://avatars3.githubusercontent.com/u/21271482?v=4"
+      }
+    }
+  ]
+}

@@ -1,18 +1,21 @@
 package com.example.data.remote.api.common
 
+import com.example.data.remote.response.ServerErrorResponse
+import com.google.gson.Gson
 import okhttp3.mockwebserver.Dispatcher
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import okhttp3.mockwebserver.RecordedRequest
 import org.junit.After
+import org.junit.Assert
 import org.junit.Before
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
-import org.koin.test.AutoCloseKoinTest
+import retrofit2.HttpException
 import java.io.File
 
 @RunWith(JUnit4::class)
-abstract class BaseApiTest : AutoCloseKoinTest() {
+abstract class BaseApiTest {
 
     lateinit var mockServer: MockWebServer
 
@@ -56,6 +59,16 @@ abstract class BaseApiTest : AutoCloseKoinTest() {
     }
 
     fun takeRequest(): RecordedRequest? = mockServer.takeRequest()
+
+    fun assertHttpException(exception: Exception, expected: ServerErrorResponse) {
+        if (exception is HttpException) {
+            val errorBody = exception.response()?.errorBody()?.string()
+            val actual = Gson().fromJson(errorBody, ServerErrorResponse::class.java)
+            Assert.assertEquals(expected, actual)
+        } else {
+            Assert.assertTrue(false)
+        }
+    }
 
     private fun configMockServer() {
         mockServer = MockWebServer()
