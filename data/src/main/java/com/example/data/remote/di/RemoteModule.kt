@@ -5,7 +5,6 @@ import com.example.data.BuildConfig
 import com.example.data.remote.api.RepoApi
 import com.example.data.remote.exception.RemoteCoroutineExceptionHandler
 import com.example.data.remote.interceptor.HeaderInterceptor
-import com.example.data.remote.mapper.OwnerMapper
 import com.example.data.remote.mapper.RepoMapper
 import com.google.gson.Gson
 import okhttp3.OkHttpClient
@@ -62,13 +61,7 @@ val remoteModule = module {
     }
 
     factory {
-        RepoMapper(
-            ownerMapper = get()
-        )
-    }
-
-    factory {
-        OwnerMapper()
+        RepoMapper()
     }
 }
 
