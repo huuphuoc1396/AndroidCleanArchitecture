@@ -13,7 +13,7 @@ class RepoMapper(
         return Repo(
             id = input?.id.defaultZero(),
             name = input?.name.defaultEmpty(),
-            description = input?.name.defaultEmpty(),
+            description = input?.description.defaultEmpty(),
             owner = ownerMapper.map(input?.owner)
         )
     }
