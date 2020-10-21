@@ -1,9 +1,11 @@
 package com.example.presentation.feature.main
 
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
+import androidx.lifecycle.viewModelScope
 import com.example.common.base.BaseViewModel
 import com.example.domain.usecase.SearchReposUseCase
-import com.example.lib.exception.CoroutineException
 import com.example.lib.extension.defaultEmpty
 import com.example.presentation.mapper.RepoItemMapper
 import com.example.presentation.model.RepoItem
