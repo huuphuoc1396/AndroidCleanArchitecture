@@ -68,6 +68,7 @@ dependencies {
     testImplementation(TestLibs.hamcrest)
     testImplementation(TestLibs.mockk)
     testImplementation(TestLibs.androidMockk)
+    testImplementation(TestLibs.mockWebServer)
     testImplementation(TestLibs.koin)
     testImplementation(TestLibs.robolectric)
     testImplementation(TestLibs.room)
