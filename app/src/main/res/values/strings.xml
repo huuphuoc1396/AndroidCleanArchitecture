@@ -6,6 +6,6 @@
     <string name="network_error">Network error</string>
     <string name="ok">OK</string>
     <string name="by_owner">by %s</string>
-    <string name="type_your_repository_name">Type your query</string>
+    <string name="type_your_query">Type your query</string>
     <string name="empty_search_result">No results</string>
 </resources>
