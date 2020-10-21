@@ -48,7 +48,8 @@ object Url {
 object BuildPlugins {
     const val androidPlugin = "com.android.tools.build:gradle:${Versions.androidPlugin}"
     const val kotlinPlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
-    const val navigationPlugin = "androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.navigation}"
+    const val navigationPlugin =
+        "androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.navigation}"
 }
 
 object Android {
@@ -142,11 +143,13 @@ object Libs {
     // Lifecycle
     const val viewModel = "androidx.lifecycle:lifecycle-viewmodel:${Versions.lifecycle}"
     const val liveDataKtx = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.lifecycle}"
-    const val viewModelSavedState = "androidx.lifecycle:lifecycle-viewmodel-savedstate:${Versions.lifecycle}"
+    const val viewModelSavedState =
+        "androidx.lifecycle:lifecycle-viewmodel-savedstate:${Versions.lifecycle}"
     const val lifecycleCompiler = "androidx.lifecycle:lifecycle-compiler:${Versions.lifecycle}"
 
     // Navigation
-    const val navigationFragment = "androidx.navigation:navigation-fragment-ktx:${Versions.navigation}"
+    const val navigationFragment =
+        "androidx.navigation:navigation-fragment-ktx:${Versions.navigation}"
     const val navigationUi = "androidx.navigation:navigation-ui-ktx:${Versions.navigation}"
 
     // Room
@@ -162,8 +165,10 @@ object Libs {
     const val koinFragment = "org.koin:koin-androidx-fragment:${Versions.koin}"
 
     // Coroutines
-    const val coroutinesCore = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}"
-    const val androidCoroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}"
+    const val coroutinesCore =
+        "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}"
+    const val androidCoroutines =
+        "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}"
 
     // Support
     const val annotations = "androidx.annotation:annotation:${Versions.annotations}"
@@ -175,7 +180,8 @@ object Libs {
 
     // Logging
     const val timber = "com.jakewharton.timber:timber:${Versions.timber}"
-    const val loggingInterceptor = "com.squareup.okhttp3:logging-interceptor:${Versions.loggingInterceptor}"
+    const val loggingInterceptor =
+        "com.squareup.okhttp3:logging-interceptor:${Versions.loggingInterceptor}"
 
     // Retrofit
     const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
