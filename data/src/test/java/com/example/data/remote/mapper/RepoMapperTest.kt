@@ -14,8 +14,7 @@ import org.junit.runner.RunWith
 @RunWith(DataProviderRunner::class)
 class RepoMapperTest {
 
-    private val ownerMapper = OwnerMapper()
-    private val repoMapper = RepoMapper(ownerMapper)
+    private val repoMapper = RepoMapper()
 
     @Test
     @UseDataProvider("dataProvider")
@@ -25,7 +24,6 @@ class RepoMapperTest {
     }
 
     companion object {
-        private val owner: Owner = makeRandomInstance()
 
         @JvmStatic
         @DataProvider
