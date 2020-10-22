@@ -1,9 +1,9 @@
 package com.example.domain.usecase
 
+import com.example.common_lib.result.ResultWrapper
+import com.example.common_lib.usecase.UseCase
 import com.example.domain.model.Repo
 import com.example.domain.repository.RepoRepository
-import com.example.lib.result.ResultWrapper
-import com.example.lib.usecase.UseCase
 
 class SearchReposUseCase(
     private val repoRepository: RepoRepository

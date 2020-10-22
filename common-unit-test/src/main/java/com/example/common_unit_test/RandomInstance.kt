@@ -2,8 +2,8 @@
 
 package com.example.common_unit_test
 
-import com.example.lib.extension.nextChar
-import com.example.lib.extension.nextString
+import com.example.common_lib.extension.nextChar
+import com.example.common_lib.extension.nextString
 import kotlin.random.Random
 import kotlin.reflect.KClass
 import kotlin.reflect.KType

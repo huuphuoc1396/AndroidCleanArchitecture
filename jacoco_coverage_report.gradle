@@ -96,6 +96,6 @@ task showJacocoFullReport(type: Exec) {
     // Windows
     commandLine 'cmd', '/c', 'start index.html'
 
-    // Mac
-    // commandLine 'open', 'index.html
+    // macOS
+    // commandLine 'open', 'index.html'
 }

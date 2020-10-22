@@ -1,11 +1,11 @@
 package com.example.data.repository
 
+import com.example.common_lib.result.ResultWrapper
 import com.example.data.remote.api.RepoApi
 import com.example.data.remote.exception.RemoteCoroutineExceptionHandler
 import com.example.data.remote.mapper.RepoMapper
 import com.example.domain.model.Repo
 import com.example.domain.repository.RepoRepository
-import com.example.lib.result.ResultWrapper
 
 class RepoRepositoryImpl(
     private val repoApi: RepoApi,

@@ -1,11 +1,11 @@
 package com.example.data.remote.exception
 
+import com.example.common_lib.exception.ApiException
+import com.example.common_lib.exception.CoroutineException
+import com.example.common_lib.exception.CoroutineExceptionHandler
+import com.example.common_lib.extension.default
+import com.example.common_lib.extension.defaultEmpty
 import com.example.data.remote.response.ServerErrorResponse
-import com.example.lib.exception.ApiException
-import com.example.lib.exception.CoroutineException
-import com.example.lib.exception.CoroutineExceptionHandler
-import com.example.lib.extension.default
-import com.example.lib.extension.defaultEmpty
 import com.google.gson.Gson
 import retrofit2.HttpException
 import timber.log.Timber
