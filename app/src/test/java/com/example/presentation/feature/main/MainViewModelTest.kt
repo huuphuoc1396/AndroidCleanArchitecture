@@ -11,11 +11,7 @@ import com.example.lib.extension.nextString
 import com.example.lib.result.ResultWrapper
 import com.example.presentation.mapper.RepoItemMapper
 import com.example.presentation.model.RepoItem
-import io.mockk.coEvery
-import io.mockk.every
-import io.mockk.mockk
-import io.mockk.verify
-import org.junit.Before
+import io.mockk.*
 import org.junit.Rule
 import org.junit.Test
 import kotlin.random.Random
@@ -35,22 +31,12 @@ class MainViewModelTest {
     private val isNoResultsObserver: Observer<Boolean> = mockk(relaxed = true)
     private val networkErrorObserver: Observer<CoroutineException> = mockk(relaxed = true)
 
-    private val mainViewModel = MainViewModel(
-        searchReposUseCase = searchReposUseCase,
-        repoItemMapper = repoItemMapper
-    )
-
-    @Before
-    fun setup() {
-        mainViewModel.repoItem.observeForever(repoItemObserver)
-        mainViewModel.isLoading.observeForever(isLoadingObserver)
-        mainViewModel.isNoResults.observeForever(isNoResultsObserver)
-        mainViewModel.networkError.observeForever(networkErrorObserver)
-    }
-
     @Test
     fun `searchRepos query isn't empty and repoList isn't empty`() {
-        clear()
+        val mainViewModel = MainViewModel(
+            searchReposUseCase = searchReposUseCase,
+            repoItemMapper = repoItemMapper
+        )
         val query = Random.nextString()
         val repoList: List<Repo> = makeRandomListInstance(1, 10)
         val repoItemList: List<RepoItem> = makeRandomListInstance(1, 10)
@@ -65,20 +51,35 @@ class MainViewModelTest {
             repoItemMapper.mapList(repoList)
         } returns repoItemList
 
+        registerObserver(mainViewModel)
+
         mainViewModel.query.value = query
 
         mainViewModel.searchRepos()
 
-        verify {
+        verifyOrder {
+            // Initializing
+            repoItemObserver.onChanged(listOf())
+            isLoadingObserver.onChanged(false)
+            isNoResultsObserver.onChanged(false)
+
+            // Start search repos
+            isLoadingObserver.onChanged(true)
+            isNoResultsObserver.onChanged(false)
             repoItemObserver.onChanged(repoItemList)
             isLoadingObserver.onChanged(false)
             isNoResultsObserver.onChanged(false)
+
+            networkErrorObserver wasNot Called
         }
     }
 
     @Test
     fun `searchRepos query isn't empty and repoList is empty`() {
-        clear()
+        val mainViewModel = MainViewModel(
+            searchReposUseCase = searchReposUseCase,
+            repoItemMapper = repoItemMapper
+        )
         val query = Random.nextString()
         val repoList: List<Repo> = listOf()
         val repoItemList: List<RepoItem> = listOf()
@@ -93,34 +94,59 @@ class MainViewModelTest {
             repoItemMapper.mapList(repoList)
         } returns repoItemList
 
+        registerObserver(mainViewModel)
+
         mainViewModel.query.value = query
 
         mainViewModel.searchRepos()
 
-        verify {
-            repoItemObserver.onChanged(repoItemList)
+        verifyOrder {
+            // Initializing
+            repoItemObserver.onChanged(listOf())
+            isLoadingObserver.onChanged(false)
+            isNoResultsObserver.onChanged(false)
+
+            // Start search repos
+            isLoadingObserver.onChanged(true)
+            isNoResultsObserver.onChanged(false)
+            repoItemObserver.onChanged(listOf())
             isLoadingObserver.onChanged(false)
             isNoResultsObserver.onChanged(true)
+
+            networkErrorObserver wasNot Called
         }
     }
 
     @Test
     fun `searchRepos query is empty`() {
-        clear()
+        val mainViewModel = MainViewModel(
+            searchReposUseCase = searchReposUseCase,
+            repoItemMapper = repoItemMapper
+        )
         val query = ""
+
+        registerObserver(mainViewModel)
+
+        mainViewModel.query.value = query
 
         mainViewModel.searchRepos()
 
-        verify {
+        verifyOrder {
+            // Initializing
             repoItemObserver.onChanged(listOf())
             isLoadingObserver.onChanged(false)
             isNoResultsObserver.onChanged(false)
+
+            networkErrorObserver wasNot Called
         }
     }
 
     @Test
     fun `searchRepos is error`() {
-        clear()
+        val mainViewModel = MainViewModel(
+            searchReposUseCase = searchReposUseCase,
+            repoItemMapper = repoItemMapper
+        )
         val query = Random.nextString()
         val error = ApiException.ConnectionException
 
@@ -130,18 +156,31 @@ class MainViewModelTest {
             )
         } returns ResultWrapper.Error(error)
 
+        registerObserver(mainViewModel)
+
         mainViewModel.query.value = query
 
         mainViewModel.searchRepos()
 
-        verify {
+        verifyOrder {
+            // Initializing
+            repoItemObserver.onChanged(listOf())
             isLoadingObserver.onChanged(false)
             isNoResultsObserver.onChanged(false)
+
+            // Start search repos
+            isLoadingObserver.onChanged(true)
+            isNoResultsObserver.onChanged(false)
             networkErrorObserver.onChanged(error)
+            isLoadingObserver.onChanged(false)
+            isNoResultsObserver.onChanged(true)
         }
     }
 
-    private fun clear() {
-        mainViewModel.repoItem.value = listOf()
+    private fun registerObserver(mainViewModel: MainViewModel) {
+        mainViewModel.repoItem.observeForever(repoItemObserver)
+        mainViewModel.isLoading.observeForever(isLoadingObserver)
+        mainViewModel.isNoResults.observeForever(isNoResultsObserver)
+        mainViewModel.networkError.observeForever(networkErrorObserver)
     }
 }
