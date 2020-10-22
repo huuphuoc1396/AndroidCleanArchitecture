@@ -5,5 +5,5 @@ import com.example.common.livedata.SingleLiveData
 
 class NavigationSharedViewModel : ViewModel() {
 
-    val navigationBack = SingleLiveData<Unit>()
+    val backNavigation = SingleLiveData<Unit>()
 }

@@ -5,7 +5,6 @@ import com.example.data.BuildConfig
 import com.example.data.remote.api.RepoApi
 import com.example.data.remote.exception.RemoteCoroutineExceptionHandler
 import com.example.data.remote.interceptor.HeaderInterceptor
-import com.example.data.remote.mapper.OwnerMapper
 import com.example.data.remote.mapper.RepoMapper
 import com.google.gson.Gson
 import okhttp3.OkHttpClient
@@ -21,6 +20,10 @@ private const val DEFAULT_CONNECTION_TIMEOUT = 15000L
 val remoteModule = module {
 
     single {
+        get<Retrofit>().create(RepoApi::class.java)
+    }
+
+    single {
         createRetrofit(
             baseUrl = BuildConfig.BASE_URL,
             connectionTimeout = DEFAULT_CONNECTION_TIMEOUT,
@@ -28,20 +31,20 @@ val remoteModule = module {
             chuckerInterceptor = get(),
             loggingInterceptor = get(),
             isLoggingEnable = BuildConfig.DEBUG
-        ).create(RepoApi::class.java)
+        )
     }
 
-    single {
+    factory {
         HeaderInterceptor()
     }
 
-    single {
+    factory {
         HttpLoggingInterceptor().apply {
             level = HttpLoggingInterceptor.Level.BODY
         }
     }
 
-    single {
+    factory {
         ChuckerInterceptor(
             context = androidContext()
         )
@@ -58,13 +61,7 @@ val remoteModule = module {
     }
 
     factory {
-        RepoMapper(
-            ownerMapper = get()
-        )
-    }
-
-    factory {
-        OwnerMapper()
+        RepoMapper()
     }
 }
 
@@ -80,10 +77,10 @@ fun createRetrofit(
     val builder = OkHttpClient.Builder()
         .connectTimeout(connectionTimeout, TimeUnit.MILLISECONDS)
         .addInterceptor(headerInterceptor)
-        .addInterceptor(chuckerInterceptor)
 
     if (isLoggingEnable) {
-        builder.addInterceptor(loggingInterceptor)
+        builder.addInterceptor(chuckerInterceptor)
+            .addInterceptor(loggingInterceptor)
     }
 
     val client = builder.build()

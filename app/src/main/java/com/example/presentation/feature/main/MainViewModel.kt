@@ -1,9 +1,11 @@
 package com.example.presentation.feature.main
 
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
+import androidx.lifecycle.viewModelScope
 import com.example.common.base.BaseViewModel
 import com.example.domain.usecase.SearchReposUseCase
-import com.example.lib.exception.CoroutineException
 import com.example.lib.extension.defaultEmpty
 import com.example.presentation.mapper.RepoItemMapper
 import com.example.presentation.model.RepoItem
@@ -34,10 +36,10 @@ class MainViewModel(
             searchJob?.cancel()
             searchJob = viewModelScope.launch {
                 isLoading.value = true
-                val result = withContext(Dispatchers.IO) {
+                val resultWrapper = withContext(Dispatchers.IO) {
                     searchReposUseCase.execute(SearchReposUseCase.Params(query))
                 }
-                result.subscribe(
+                resultWrapper.subscribe(
                     success = { repos ->
                         repoItem.value = repoItemMapper.mapList(repos)
                         isLoading.value = false

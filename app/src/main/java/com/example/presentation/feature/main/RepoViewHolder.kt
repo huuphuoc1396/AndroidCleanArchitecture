@@ -6,9 +6,9 @@ import com.example.presentation.model.RepoItem
 
 class RepoViewHolder(
     private val itemRepoBinding: ItemRepoBinding
-) : RecyclerView.ViewHolder(itemRepoBinding.root){
+) : RecyclerView.ViewHolder(itemRepoBinding.root) {
 
-    fun bind(item: RepoItem){
+    fun bind(item: RepoItem) {
         itemRepoBinding.repoItem = item
     }
 }

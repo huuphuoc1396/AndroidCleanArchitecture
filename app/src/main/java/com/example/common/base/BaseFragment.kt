@@ -57,7 +57,7 @@ abstract class BaseFragment<V : ViewDataBinding> : Fragment() {
             handleNetworkError(coroutineException)
         })
 
-        navigationSharedViewModel.navigationBack.observe(viewLifecycleOwner, Observer {
+        navigationSharedViewModel.backNavigation.observe(viewLifecycleOwner, Observer {
             if (onBackPressed()) {
                 activity?.finishAfterTransition()
             }
