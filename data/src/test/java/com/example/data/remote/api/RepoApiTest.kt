@@ -1,12 +1,12 @@
 package com.example.data.remote.api
 
+import com.example.common_lib.extension.nextString
 import com.example.data.remote.api.common.BaseApiTest
 import com.example.data.remote.api.common.HttpMethod
 import com.example.data.remote.di.createRetrofit
 import com.example.data.remote.interceptor.HeaderInterceptor
 import com.example.data.remote.response.RepoListResponse
 import com.example.data.remote.response.ServerErrorResponse
-import com.example.lib.extension.nextString
 import io.mockk.mockk
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert

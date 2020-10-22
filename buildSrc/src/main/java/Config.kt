@@ -57,7 +57,7 @@ object BuildPlugins {
 object Android {
     const val minSdk = 21
     const val targetSdk = 30
-    const val applicationId = "com.example.presentation"
+    const val applicationId = "com.example.clean_architecture"
     const val versionCode = 1
     const val versionName = "1.0.0"
 }

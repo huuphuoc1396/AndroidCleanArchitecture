@@ -7,7 +7,7 @@
 
         <variable
             name="repoItem"
-            type="com.example.presentation.model.RepoItem" />
+            type="com.example.clean_architecture.presentation.model.RepoItem" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.presentation.feature.main.MainViewModel" />
+            type="com.example.clean_architecture.presentation.feature.main.MainViewModel" />
 
         <import type="android.view.View" />
     </data>
