@@ -1,7 +1,6 @@
 package com.example.presentation
 
 import android.app.Application
-import com.example.common.di.commonModule
 import com.example.data.local.di.localModule
 import com.example.data.remote.di.remoteModule
 import com.example.data.repository.di.repositoryModule
@@ -22,7 +21,6 @@ class App : Application() {
         startKoin {
             androidContext(this@App)
             modules(
-                commonModule,
                 presentationModule,
                 viewModelModule,
                 localModule,

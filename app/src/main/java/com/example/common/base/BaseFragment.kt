@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
@@ -11,17 +12,13 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.example.common.livedata.autoCleared
-import com.example.common.viewmodel.NavigationSharedViewModel
 import com.example.lib.exception.ApiException
 import com.example.lib.exception.CoroutineException
 import com.example.presentation.R
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 abstract class BaseFragment<V : ViewDataBinding> : Fragment() {
 
     private var networkErrorDialog: AlertDialog? = null
-
-    private val navigationSharedViewModel: NavigationSharedViewModel by sharedViewModel()
 
     @get:LayoutRes
     abstract val layoutResId: Int
@@ -36,6 +33,18 @@ abstract class BaseFragment<V : ViewDataBinding> : Fragment() {
 
     open fun onBackPressed(): Boolean {
         return true
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        activity?.onBackPressedDispatcher?.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                isEnabled = !onBackPressed()
+                if (!isEnabled) {
+                    activity?.onBackPressed()
+                }
+            }
+        })
     }
 
     override fun onCreateView(
@@ -55,12 +64,6 @@ abstract class BaseFragment<V : ViewDataBinding> : Fragment() {
 
         getViewModel()?.networkError?.observe(viewLifecycleOwner, Observer { coroutineException ->
             handleNetworkError(coroutineException)
-        })
-
-        navigationSharedViewModel.backNavigation.observe(viewLifecycleOwner, Observer {
-            if (onBackPressed()) {
-                activity?.finishAfterTransition()
-            }
         })
     }
 
