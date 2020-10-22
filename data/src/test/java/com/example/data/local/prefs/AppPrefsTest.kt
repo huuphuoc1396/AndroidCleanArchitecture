@@ -14,12 +14,17 @@ class AppPrefsTest {
     )
 
     @Test
-    fun testFirstRun() {
-
+    fun isFirstRun() {
         assertEquals(appPrefs.isFirstRun(), true)
+    }
 
+    @Test
+    fun setFirstRun() {
         appPrefs.setFirstRun()
+        assertEquals(appPrefs.isFirstRun(), false)
 
+        // setFirstRun() again
+        appPrefs.setFirstRun()
         assertEquals(appPrefs.isFirstRun(), false)
     }
 }
