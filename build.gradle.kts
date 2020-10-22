@@ -20,6 +20,10 @@ buildscript {
     }
 }
 
+apply {
+    from("jacoco_coverage_report.gradle")
+}
+
 allprojects {
     repositories {
         google()
