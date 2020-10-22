@@ -9,5 +9,19 @@
         android:id="@+id/mainFragment"
         android:name="com.example.clean_architecture.presentation.feature.main.MainFragment"
         android:label="MainFragment"
-        tools:layout="@layout/fragment_main" />
+        tools:layout="@layout/fragment_main">
+        <action
+            android:id="@+id/action_mainFragment_to_detailFragment"
+            app:destination="@id/detailFragment"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit"
+            app:popEnterAnim="@anim/fragment_close_enter"
+            app:popExitAnim="@anim/fragment_close_exit" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.example.presentation.feature.detail.DetailFragment"
+        android:label="DetailFragment"
+        tools:layout="@layout/fragment_detail" />
 </navigation>

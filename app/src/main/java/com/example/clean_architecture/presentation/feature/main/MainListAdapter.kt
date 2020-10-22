@@ -7,12 +7,14 @@ import androidx.recyclerview.widget.ListAdapter
 import com.example.clean_architecture.databinding.ItemRepoBinding
 import com.example.clean_architecture.presentation.model.RepoItem
 
-class MainListAdapter : ListAdapter<RepoItem, RepoViewHolder>(DIFF_CALLBACK) {
+class MainListAdapter(
+    private val onItemClickListener: (RepoItem) -> Unit
+) : ListAdapter<RepoItem, RepoViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepoViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val itemRepoBinding = ItemRepoBinding.inflate(inflater, parent, false)
-        return RepoViewHolder(itemRepoBinding)
+        return RepoViewHolder(itemRepoBinding, onItemClickListener)
     }
 
     override fun onBindViewHolder(holder: RepoViewHolder, position: Int) {
