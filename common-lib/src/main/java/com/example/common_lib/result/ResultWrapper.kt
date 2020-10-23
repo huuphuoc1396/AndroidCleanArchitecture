@@ -22,7 +22,7 @@ sealed class ResultWrapper<out R> {
 
     companion object {
         suspend fun <R> safeSuspend(
-            coroutineExceptionHandler: CoroutineExceptionHandler?,
+            coroutineExceptionHandler: CoroutineExceptionHandler? = null,
             action: suspend () -> ResultWrapper<R>
         ): ResultWrapper<R> {
             try {

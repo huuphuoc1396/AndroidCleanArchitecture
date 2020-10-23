@@ -20,8 +20,10 @@ configure(jacocoCoveredProjects) { project ->
         def fileFilter = []
         if (project.name == 'app' || project.name == 'data') {
             testTask = 'testDevDebugUnitTest'
-            fileFilter = ['**/R.class', '**/R$*.class', '**/BuildConfig.*', '**/Manifest*.*',
-                          '**/*Test*.*', 'android/**/*.*', '**/androidx/databinding/*']
+            fileFilter = [
+                    '**/R.class', '**/R$*.class', '**/BuildConfig.*', '**/Manifest*.*',
+                    '**/*Test*.*', 'android/**/*.*', '**/androidx/databinding/*'
+            ]
         }
         dependsOn testTask
 

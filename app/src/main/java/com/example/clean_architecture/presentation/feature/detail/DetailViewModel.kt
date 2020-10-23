@@ -5,9 +5,9 @@ import com.example.clean_architecture.common.base.BaseViewModel
 
 class DetailViewModel : BaseViewModel() {
 
-    val detailItem = MutableLiveData<DetailItem>(initDetailModel())
+    val detailItem = MutableLiveData<DetailItem>(initDetailItem())
 
-    fun setDetailModel(
+    fun setDetailItem(
         repoName: String,
         ownerLogin: String
     ) {
@@ -17,7 +17,7 @@ class DetailViewModel : BaseViewModel() {
         )
     }
 
-    private fun initDetailModel(): DetailItem {
+    private fun initDetailItem(): DetailItem {
         return DetailItem(
             repoName = "",
             ownerLogin = ""
