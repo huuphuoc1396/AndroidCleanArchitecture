@@ -19,17 +19,32 @@ android {
 
     buildTypes {
         getByName(BuildType.release) {
-            buildConfigField("String", "BASE_URL", "\"https://api.github.com/\"")
-
             isMinifyEnabled = BuildType.minifyRelease
+            isShrinkResources = BuildType.isShrinkResourcesRelease
             proguardFiles(BuildType.proguardRelease)
         }
 
         getByName(BuildType.debug) {
-            buildConfigField("String", "BASE_URL", "\"https://api.github.com/\"")
-
             isMinifyEnabled = BuildType.minifyDebug
+            isShrinkResources = BuildType.isShrinkResourcesDebug
             proguardFiles(BuildType.proguardDebug)
+        }
+    }
+
+    flavorDimensions(ProductFlavors.dimensions)
+
+    productFlavors {
+
+        create(ProductFlavors.develop) {
+            matchingFallbacks = listOf(BuildType.debug, BuildType.release)
+
+            buildConfigField("String", "BASE_URL", "\"https://api.github.com/\"")
+        }
+
+        create(ProductFlavors.product) {
+            matchingFallbacks = listOf(BuildType.release)
+
+            buildConfigField("String", "BASE_URL", "\"https://api.github.com/\"")
         }
     }
 }
