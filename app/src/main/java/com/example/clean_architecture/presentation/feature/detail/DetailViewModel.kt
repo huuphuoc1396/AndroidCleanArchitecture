@@ -5,26 +5,26 @@ import com.example.clean_architecture.common.base.BaseViewModel
 
 class DetailViewModel : BaseViewModel() {
 
-    val detailModel = MutableLiveData<DetailModel>(initDetailModel())
+    val detailItem = MutableLiveData<DetailItem>(initDetailModel())
 
     fun setDetailModel(
         repoName: String,
         ownerLogin: String
     ) {
-        detailModel.value = detailModel.value?.copy(
+        detailItem.value = detailItem.value?.copy(
             repoName = repoName,
             ownerLogin = ownerLogin
         )
     }
 
-    private fun initDetailModel(): DetailModel {
-        return DetailModel(
+    private fun initDetailModel(): DetailItem {
+        return DetailItem(
             repoName = "",
             ownerLogin = ""
         )
     }
 
-    data class DetailModel(
+    data class DetailItem(
         val repoName: String,
         val ownerLogin: String
     )
