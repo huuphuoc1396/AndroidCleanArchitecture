@@ -91,11 +91,19 @@ object BuildType {
 
     // Release
     const val minifyRelease = false
+    const val isShrinkResourcesRelease = false
     const val proguardRelease = "proguard-rules.pro"
 
     // Debug
     const val minifyDebug = false
+    const val isShrinkResourcesDebug = false
     const val proguardDebug = "proguard-rules.pro"
+}
+
+object ProductFlavors {
+    const val dimensions = "default"
+    const val develop = "dev"
+    const val product = "prod"
 }
 
 object TestLibs {

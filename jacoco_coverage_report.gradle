@@ -4,15 +4,8 @@ apply plugin: 'jacoco'
 def jacocoCoveredProject = subprojects.findAll { project ->
     project.name == "app" || project.name == "data" || project.name == "domain"
 }
-def coveredProject = subprojects
 
-println("All subprojects:")
-println(subprojects.name)
-println("")
-println("Jacoco covered subprojects:")
-println(jacocoCoveredProject.name)
-
-configure(coveredProject) { project ->
+configure(jacocoCoveredProject) { project ->
     apply plugin: 'jacoco'
 
     jacoco {
@@ -21,7 +14,16 @@ configure(coveredProject) { project ->
 
     tasks.withType(Test) { jacoco.includeNoLocationClasses = true }
 
-    task jacocoReport(type: JacocoReport, dependsOn: 'test') {
+    task jacocoReport(type: JacocoReport) {
+
+        def testTask = 'test'
+        def fileFilter = []
+        if (project.name == 'app' || project.name == 'data') {
+            testTask = 'testDevDebugUnitTest'
+            fileFilter = ['**/R.class', '**/R$*.class', '**/BuildConfig.*', '**/Manifest*.*',
+                          '**/*Test*.*', 'android/**/*.*', '**/androidx/databinding/*']
+        }
+        dependsOn testTask
 
         reports {
             csv.enabled = true
@@ -29,18 +31,18 @@ configure(coveredProject) { project ->
             html.enabled = true
         }
 
-        final fileFilter = ['**/R.class', '**/R$*.class', '**/BuildConfig.*', '**/Manifest*.*',
-                            '**/*Test*.*', 'android/**/*.*', '**/androidx/databinding/*']
         final androidKotlinTree = fileTree(dir: "${project.buildDir}/tmp/kotlin-classes/debug", excludes: fileFilter)
+        final devKotlinTree = fileTree(dir: "${project.buildDir}/tmp/kotlin-classes/devDebug", excludes: fileFilter)
         final kotlinTree = fileTree(dir: "${project.buildDir}/classes/kotlin/main", excludes: fileFilter)
         final javacTree = fileTree(dir: "${project.buildDir}/intermediates/javac/debug", excludes: fileFilter)
         final mainSrc = "${project.projectDir}/src/main/java"
 
         sourceDirectories.setFrom files([mainSrc])
-        classDirectories.setFrom files([androidKotlinTree, kotlinTree, javacTree])
+        classDirectories.setFrom files([androidKotlinTree, devKotlinTree, kotlinTree, javacTree])
         executionData.setFrom fileTree(dir: project.buildDir, includes: [
                 'jacoco/test.exec',
                 'jacoco/testDebugUnitTest.exec',
+                'jacoco/testDevDebugUnitTest.exec',
                 'outputs/code-coverage/connected/*coverage.ec'
         ])
     }
