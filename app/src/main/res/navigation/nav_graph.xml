@@ -23,5 +23,12 @@
         android:id="@+id/detailFragment"
         android:name="com.example.clean_architecture.presentation.feature.detail.DetailFragment"
         android:label="DetailFragment"
-        tools:layout="@layout/fragment_detail" />
+        tools:layout="@layout/fragment_detail">
+        <argument
+            android:name="repoName"
+            app:argType="string" />
+        <argument
+            android:name="ownerLogin"
+            app:argType="string" />
+    </fragment>
 </navigation>

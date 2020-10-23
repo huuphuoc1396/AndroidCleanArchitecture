@@ -37,8 +37,13 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
 
     private fun initViews() {
         viewDataBinding.recyclerRepoItems.adapter = MainListAdapter(
-            onItemClickListener = {
-                findNavController().navigate(R.id.action_mainFragment_to_detailFragment)
+            onItemClickListener = { repoItem ->
+                findNavController().navigate(
+                    MainFragmentDirections.actionMainFragmentToDetailFragment(
+                        repoName = repoItem.name,
+                        ownerLogin = repoItem.owner.login
+                    )
+                )
             }
         )
         viewDataBinding.editQuery.setOnEditorActionListener { view: View, actionId: Int, _: KeyEvent? ->

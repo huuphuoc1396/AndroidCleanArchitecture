@@ -28,7 +28,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:navigationIcon="@drawable/ic_baseline_arrow_back"
-                app:title="@string/app_name"
+                app:title="@{viewModel.detailModel.repoName}"
                 app:titleTextColor="@android:color/white" />
         </com.google.android.material.appbar.AppBarLayout>
 

@@ -3,6 +3,7 @@ package com.example.clean_architecture.presentation.feature.detail
 import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.clean_architecture.R
 import com.example.clean_architecture.common.base.BaseFragment
 import com.example.clean_architecture.common.base.BaseViewModel
@@ -11,12 +12,19 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DetailFragment : BaseFragment<FragmentDetailBinding>() {
 
-    private val detailViewModel: DetailViewModel by viewModel()
+    private val viewModel: DetailViewModel by viewModel()
+
+    private val args: DetailFragmentArgs by navArgs()
 
     override val layoutResId: Int = R.layout.fragment_detail
 
+    override fun setBindingVariable() {
+        super.setBindingVariable()
+        viewDataBinding.viewModel = viewModel
+    }
+
     override fun getViewModel(): BaseViewModel? {
-        return detailViewModel
+        return viewModel
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -25,6 +33,12 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>() {
     }
 
     private fun initViews() {
+
+        viewModel.setDetailModel(
+            repoName = args.repoName,
+            ownerLogin = args.ownerLogin
+        )
+
         viewDataBinding.toolBar.setNavigationOnClickListener {
             findNavController().navigateUp()
         }
