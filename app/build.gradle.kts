@@ -1,8 +1,9 @@
 plugins {
     id(GradlePlugins.android)
-    kotlin(GradlePlugins.kotlinAndroid)
-    kotlin(GradlePlugins.kotlinAndroidExt)
-    kotlin(GradlePlugins.kotlinApt)
+    id(GradlePlugins.kotlinAndroid)
+    id(GradlePlugins.kotlinAndroidExt)
+    id(GradlePlugins.kotlinApt)
+    id(GradlePlugins.navigation)
 }
 
 apply {

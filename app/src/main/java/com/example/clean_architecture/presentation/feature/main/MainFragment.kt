@@ -5,6 +5,7 @@ import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import androidx.databinding.BindingAdapter
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.clean_architecture.R
 import com.example.clean_architecture.common.base.BaseFragment
@@ -35,7 +36,16 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
     }
 
     private fun initViews() {
-        viewDataBinding.recyclerRepoItems.adapter = MainListAdapter()
+        viewDataBinding.recyclerRepoItems.adapter = MainListAdapter(
+            onItemClickListener = { repoItem ->
+                findNavController().navigate(
+                    MainFragmentDirections.actionMainFragmentToDetailFragment(
+                        repoName = repoItem.name,
+                        ownerLogin = repoItem.owner.login
+                    )
+                )
+            }
+        )
         viewDataBinding.editQuery.setOnEditorActionListener { view: View, actionId: Int, _: KeyEvent? ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 search(view)
