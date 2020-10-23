@@ -1,11 +1,11 @@
 apply plugin: 'jacoco'
 
 // Filter out modules
-def jacocoCoveredProject = subprojects.findAll { project ->
+def jacocoCoveredProjects = subprojects.findAll { project ->
     project.name == "app" || project.name == "data" || project.name == "domain"
 }
 
-configure(jacocoCoveredProject) { project ->
+configure(jacocoCoveredProjects) { project ->
     apply plugin: 'jacoco'
 
     jacoco {
@@ -31,17 +31,15 @@ configure(jacocoCoveredProject) { project ->
             html.enabled = true
         }
 
-        final androidKotlinTree = fileTree(dir: "${project.buildDir}/tmp/kotlin-classes/debug", excludes: fileFilter)
-        final devKotlinTree = fileTree(dir: "${project.buildDir}/tmp/kotlin-classes/devDebug", excludes: fileFilter)
-        final kotlinTree = fileTree(dir: "${project.buildDir}/classes/kotlin/main", excludes: fileFilter)
-        final javacTree = fileTree(dir: "${project.buildDir}/intermediates/javac/debug", excludes: fileFilter)
-        final mainSrc = "${project.projectDir}/src/main/java"
-
-        sourceDirectories.setFrom files([mainSrc])
-        classDirectories.setFrom files([androidKotlinTree, devKotlinTree, kotlinTree, javacTree])
+        sourceDirectories.setFrom files([
+                "${project.projectDir}/src/main/java"
+        ])
+        classDirectories.setFrom files([
+                fileTree(dir: "${project.buildDir}/tmp/kotlin-classes/devDebug", excludes: fileFilter),
+                fileTree(dir: "${project.buildDir}/classes/kotlin/main", excludes: fileFilter)
+        ])
         executionData.setFrom fileTree(dir: project.buildDir, includes: [
                 'jacoco/test.exec',
-                'jacoco/testDebugUnitTest.exec',
                 'jacoco/testDevDebugUnitTest.exec',
                 'outputs/code-coverage/connected/*coverage.ec'
         ])
@@ -58,7 +56,7 @@ task jacocoFullReport(type: JacocoReport, group: 'Coverage reports') {
         ignoreFailures true
     }
 
-    def projects = jacocoCoveredProject
+    def projects = jacocoCoveredProjects
 
     // noinspection GrUnresolvedAccess
     dependsOn(projects.jacocoReport)
