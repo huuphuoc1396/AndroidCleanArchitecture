@@ -21,7 +21,7 @@
 
     <fragment
         android:id="@+id/detailFragment"
-        android:name="com.example.presentation.feature.detail.DetailFragment"
+        android:name="com.example.clean_architecture.presentation.feature.detail.DetailFragment"
         android:label="DetailFragment"
         tools:layout="@layout/fragment_detail" />
 </navigation>

@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.presentation.feature.main.MainViewModel" />
+            type="com.example.clean_architecture.presentation.feature.detail.DetailViewModel" />
 
         <import type="android.view.View" />
     </data>
@@ -27,10 +27,9 @@
                 android:id="@+id/toolBar"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:title="@string/app_name"
                 app:navigationIcon="@drawable/ic_baseline_arrow_back"
+                app:title="@string/app_name"
                 app:titleTextColor="@android:color/white" />
-
         </com.google.android.material.appbar.AppBarLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

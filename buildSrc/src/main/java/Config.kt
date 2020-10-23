@@ -65,9 +65,9 @@ object Android {
 object GradlePlugins {
     const val android = "com.android.application"
     const val kotlin = "kotlin"
-    const val kotlinAndroid = "android"
-    const val kotlinAndroidExt = "android.extensions"
-    const val kotlinApt = "kapt"
+    const val kotlinAndroid = "kotlin-android"
+    const val kotlinAndroidExt = "kotlin-android-extensions"
+    const val kotlinApt = "kotlin-kapt"
     const val javaLib = "java-library"
     const val androidLib = "com.android.library"
     const val navigation = "androidx.navigation.safeargs.kotlin"
