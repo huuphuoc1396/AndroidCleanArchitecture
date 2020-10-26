@@ -1,14 +1,14 @@
 package com.example.data.remote.mapper
 
-import com.example.data.remote.response.RepoListResponse
+import com.example.common_lib.extension.defaultEmpty
+import com.example.common_lib.extension.defaultZero
+import com.example.common_lib.mapper.Mapper
+import com.example.data.remote.response.ItemResponse
 import com.example.domain.model.Owner
 import com.example.domain.model.Repo
-import com.example.lib.extension.defaultEmpty
-import com.example.lib.extension.defaultZero
-import com.example.lib.mapper.Mapper
 
-class RepoMapper : Mapper<RepoListResponse.Item?, Repo>() {
-    override fun map(input: RepoListResponse.Item?): Repo {
+class RepoMapper : Mapper<ItemResponse?, Repo>() {
+    override fun map(input: ItemResponse?): Repo {
         val owner = Owner(
             id = input?.id.defaultZero(),
             login = input?.owner?.login.defaultEmpty(),

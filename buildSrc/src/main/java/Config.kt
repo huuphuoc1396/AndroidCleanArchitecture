@@ -57,7 +57,7 @@ object BuildPlugins {
 object Android {
     const val minSdk = 21
     const val targetSdk = 30
-    const val applicationId = "com.example.presentation"
+    const val applicationId = "com.example.clean_architecture"
     const val versionCode = 1
     const val versionName = "1.0.0"
 }
@@ -65,9 +65,9 @@ object Android {
 object GradlePlugins {
     const val android = "com.android.application"
     const val kotlin = "kotlin"
-    const val kotlinAndroid = "android"
-    const val kotlinAndroidExt = "android.extensions"
-    const val kotlinApt = "kapt"
+    const val kotlinAndroid = "kotlin-android"
+    const val kotlinAndroidExt = "kotlin-android-extensions"
+    const val kotlinApt = "kotlin-kapt"
     const val javaLib = "java-library"
     const val androidLib = "com.android.library"
     const val navigation = "androidx.navigation.safeargs.kotlin"
@@ -91,11 +91,19 @@ object BuildType {
 
     // Release
     const val minifyRelease = false
+    const val isShrinkResourcesRelease = false
     const val proguardRelease = "proguard-rules.pro"
 
     // Debug
     const val minifyDebug = false
+    const val isShrinkResourcesDebug = false
     const val proguardDebug = "proguard-rules.pro"
+}
+
+object ProductFlavors {
+    const val dimensions = "default"
+    const val develop = "dev"
+    const val product = "prod"
 }
 
 object TestLibs {

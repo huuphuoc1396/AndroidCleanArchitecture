@@ -1,12 +1,14 @@
 package com.example.data.remote.api
 
+import com.example.common_lib.extension.nextString
 import com.example.data.remote.api.common.BaseApiTest
 import com.example.data.remote.api.common.HttpMethod
 import com.example.data.remote.di.createRetrofit
 import com.example.data.remote.interceptor.HeaderInterceptor
+import com.example.data.remote.response.ItemResponse
+import com.example.data.remote.response.OwnerResponse
 import com.example.data.remote.response.RepoListResponse
 import com.example.data.remote.response.ServerErrorResponse
-import com.example.lib.extension.nextString
 import io.mockk.mockk
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert
@@ -21,31 +23,31 @@ class RepoApiTest : BaseApiTest() {
         totalCount = 3,
         incompleteResults = false,
         items = listOf(
-            RepoListResponse.Item(
+            ItemResponse(
                 id = 82128465,
                 name = "Android",
                 description = "GitHub上最火的Android开源项目,所有开源项目都有详细资料和配套视频",
-                owner = RepoListResponse.Owner(
+                owner = OwnerResponse(
                     id = 23095877,
                     login = "open-android",
                     avatarUrl = "https://avatars2.githubusercontent.com/u/23095877?v=4"
                 )
             ),
-            RepoListResponse.Item(
+            ItemResponse(
                 id = 12544093,
                 name = "Android",
                 description = "Android related examples",
-                owner = RepoListResponse.Owner(
+                owner = OwnerResponse(
                     id = 3790597,
                     login = "hmkcode",
                     avatarUrl = "https://avatars3.githubusercontent.com/u/3790597?v=4"
                 )
             ),
-            RepoListResponse.Item(
+            ItemResponse(
                 id = 190503465,
                 name = "hilahi-music",
                 description = null,
-                owner = RepoListResponse.Owner(
+                owner = OwnerResponse(
                     id = 21271482,
                     login = "huuphuoc1396",
                     avatarUrl = "https://avatars3.githubusercontent.com/u/21271482?v=4"

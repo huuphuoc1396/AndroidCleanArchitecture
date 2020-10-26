@@ -1,8 +1,9 @@
 plugins {
     id(GradlePlugins.android)
-    kotlin(GradlePlugins.kotlinAndroid)
-    kotlin(GradlePlugins.kotlinAndroidExt)
-    kotlin(GradlePlugins.kotlinApt)
+    id(GradlePlugins.kotlinAndroid)
+    id(GradlePlugins.kotlinAndroidExt)
+    id(GradlePlugins.kotlinApt)
+    id(GradlePlugins.navigation)
 }
 
 apply {
@@ -25,12 +26,35 @@ android {
     buildTypes {
         getByName(BuildType.release) {
             isMinifyEnabled = BuildType.minifyRelease
+            isShrinkResources = BuildType.isShrinkResourcesRelease
             proguardFiles(BuildType.proguardRelease)
         }
 
         getByName(BuildType.debug) {
             isMinifyEnabled = BuildType.minifyDebug
+            isShrinkResources = BuildType.isShrinkResourcesDebug
             proguardFiles(BuildType.proguardDebug)
+        }
+    }
+
+    flavorDimensions(ProductFlavors.dimensions)
+
+    productFlavors {
+        val applicationName = "applicationName"
+
+        create(ProductFlavors.develop) {
+            matchingFallbacks = listOf(BuildType.debug, BuildType.release)
+            applicationIdSuffix = ".dev"
+            manifestPlaceholders = mapOf(
+                applicationName to "[DEV] Clean Architecture"
+            )
+        }
+
+        create(ProductFlavors.product) {
+            matchingFallbacks = listOf(BuildType.release)
+            manifestPlaceholders = mapOf(
+                applicationName to "@string/app_name"
+            )
         }
     }
 
