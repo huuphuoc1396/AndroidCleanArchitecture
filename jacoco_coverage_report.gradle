@@ -96,8 +96,8 @@ task showJacocoFullReport(type: Exec) {
     workingDir "${rootProject.buildDir}/reports/jacoco/html/"
 
     // Windows
-    commandLine 'cmd', '/c', 'start index.html'
+//    commandLine 'cmd', '/c', 'start index.html'
 
     // macOS
-    // commandLine 'open', 'index.html'
+    commandLine 'open', 'index.html'
 }

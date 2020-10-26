@@ -1,7 +1,7 @@
 package com.example.data.remote.mapper
 
-import com.example.common_unit_test.makeRandomInstance
-import com.example.data.remote.response.RepoListResponse
+import com.example.data.remote.response.ItemResponse
+import com.example.data.remote.response.OwnerResponse
 import com.example.domain.model.Owner
 import com.example.domain.model.Repo
 import com.tngtech.java.junit.dataprovider.DataProvider
@@ -18,7 +18,7 @@ class RepoMapperTest {
 
     @Test
     @UseDataProvider("dataProvider")
-    fun map(response: RepoListResponse.Item?, expected: Repo) {
+    fun map(response: ItemResponse?, expected: Repo) {
         val actual = repoMapper.map(response)
         Assert.assertEquals(expected, actual)
     }
@@ -43,7 +43,7 @@ class RepoMapperTest {
             ),
 
             listOf(
-                RepoListResponse.Item(
+                ItemResponse(
                     id = null,
                     name = null,
                     description = null,
@@ -62,11 +62,11 @@ class RepoMapperTest {
             ),
 
             listOf(
-                RepoListResponse.Item(
+                ItemResponse(
                     id = 82128465,
                     name = "Android",
                     description = "Android App Example",
-                    owner = RepoListResponse.Owner(
+                    owner = OwnerResponse(
                         id = 82128465,
                         avatarUrl = "https://avatars2.githubusercontent.com/u/23095877?v=4",
                         login = "open-android"

@@ -27,9 +27,9 @@ In this sample you'll find:
 ## Structure
 <img src=https://github.com/huuphuoc1396/clean-architecture/blob/develop/clean-architecture-structure.png width="800" height="450">
 
-* Presentation: Views (Fragments or Activities) interact with ViewModels which use the use cases to access the business logic.
-* Domain: Holds all business logic and the use cases represent all the possible actions a developer can perform from the presentation layer.
-* Data: Including the repository implements to access local or remote data
+* **Presentation**: **Views** (Fragments or Activities) interact with **ViewModels** which use the **use cases** to access the **business logic**.
+* **Domain**: Holds all **business logic** and the **use cases** represent all the possible actions able to being performed by the **presentation** layer.
+* **Data**: Including the **repository implements** to access **local** or **remote** data
 
 ## References
 * [Android Architecture Blueprints - Use Cases/Interactors in Domain layer](https://github.com/android/architecture-samples/tree/usecases)
