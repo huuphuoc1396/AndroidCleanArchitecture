@@ -1,6 +1,6 @@
 # Clean Architecture
 
-<img src=https://github.com/huuphuoc1396/clean-architecture/blob/master/app_recording.gif width="405" height="720">
+<img src=https://github.com/huuphuoc1396/clean-architecture/blob/develop/app_recording.gif width="405" height="720">
 
 ## Summary
 This is an Android Architecture sample written in Kotlin using [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) and [Jetpack components](https://developer.android.com/jetpack).
@@ -25,7 +25,7 @@ In this sample you'll find:
 * [JaCoCo](https://www.eclemma.org/jacoco/) generates an aggregated Jacoco test coverage report for all sub-projects.
 
 ## Structure
-<img src=https://github.com/huuphuoc1396/clean-architecture/blob/master/clean-architecture-structure.png width="800" height="450">
+<img src=https://github.com/huuphuoc1396/clean-architecture/blob/develop/clean-architecture-structure.png width="800" height="320">
 
 * **Presentation**: **Views** (Fragments or Activities) interact with **ViewModels** which use the **use cases** to access the **business logic**.
 * **Domain**: Holds all **business logic** and the **use cases** represent all the possible actions able to being performed by the **presentation** layer.
