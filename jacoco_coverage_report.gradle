@@ -18,7 +18,14 @@ configure(jacocoCoveredProjects) { project ->
 
         def testTask = 'test'
         def fileFilter = []
-        if (project.name == 'app' || project.name == 'data') {
+        if (project.name == 'data') {
+            testTask = 'testDevDebugUnitTest'
+            fileFilter = [
+                    '**/R.class', '**/R$*.class', '**/BuildConfig.*', '**/Manifest*.*',
+                    '**/*Test*.*', 'android/**/*.*'
+            ]
+        }
+        if (project.name == 'app') {
             testTask = 'testDevDebugUnitTest'
             fileFilter = [
                     '**/R.class', '**/R$*.class', '**/BuildConfig.*', '**/Manifest*.*',
