@@ -21,7 +21,7 @@ buildscript {
 }
 
 apply {
-    from("jacoco_coverage_report.gradle")
+    from("jacoco.gradle")
 }
 
 allprojects {
