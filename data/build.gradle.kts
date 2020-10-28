@@ -20,13 +20,11 @@ android {
     buildTypes {
         getByName(BuildType.release) {
             isMinifyEnabled = BuildType.minifyRelease
-            isShrinkResources = BuildType.isShrinkResourcesRelease
             proguardFiles(BuildType.proguardRelease)
         }
 
         getByName(BuildType.debug) {
             isMinifyEnabled = BuildType.minifyDebug
-            isShrinkResources = BuildType.isShrinkResourcesDebug
             proguardFiles(BuildType.proguardDebug)
         }
     }
