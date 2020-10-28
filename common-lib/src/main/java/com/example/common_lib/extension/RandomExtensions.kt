@@ -10,4 +10,4 @@ fun Random.nextString(length: Int = nextInt(1, 256)): String {
         .joinToString("")
 }
 
-fun Random.nextChar() = Random.nextInt(0, 255).toChar()
+fun Random.nextChar(): Char = nextInt(0, 255).toChar()

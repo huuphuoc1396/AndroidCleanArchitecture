@@ -41,7 +41,6 @@ fun <T : Any> makeRandomListInstance(kType: KType, minSize: Int = 0, maxSize: In
 
 
 fun <T : Any> makeRandomInstance(clazz: KClass<T>): T? {
-
     val primitive = makePrimitiveOrNull(clazz)
     if (primitive != null) {
         return primitive as? T?
@@ -73,13 +72,11 @@ fun <T : Any> makeRandomInstance(clazz: KClass<T>): T? {
                     }
                 }
                 .toTypedArray()
-
             return constructor.call(*arguments)
         } catch (e: Throwable) {
             e.printStackTrace()
         }
     }
-
     throw NoUsableConstructor()
 }
 

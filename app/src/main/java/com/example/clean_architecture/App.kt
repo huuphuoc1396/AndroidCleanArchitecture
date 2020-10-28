@@ -1,7 +1,6 @@
-package com.example.clean_architecture.presentation
+package com.example.clean_architecture
 
 import android.app.Application
-import com.example.clean_architecture.BuildConfig
 import com.example.clean_architecture.presentation.di.presentationModule
 import com.example.clean_architecture.presentation.di.viewModelModule
 import com.example.data.local.di.localModule
