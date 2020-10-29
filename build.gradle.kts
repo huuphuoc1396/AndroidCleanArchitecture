@@ -14,6 +14,8 @@ buildscript {
         classpath(BuildPlugins.androidPlugin)
         classpath(BuildPlugins.kotlinPlugin)
         classpath(BuildPlugins.navigationPlugin)
+        classpath(BuildPlugins.googleServices)
+        classpath(BuildPlugins.firebaseCrashlytics)
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files

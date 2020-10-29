@@ -4,10 +4,8 @@ plugins {
     id(GradlePlugins.kotlinAndroidExt)
     id(GradlePlugins.kotlinApt)
     id(GradlePlugins.navigation)
-}
-
-apply {
-    plugin(GradlePlugins.navigation)
+    id(GradlePlugins.googleServices)
+    id(GradlePlugins.firebaseCrashlytics)
 }
 
 android {
@@ -110,6 +108,10 @@ dependencies {
     implementation(Libs.cardView)
     implementation(Libs.material)
     implementation(Libs.recyclerView)
+
+    implementation(platform(Libs.firebaseBom))
+    implementation(Libs.firebaseCrashlytics)
+    implementation(Libs.firebaseAnalytics)
 
     implementation(Libs.timber)
     implementation(Libs.glide)
