@@ -6,7 +6,7 @@ object Versions {
     internal const val lifecycle = "2.2.0"
     internal const val navigation = "2.3.0"
     internal const val room = "2.2.5"
-    internal const val koin = "2.2.0-rc-2"
+    internal const val koin = "2.1.6"
     internal const val coroutines = "1.3.9"
 
     // Support
