@@ -12,5 +12,4 @@ class OwnerItemMapper : Mapper<Owner, OwnerItem>() {
             avatarUrl = input.avatarUrl
         )
     }
-
 }
