@@ -20,6 +20,7 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
+### Common Android
 # This is a configuration file for ProGuard.
 # http://proguard.sourceforge.net/index.html#manual/usage.html
 -dontusemixedcaseclassnames
@@ -68,7 +69,7 @@
 # platform version.  We know about them, and they are safe.
 -dontwarn android.support
 
-# AndroidX
+### AndroidX
 -dontwarn com.google.android.material.**
 -keep class com.google.android.material.** { *; }
 
@@ -79,11 +80,21 @@
 # Marshmallow removed Notification.setLatestEventInfo()
 -dontwarn android.app.Notification
 
-# Firebase Crashlytics
+### Coroutines
+# ServiceLoader support
+-keepnames class kotlinx.coroutines.internal.MainDispatcherFactory {}
+-keepnames class kotlinx.coroutines.CoroutineExceptionHandler {}
+
+# Most of volatile fields are updated with AFU and should not be mangled
+-keepclassmembernames class kotlinx.** {
+    volatile <fields>;
+}
+
+### Firebase Crashlytics
 -keepattributes SourceFile,LineNumberTable        # Keep file names and line numbers.
 -keep public class * extends java.lang.Exception  # Optional: Keep custom exceptions.
 
-# Glide
+### Glide
 -keep public class * implements com.bumptech.glide.module.GlideModule
 -keep class * extends com.bumptech.glide.module.AppGlideModule {
  <init>(...);
@@ -99,7 +110,7 @@
 # Uncomment for DexGuard only
 #-keepresourcexmlelements manifest/application/meta-data@value=GlideModule
 
-# LeakCanary
+### LeakCanary
 # Loaded via reflection & referenced by shark.AndroidReferenceMatchers.LEAK_CANARY_INTERNAL
 -keep class leakcanary.internal.InternalLeakCanary { *; }
 # Referenced by shark.AndroidReferenceMatchers.LEAK_CANARY_HEAP_DUMPER
