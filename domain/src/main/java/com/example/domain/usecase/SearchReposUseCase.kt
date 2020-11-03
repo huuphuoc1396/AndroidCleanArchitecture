@@ -9,7 +9,7 @@ class SearchReposUseCase(
     private val repoRepository: RepoRepository
 ) : UseCase<SearchReposUseCase.Params, ResultWrapper<List<Repo>>>() {
 
-    override suspend fun execute(params: Params): ResultWrapper<List<Repo>> {
+    override suspend fun executeInternal(params: Params): ResultWrapper<List<Repo>> {
         return repoRepository.searchRepos(params.query)
     }
 
