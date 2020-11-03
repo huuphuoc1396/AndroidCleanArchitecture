@@ -48,7 +48,6 @@ object Versions {
 }
 
 object Url {
-    const val fabric = "https://maven.fabric.io/public"
     const val jitPack = "https://jitpack.io"
 }
 
