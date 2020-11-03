@@ -1,23 +1,19 @@
 package com.example.data.local.prefs
 
-import android.content.Context
-import android.content.SharedPreferences
+import com.example.data.local.prefs.api.SharedPrefsApi
 
-class AppPrefs(context: Context) : PrefsHelper {
-
-    private val sharedPreferences: SharedPreferences = context.getSharedPreferences(
-        context.packageName,
-        Context.MODE_PRIVATE
-    )
+class AppPrefs(
+    private val sharedPrefsApi: SharedPrefsApi
+) : PrefsHelper {
 
     override fun setFirstRun() {
         if (isFirstRun()) {
-            sharedPreferences.edit().putBoolean(FIRST_RUN, false).apply()
+            sharedPrefsApi.set(FIRST_RUN, false)
         }
     }
 
     override fun isFirstRun(): Boolean {
-        return sharedPreferences.getBoolean(FIRST_RUN, true)
+        return sharedPrefsApi.get(FIRST_RUN, true)
     }
 
     companion object {
