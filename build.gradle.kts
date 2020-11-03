@@ -6,14 +6,13 @@ buildscript {
         maven {
             url = uri(Url.jitPack)
         }
-        maven {
-            url = uri(Url.fabric)
-        }
     }
     dependencies {
         classpath(BuildPlugins.androidPlugin)
         classpath(BuildPlugins.kotlinPlugin)
         classpath(BuildPlugins.navigationPlugin)
+        classpath(BuildPlugins.googleServices)
+        classpath(BuildPlugins.firebaseCrashlytics)
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -21,7 +20,7 @@ buildscript {
 }
 
 apply {
-    from("jacoco_coverage_report.gradle")
+    from("jacoco.gradle")
 }
 
 allprojects {
@@ -30,9 +29,6 @@ allprojects {
         jcenter()
         maven {
             url = uri(Url.jitPack)
-        }
-        maven {
-            url = uri(Url.fabric)
         }
     }
 }

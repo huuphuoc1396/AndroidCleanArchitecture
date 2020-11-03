@@ -1,10 +1,14 @@
 package com.example.common_lib.usecase
 
-abstract class UseCase<Params : UseCase.Params, Result>() {
+abstract class UseCase<Params : UseCase.Params, Result> {
 
-    abstract suspend fun execute(params: Params): Result
+    protected abstract suspend fun executeInternal(params: Params): Result
 
-    abstract class Params {
-        object Empty
+    suspend fun execute(params: Params): Result {
+        return executeInternal(params)
     }
+
+    abstract class Params
+
+    object EmptyParams : Params()
 }

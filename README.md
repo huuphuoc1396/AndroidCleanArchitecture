@@ -1,6 +1,6 @@
 # Clean Architecture
 
-<img src=https://github.com/huuphuoc1396/clean-architecture/blob/master/app_recording.gif width="405" height="720">
+<img src=https://github.com/huuphuoc1396/clean-architecture/blob/develop/images/app-recording.gif width="405" height="720">
 
 ## Summary
 This is an Android Architecture sample written in Kotlin using [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) and [Jetpack components](https://developer.android.com/jetpack).
@@ -20,16 +20,29 @@ In this sample you'll find:
 * [Chucker](https://github.com/ChuckerTeam/chucker) simplifies the inspection of HTTP(S) requests/responses, and Throwables fired by your Android App.
 * [LeakCanary](https://github.com/square/leakcanary) - A memory leak detection library for Android.
 * [Mockk](https://mockk.io/) supports mocking for Kotlin testing.
-* [Local unit tests](https://developer.android.com/training/testing/unit-testing/local-unit-tests) evaluates your app's logic
+* [Local unit tests](https://developer.android.com/training/testing/unit-testing/local-unit-tests) evaluate your app's logic more quickly and don't need the fidelity and confidence associated with running tests on a real device.
+* [MockWebServer](https://github.com/square/okhttp/tree/master/mockwebserver) - A scriptable web server for testing HTTP clients
 * [Robolectric](http://robolectric.org/getting-started/) supports running in a simulated Android environment inside a JVM.
-* [JaCoCo](https://www.eclemma.org/jacoco/) generates an aggregated Jacoco test coverage report for all sub-projects.
+* [JaCoCo](https://www.eclemma.org/jacoco/) generates an aggregated JaCoCo test coverage report for all sub-projects.
 
 ## Structure
-<img src=https://github.com/huuphuoc1396/clean-architecture/blob/master/clean-architecture-structure.png width="800" height="450">
+<img src=https://github.com/huuphuoc1396/clean-architecture/blob/develop/images/clean-architecture-structure.png width="800" height="320">
 
-* **Presentation**: **Views** (Fragments or Activities) interact with **ViewModels** which use the **use cases** to access the **business logic**.
-* **Domain**: Holds all **business logic** and the **use cases** represent all the possible actions able to being performed by the **presentation** layer.
-* **Data**: Including the **repository implements** to access **local** or **remote** data
+* **Presentation**: The **Views** (Fragments or Activities) will interact with **ViewModels** which access the **business logic** through **use cases**.
+* **Domain**: Holds all **business logic** and **use cases** represent all the possible actions able to being performed by the **presentation** module.
+* **Data**: Contains all **repository implements** to access **local** or **remote** data
+
+## Testing
+The project uses local unit tests that run on your computer. To run it and generate a coverage report, you can run:
+`./gradlew jacocoFullReport`
+
+You can see this report at: `./build/reports/jacoco/html/index.html`
+<img src=https://github.com/huuphuoc1396/clean-architecture/blob/develop/images/jacoco-full-report.png width="800" height="314">
+
+You can easily write Unit Test up to 70% code coverage lines of code (LOC), if you write focus on
+* **Presentation**: `ViewModel`, `Mapper`
+* **Domain**: `UseCase`, `Repository`, `Exception` handlers
+* **Data**: API service, local (database, shared preferences), `RepositoryImpl`, `Mapper`
 
 ## References
 * [Android Architecture Blueprints - Use Cases/Interactors in Domain layer](https://github.com/android/architecture-samples/tree/usecases)

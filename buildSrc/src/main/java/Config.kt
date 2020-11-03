@@ -1,12 +1,14 @@
 object Versions {
     internal const val androidPlugin = "4.0.2"
     internal const val kotlin = "1.4.10"
+    internal const val googleServices = "4.3.4"
+    internal const val firebaseCrashlytics = "2.3.0"
 
     internal const val androidxCore = "1.3.2"
     internal const val lifecycle = "2.2.0"
     internal const val navigation = "2.3.0"
     internal const val room = "2.2.5"
-    internal const val koin = "2.2.0-rc-2"
+    internal const val koin = "2.1.6"
     internal const val coroutines = "1.3.9"
 
     // Support
@@ -28,6 +30,9 @@ object Versions {
     internal const val mockWebServer = "4.9.0"
     internal const val robolectric = "4.4"
 
+    // Firebase
+    internal const val firebaseBom = "26.0.0"
+
     // Logging
     internal const val loggingInterceptor = "4.9.0"
     internal const val timber = "4.7.1"
@@ -43,7 +48,6 @@ object Versions {
 }
 
 object Url {
-    const val fabric = "https://maven.fabric.io/public"
     const val jitPack = "https://jitpack.io"
 }
 
@@ -52,6 +56,9 @@ object BuildPlugins {
     const val kotlinPlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
     const val navigationPlugin =
         "androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.navigation}"
+    const val googleServices = "com.google.gms:google-services:${Versions.googleServices}"
+    const val firebaseCrashlytics =
+        "com.google.firebase:firebase-crashlytics-gradle:${Versions.firebaseCrashlytics}"
 }
 
 object Android {
@@ -71,6 +78,8 @@ object GradlePlugins {
     const val javaLib = "java-library"
     const val androidLib = "com.android.library"
     const val navigation = "androidx.navigation.safeargs.kotlin"
+    const val googleServices = "com.google.gms.google-services"
+    const val firebaseCrashlytics = "com.google.firebase.crashlytics"
 }
 
 object Modules {
@@ -191,6 +200,11 @@ object Libs {
     const val material = "com.google.android.material:material:${Versions.material}"
     const val constraint = "androidx.constraintlayout:constraintlayout:${Versions.constraint}"
     const val recyclerView = "androidx.recyclerview:recyclerview:${Versions.recyclerView}"
+
+    // Firebase
+    const val firebaseBom = "com.google.firebase:firebase-bom:${Versions.firebaseBom}"
+    const val firebaseCrashlytics = "com.google.firebase:firebase-crashlytics-ktx"
+    const val firebaseAnalytics = "com.google.firebase:firebase-analytics-ktx"
 
     // Logging
     const val timber = "com.jakewharton.timber:timber:${Versions.timber}"

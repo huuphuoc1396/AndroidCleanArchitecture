@@ -33,7 +33,6 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>() {
     }
 
     private fun initViews() {
-
         viewModel.setDetailItem(
             repoName = args.repoName,
             ownerLogin = args.ownerLogin
