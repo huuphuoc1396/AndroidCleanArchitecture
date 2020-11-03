@@ -6,9 +6,6 @@ buildscript {
         maven {
             url = uri(Url.jitPack)
         }
-        maven {
-            url = uri(Url.fabric)
-        }
     }
     dependencies {
         classpath(BuildPlugins.androidPlugin)
@@ -32,9 +29,6 @@ allprojects {
         jcenter()
         maven {
             url = uri(Url.jitPack)
-        }
-        maven {
-            url = uri(Url.fabric)
         }
     }
 }
