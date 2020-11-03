@@ -2,9 +2,9 @@ package com.example.data.local.di
 
 import android.content.Context
 import android.content.SharedPreferences
-import com.example.data.local.common.SharedPrefsApi
 import com.example.data.local.prefs.AppPrefs
 import com.example.data.local.prefs.PrefsHelper
+import com.example.data.local.prefs.api.SharedPrefsApi
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 
@@ -18,6 +18,7 @@ val localModule = module {
 
     single {
         SharedPrefsApi(
+            gson = get(),
             sharedPreferences = get()
         )
     }

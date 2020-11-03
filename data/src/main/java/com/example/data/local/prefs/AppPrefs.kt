@@ -1,6 +1,6 @@
 package com.example.data.local.prefs
 
-import com.example.data.local.common.SharedPrefsApi
+import com.example.data.local.prefs.api.SharedPrefsApi
 
 class AppPrefs(
     private val sharedPrefsApi: SharedPrefsApi
