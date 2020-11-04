@@ -1,5 +1,5 @@
 digraph {
-  graph [label="clean-architecture\n ",labelloc=t,fontsize=30,ranksep=1.4];
+  graph [labelloc=t,fontsize=30,ranksep=0.5];
   node [style=filled, fillcolor="#bbbbbb"];
   rankdir=TB;
 

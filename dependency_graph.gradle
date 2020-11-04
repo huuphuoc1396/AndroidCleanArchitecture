@@ -8,7 +8,7 @@ task projectDependencyGraph {
         dot.delete()
 
         dot << 'digraph {\n'
-        dot << "  graph [label=\"${rootProject.name}\\n \",labelloc=t,fontsize=30,ranksep=1.4];\n"
+        dot << "  graph [labelloc=t,fontsize=30,ranksep=0.5];\n"
         dot << '  node [style=filled, fillcolor="#bbbbbb"];\n'
         dot << '  rankdir=TB;\n'
 
