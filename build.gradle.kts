@@ -21,6 +21,7 @@ buildscript {
 
 apply {
     from("jacoco.gradle")
+    from("dependency_graph.gradle")
 }
 
 allprojects {

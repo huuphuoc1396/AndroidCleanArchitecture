@@ -17,7 +17,6 @@ class AppPrefs(
     }
 
     companion object {
-
         private const val FIRST_RUN = "first_run"
     }
 }
