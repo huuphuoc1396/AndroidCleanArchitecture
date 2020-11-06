@@ -1,5 +1,5 @@
 include(":app")
 include(":data")
 include(":domain")
-include(":common-lib")
-include(":common-unit-test")
+include(":common:common-lib")
+include(":common:common-unit-test")

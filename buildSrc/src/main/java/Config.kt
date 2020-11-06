@@ -83,11 +83,10 @@ object GradlePlugins {
 }
 
 object Modules {
-    const val app = ":app"
     const val data = ":data"
     const val domain = ":domain"
-    const val commonLib = ":common-lib"
-    const val commonUnitTest = ":common-unit-test"
+    const val commonLib = ":common:common-lib"
+    const val commonUnitTest = ":common:common-unit-test"
 }
 
 object AndroidJUnit {
