@@ -1,28 +1,28 @@
 digraph {
-  graph [labelloc=t,fontsize=30,ranksep=0.5];
+  graph [labelloc=t,fontsize=30,ranksep=0.35];
   node [style=filled, fillcolor="#bbbbbb"];
   rankdir=TB;
 
   # Projects
 
-  ":app" [shape=box, fillcolor="#baffc9"];
-  ":common-lib" [fillcolor="#ffb3ba"];
-  ":common-unit-test" [fillcolor="#ffb3ba"];
-  ":data" [fillcolor="#baffc9"];
-  ":domain" [fillcolor="#ffb3ba"];
+  "app" [shape=box, fillcolor="#baffc9"];
+  "common-lib" [fillcolor="#ffb3ba"];
+  "common-unit-test" [fillcolor="#ffb3ba"];
+  "data" [fillcolor="#baffc9"];
+  "domain" [fillcolor="#ffb3ba"];
 
-  {rank = same; ":app";}
+  {rank = same; "app";}
 
   # Dependencies
 
-  ":app" -> ":data" [style=dotted]
-  ":app" -> ":domain" [style=dotted]
-  ":app" -> ":common-lib" [style=dotted]
-  ":app" -> ":common-unit-test" [style=dotted]
-  ":common-unit-test" -> ":common-lib" [style=dotted]
-  ":data" -> ":domain" [style=dotted]
-  ":data" -> ":common-lib" [style=dotted]
-  ":data" -> ":common-unit-test" [style=dotted]
-  ":domain" -> ":common-lib" [style=dotted]
-  ":domain" -> ":common-unit-test" [style=dotted]
+  "app" -> "data" [style=dotted]
+  "app" -> "domain" [style=dotted]
+  "app" -> "common-lib" [style=dotted]
+  "app" -> "common-unit-test" [style=dotted]
+  "data" -> "domain" [style=dotted]
+  "data" -> "common-lib" [style=dotted]
+  "data" -> "common-unit-test" [style=dotted]
+  "domain" -> "common-lib" [style=dotted]
+  "domain" -> "common-unit-test" [style=dotted]
+  "common-unit-test" -> "common-lib" [style=dotted]
 }

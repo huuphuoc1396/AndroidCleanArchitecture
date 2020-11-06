@@ -8,7 +8,7 @@ task projectDependencyGraph {
         dot.delete()
 
         dot << 'digraph {\n'
-        dot << "  graph [labelloc=t,fontsize=30,ranksep=0.5];\n"
+        dot << "  graph [labelloc=t,fontsize=30,ranksep=0.35];\n"
         dot << '  node [style=filled, fillcolor="#bbbbbb"];\n'
         dot << '  rankdir=TB;\n'
 
@@ -86,20 +86,20 @@ task projectDependencyGraph {
                 traits.add('fillcolor="#eeeeee"')
             }
 
-            dot << "  \"${project.path}\" [${traits.join(", ")}];\n"
+            dot << "  \"${project.name}\" [${traits.join(", ")}];\n"
         }
 
         dot << '\n  {rank = same;'
         for (project in projects) {
             if (rootProjects.contains(project)) {
-                dot << " \"${project.path}\";"
+                dot << " \"${project.name}\";"
             }
         }
         dot << '}\n'
 
         dot << '\n  # Dependencies\n\n'
         dependencies.forEach { key, traits ->
-            dot << "  \"${key.first.path}\" -> \"${key.second.path}\""
+            dot << "  \"${key.first.name}\" -> \"${key.second.name}\""
             if (!traits.isEmpty()) {
                 dot << " [${traits.join(", ")}]"
             }
