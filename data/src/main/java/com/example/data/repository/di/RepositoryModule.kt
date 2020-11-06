@@ -4,7 +4,7 @@ import com.example.data.repository.RepoRepositoryImpl
 import com.example.domain.repository.RepoRepository
 import org.koin.dsl.module
 
-val repositoryModule = module {
+internal val repositoryModule = module {
 
     single<RepoRepository> {
         RepoRepositoryImpl(

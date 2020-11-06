@@ -8,7 +8,7 @@ import com.example.data.local.prefs.api.SharedPrefsApi
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 
-val localModule = module {
+internal val localModule = module {
 
     single<PrefsHelper> {
         AppPrefs(

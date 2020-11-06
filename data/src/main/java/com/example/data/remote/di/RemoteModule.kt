@@ -18,7 +18,7 @@ import java.util.concurrent.TimeUnit
 
 private const val DEFAULT_CONNECTION_TIMEOUT = 15000L
 
-val remoteModule = module {
+internal val remoteModule = module {
 
     single {
         get<Retrofit>().create(RepoApi::class.java)
