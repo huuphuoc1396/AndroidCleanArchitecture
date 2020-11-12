@@ -86,6 +86,7 @@ object Modules {
     const val data = ":data"
     const val domain = ":domain"
     const val commonLib = ":common:common-lib"
+    const val commonAndroid = ":common:common-android"
     const val commonUnitTest = ":common:common-unit-test"
 }
 

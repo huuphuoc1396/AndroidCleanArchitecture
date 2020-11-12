@@ -1,4 +1,4 @@
-package com.example.clean_architecture.common.base
+package com.example.common_android.base
 
 import android.os.Bundle
 import android.os.PersistableBundle

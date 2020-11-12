@@ -1,4 +1,4 @@
-package com.example.clean_architecture.common.extension
+package com.example.common_android.extension
 
 import android.view.View
 import androidx.databinding.BindingAdapter

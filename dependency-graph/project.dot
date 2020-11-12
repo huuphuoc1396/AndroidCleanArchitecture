@@ -1,11 +1,12 @@
 digraph {
-  graph [labelloc=t,fontsize=30,ranksep=0.35];
+  graph [labelloc=t,fontsize=30,ranksep=0.5];
   node [style=filled, fillcolor="#bbbbbb"];
   rankdir=TB;
 
   # Projects
 
   "app" [shape=box, fillcolor="#baffc9"];
+  "common-android" [fillcolor="#baffc9"];
   "common-lib" [fillcolor="#ffb3ba"];
   "common-unit-test" [fillcolor="#ffb3ba"];
   "data" [fillcolor="#baffc9"];
@@ -18,11 +19,13 @@ digraph {
   "app" -> "data" [style=dotted]
   "app" -> "domain" [style=dotted]
   "app" -> "common-lib" [style=dotted]
+  "app" -> "common-android" [style=dotted]
   "app" -> "common-unit-test" [style=dotted]
   "data" -> "domain" [style=dotted]
   "data" -> "common-lib" [style=dotted]
   "data" -> "common-unit-test" [style=dotted]
   "domain" -> "common-lib" [style=dotted]
   "domain" -> "common-unit-test" [style=dotted]
+  "common-android" -> "common-lib" [style=dotted]
   "common-unit-test" -> "common-lib" [style=dotted]
 }

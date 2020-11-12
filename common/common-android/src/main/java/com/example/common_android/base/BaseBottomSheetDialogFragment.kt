@@ -1,4 +1,4 @@
-package com.example.clean_architecture.common.base
+package com.example.common_android.base
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,10 +7,10 @@ import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import androidx.fragment.app.DialogFragment
-import com.example.clean_architecture.common.livedata.autoCleared
+import com.example.common_android.livedata.autoCleared
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-abstract class BaseDialogFragment<V : ViewDataBinding> : DialogFragment() {
+abstract class BaseBottomSheetDialogFragment<V : ViewDataBinding> : BottomSheetDialogFragment() {
 
     @get:LayoutRes
     protected abstract val layoutResId: Int

@@ -8,11 +8,11 @@ import androidx.databinding.BindingAdapter
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.clean_architecture.R
-import com.example.clean_architecture.common.base.BaseFragment
-import com.example.clean_architecture.common.base.BaseViewModel
-import com.example.clean_architecture.common.extension.dismissKeyboard
 import com.example.clean_architecture.databinding.FragmentMainBinding
 import com.example.clean_architecture.presentation.model.RepoItem
+import com.example.common_android.base.BaseFragment
+import com.example.common_android.base.BaseViewModel
+import com.example.common_android.extension.dismissKeyboard
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainFragment : BaseFragment<FragmentMainBinding>() {

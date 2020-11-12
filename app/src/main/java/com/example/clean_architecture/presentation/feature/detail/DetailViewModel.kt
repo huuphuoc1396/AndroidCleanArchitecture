@@ -1,7 +1,7 @@
 package com.example.clean_architecture.presentation.feature.detail
 
 import androidx.lifecycle.MutableLiveData
-import com.example.clean_architecture.common.base.BaseViewModel
+import com.example.common_android.base.BaseViewModel
 
 class DetailViewModel : BaseViewModel() {
 
