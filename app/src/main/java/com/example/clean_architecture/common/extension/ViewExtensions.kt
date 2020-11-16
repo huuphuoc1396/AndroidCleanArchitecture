@@ -2,7 +2,7 @@ package com.example.clean_architecture.common.extension
 
 import android.view.View
 import androidx.databinding.BindingAdapter
-import java.util.concurrent.atomic.AtomicBoolean
+import com.example.clean_architecture.common.listener.OnSingleClickListener
 
 @BindingAdapter("onSingleClick")
 fun View.setOnSingleClickListener(onClickListener: View.OnClickListener?) {
@@ -17,20 +17,14 @@ fun View.setOnSingleClickListener(onClickListener: (View) -> Unit) {
     })
 }
 
-class OnSingleClickListener(
-    private val onClickListener: View.OnClickListener,
-    private val intervalMs: Long = 1000L
-) : View.OnClickListener {
-    private val canClick = AtomicBoolean(true)
+fun View.visible() {
+    this.visibility = View.VISIBLE
+}
 
-    override fun onClick(view: View?) {
-        if (canClick.getAndSet(false)) {
-            view?.run {
-                postDelayed({
-                    canClick.set(true)
-                }, intervalMs)
-                onClickListener.onClick(view)
-            }
-        }
-    }
+fun View.gone() {
+    this.visibility = View.GONE
+}
+
+fun View.invisible() {
+    this.visibility = View.INVISIBLE
 }
