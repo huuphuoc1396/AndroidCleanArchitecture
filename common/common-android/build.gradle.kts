@@ -34,11 +34,11 @@ android {
 
     productFlavors {
         create(ProductFlavors.develop) {
-            matchingFallbacks = listOf(BuildType.debug, BuildType.release)
+            setMatchingFallbacks(listOf(BuildType.debug, BuildType.release))
         }
 
         create(ProductFlavors.product) {
-            matchingFallbacks = listOf(BuildType.release)
+            setMatchingFallbacks(listOf(BuildType.release))
         }
     }
 

@@ -34,13 +34,13 @@ android {
     productFlavors {
 
         create(ProductFlavors.develop) {
-            matchingFallbacks = listOf(BuildType.debug, BuildType.release)
+            setMatchingFallbacks(listOf(BuildType.debug, BuildType.release))
 
             buildConfigField("String", "BASE_URL", "\"https://api.github.com/\"")
         }
 
         create(ProductFlavors.product) {
-            matchingFallbacks = listOf(BuildType.release)
+            setMatchingFallbacks(listOf(BuildType.release))
 
             buildConfigField("String", "BASE_URL", "\"https://api.github.com/\"")
         }

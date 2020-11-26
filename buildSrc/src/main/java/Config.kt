@@ -1,5 +1,5 @@
 object Versions {
-    internal const val androidPlugin = "4.0.2"
+    internal const val androidPlugin = "4.1.1"
     internal const val kotlin = "1.4.10"
     internal const val googleServices = "4.3.4"
     internal const val firebaseCrashlytics = "2.3.0"

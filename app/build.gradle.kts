@@ -41,18 +41,14 @@ android {
         val applicationName = "applicationName"
 
         create(ProductFlavors.develop) {
-            matchingFallbacks = listOf(BuildType.debug, BuildType.release)
+            setMatchingFallbacks(listOf(BuildType.debug, BuildType.release))
             applicationIdSuffix = ".dev"
-            manifestPlaceholders = mapOf(
-                applicationName to "[DEV] Clean Architecture"
-            )
+            setManifestPlaceholders(mapOf(applicationName to "[DEV] Clean Architecture"))
         }
 
         create(ProductFlavors.product) {
-            matchingFallbacks = listOf(BuildType.release)
-            manifestPlaceholders = mapOf(
-                applicationName to "@string/app_name"
-            )
+            setMatchingFallbacks(listOf(BuildType.release))
+            setManifestPlaceholders(mapOf(applicationName to "@string/app_name"))
         }
     }
 
