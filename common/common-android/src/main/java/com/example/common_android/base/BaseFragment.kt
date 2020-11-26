@@ -1,4 +1,4 @@
-package com.example.clean_architecture.common.base
+package com.example.common_android.base
 
 import android.app.Activity
 import android.content.Context
@@ -15,8 +15,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import com.example.clean_architecture.R
-import com.example.clean_architecture.common.livedata.autoCleared
+import com.example.common_android.R
+import com.example.common_android.livedata.autoCleared
 import com.example.common_lib.exception.ApiException
 import com.example.common_lib.exception.CoroutineException
 import pub.devrel.easypermissions.AppSettingsDialog

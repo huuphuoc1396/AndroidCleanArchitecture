@@ -1,4 +1,4 @@
-package com.example.clean_architecture.common.livedata
+package com.example.common_android.livedata
 
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle

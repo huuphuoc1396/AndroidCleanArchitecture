@@ -1,4 +1,4 @@
-package com.example.clean_architecture.common.binding
+package com.example.common_android.binding
 
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.databinding.BindingAdapter
