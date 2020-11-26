@@ -1,7 +1,7 @@
 package com.example.clean_architecture.presentation.mapper
 
+import com.example.clean_architecture.domain.model.Owner
 import com.example.clean_architecture.presentation.model.OwnerItem
-import com.example.domain.model.Owner
 import com.tngtech.java.junit.dataprovider.DataProvider
 import com.tngtech.java.junit.dataprovider.DataProviderRunner
 import com.tngtech.java.junit.dataprovider.UseDataProvider

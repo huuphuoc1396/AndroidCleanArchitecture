@@ -2,15 +2,15 @@ package com.example.clean_architecture.presentation.feature.main
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
+import com.example.clean_architecture.core_lib.exception.ApiException
+import com.example.clean_architecture.core_lib.exception.CoroutineException
+import com.example.clean_architecture.core_lib.extension.nextString
+import com.example.clean_architecture.core_lib.result.ResultWrapper
+import com.example.clean_architecture.core_unit_test.makeRandomListInstance
+import com.example.clean_architecture.domain.model.Repo
+import com.example.clean_architecture.domain.usecase.SearchReposUseCase
 import com.example.clean_architecture.presentation.mapper.RepoItemMapper
 import com.example.clean_architecture.presentation.model.RepoItem
-import com.example.common_lib.exception.ApiException
-import com.example.common_lib.exception.CoroutineException
-import com.example.common_lib.extension.nextString
-import com.example.common_lib.result.ResultWrapper
-import com.example.common_unit_test.makeRandomListInstance
-import com.example.domain.model.Repo
-import com.example.domain.usecase.SearchReposUseCase
 import io.mockk.*
 import org.junit.Rule
 import org.junit.Test

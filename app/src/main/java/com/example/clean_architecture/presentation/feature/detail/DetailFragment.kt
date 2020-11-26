@@ -5,9 +5,9 @@ import android.view.View
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.clean_architecture.R
+import com.example.clean_architecture.core_android.base.BaseFragment
+import com.example.clean_architecture.core_android.base.BaseViewModel
 import com.example.clean_architecture.databinding.FragmentDetailBinding
-import com.example.common_android.base.BaseFragment
-import com.example.common_android.base.BaseViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DetailFragment : BaseFragment<FragmentDetailBinding>() {

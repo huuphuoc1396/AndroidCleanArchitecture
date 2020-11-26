@@ -1,8 +1,8 @@
 package com.example.clean_architecture.presentation.mapper
 
+import com.example.clean_architecture.core_lib.mapper.Mapper
+import com.example.clean_architecture.domain.model.Repo
 import com.example.clean_architecture.presentation.model.RepoItem
-import com.example.common_lib.mapper.Mapper
-import com.example.domain.model.Repo
 
 class RepoItemMapper(
     private val ownerItemMapper: OwnerItemMapper
