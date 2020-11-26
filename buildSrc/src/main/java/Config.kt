@@ -85,9 +85,9 @@ object GradlePlugins {
 object Modules {
     const val data = ":data"
     const val domain = ":domain"
-    const val commonLib = ":common:common-lib"
-    const val commonAndroid = ":common:common-android"
-    const val commonUnitTest = ":common:common-unit-test"
+    const val coreLib = ":core:core-lib"
+    const val coreAndroid = ":core:core-android"
+    const val coreUnitTest = ":core:core-unit-test"
 }
 
 object AndroidJUnit {

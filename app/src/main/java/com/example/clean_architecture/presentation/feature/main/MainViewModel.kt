@@ -4,11 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.viewModelScope
+import com.example.clean_architecture.core_android.base.BaseViewModel
+import com.example.clean_architecture.core_lib.extension.defaultEmpty
+import com.example.clean_architecture.domain.usecase.SearchReposUseCase
 import com.example.clean_architecture.presentation.mapper.RepoItemMapper
 import com.example.clean_architecture.presentation.model.RepoItem
-import com.example.common_android.base.BaseViewModel
-import com.example.common_lib.extension.defaultEmpty
-import com.example.domain.usecase.SearchReposUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch

@@ -51,7 +51,7 @@ dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 
     implementation(project(Modules.domain))
-    implementation(project(Modules.commonLib))
+    implementation(project(Modules.coreLib))
 
     implementation(Libs.kotlinStdlib)
     implementation(Libs.androidxCore)
@@ -88,7 +88,7 @@ dependencies {
     testImplementation(TestLibs.robolectric)
     testImplementation(TestLibs.room)
     testImplementation(TestLibs.junitDataProvider)
-    testImplementation(project(Modules.commonUnitTest))
+    testImplementation(project(Modules.coreUnitTest))
 
     androidTestImplementation(TestLibs.androidTestJunit)
 }
