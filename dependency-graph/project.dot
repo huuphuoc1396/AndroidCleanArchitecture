@@ -6,9 +6,9 @@ digraph {
   # Projects
 
   "app" [shape=box, fillcolor="#baffc9"];
-  "common-android" [fillcolor="#baffc9"];
-  "common-lib" [fillcolor="#ffb3ba"];
-  "common-unit-test" [fillcolor="#ffb3ba"];
+  "core-android" [fillcolor="#baffc9"];
+  "core-lib" [fillcolor="#ffb3ba"];
+  "core-unit-test" [fillcolor="#ffb3ba"];
   "data" [fillcolor="#baffc9"];
   "domain" [fillcolor="#ffb3ba"];
 
@@ -18,14 +18,14 @@ digraph {
 
   "app" -> "data" [style=dotted]
   "app" -> "domain" [style=dotted]
-  "app" -> "common-lib" [style=dotted]
-  "app" -> "common-android" [style=dotted]
-  "app" -> "common-unit-test" [style=dotted]
+  "app" -> "core-lib" [style=dotted]
+  "app" -> "core-android" [style=dotted]
+  "app" -> "core-unit-test" [style=dotted]
   "data" -> "domain" [style=dotted]
-  "data" -> "common-lib" [style=dotted]
-  "data" -> "common-unit-test" [style=dotted]
-  "domain" -> "common-lib" [style=dotted]
-  "domain" -> "common-unit-test" [style=dotted]
-  "common-android" -> "common-lib" [style=dotted]
-  "common-unit-test" -> "common-lib" [style=dotted]
+  "data" -> "core-lib" [style=dotted]
+  "data" -> "core-unit-test" [style=dotted]
+  "domain" -> "core-lib" [style=dotted]
+  "domain" -> "core-unit-test" [style=dotted]
+  "core-android" -> "core-lib" [style=dotted]
+  "core-unit-test" -> "core-lib" [style=dotted]
 }
