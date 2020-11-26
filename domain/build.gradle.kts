@@ -6,7 +6,7 @@ plugins {
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 
-    implementation(project(Modules.commonLib))
+    implementation(project(Modules.coreLib))
 
     implementation(Libs.kotlinStdlib)
 
@@ -22,5 +22,5 @@ dependencies {
     testImplementation(TestLibs.hamcrest)
     testImplementation(TestLibs.mockk)
     testImplementation(TestLibs.koin)
-    testImplementation(project(Modules.commonUnitTest))
+    testImplementation(project(Modules.coreUnitTest))
 }

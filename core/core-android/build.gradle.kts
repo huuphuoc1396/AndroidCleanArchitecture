@@ -67,7 +67,7 @@ android {
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 
-    implementation(project(Modules.commonLib))
+    implementation(project(Modules.coreLib))
 
     implementation(Libs.kotlinStdlib)
     implementation(Libs.androidxCore)

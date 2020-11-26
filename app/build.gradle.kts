@@ -79,8 +79,8 @@ dependencies {
 
     implementation(project(Modules.data))
     implementation(project(Modules.domain))
-    implementation(project(Modules.commonLib))
-    implementation(project(Modules.commonAndroid))
+    implementation(project(Modules.coreLib))
+    implementation(project(Modules.coreAndroid))
 
     implementation(Libs.kotlinStdlib)
     implementation(Libs.androidxCore)
@@ -128,7 +128,7 @@ dependencies {
     testImplementation(TestLibs.koin)
     testImplementation(TestLibs.robolectric)
     testImplementation(TestLibs.junitDataProvider)
-    testImplementation(project(Modules.commonUnitTest))
+    testImplementation(project(Modules.coreUnitTest))
 
     androidTestImplementation(TestLibs.androidTestJunit)
     androidTestImplementation(TestLibs.espressoCore)
