@@ -3,5 +3,5 @@
     <string name="ok">OK</string>
     <string name="network_error">Network error</string>
     <string name="unexpected_error">Network connection failed. Please try again!</string>
-    <string name="no_internet_error">Please check internet connection and try again!</string>
+    <string name="no_internet_error">Please check your internet connection and try again!</string>
 </resources>

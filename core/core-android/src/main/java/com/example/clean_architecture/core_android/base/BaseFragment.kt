@@ -10,11 +10,11 @@ import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.annotation.LayoutRes
 import androidx.annotation.Size
-import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import com.example.clean_architecture.core_android.dialog.NetworkErrorDialogFragment
 import com.example.clean_architecture.core_android.livedata.autoCleared
 import com.example.clean_architecture.core_lib.exception.ApiException
 import com.example.clean_architecture.core_lib.exception.CoroutineException
@@ -24,8 +24,6 @@ import pub.devrel.easypermissions.EasyPermissions
 import timber.log.Timber
 
 abstract class BaseFragment<V : ViewDataBinding> : Fragment(), EasyPermissions.PermissionCallbacks {
-
-    private var networkErrorDialog: AlertDialog? = null
 
     @get:LayoutRes
     protected abstract val layoutResId: Int
@@ -145,7 +143,6 @@ abstract class BaseFragment<V : ViewDataBinding> : Fragment(), EasyPermissions.P
 
     override fun onDestroy() {
         Timber.tag(LIFECYCLE_TAG).i("${this::class.simpleName} onDestroy")
-        networkErrorDialog?.dismiss()
         super.onDestroy()
     }
 
@@ -159,37 +156,28 @@ abstract class BaseFragment<V : ViewDataBinding> : Fragment(), EasyPermissions.P
     override fun onPermissionsGranted(requestCode: Int, perms: MutableList<String>) {}
 
     private fun handleNetworkError(coroutineException: CoroutineException) {
-        when (coroutineException) {
-            is ApiException.ConnectionException -> {
-                showNetworkErrorDialog(getString(R.string.no_internet_error))
-            }
-
-            is ApiException.ServerException -> {
-                val errorMessage = coroutineException.errorMessage
-                if (errorMessage.isNotEmpty()) {
-                    showNetworkErrorDialog(errorMessage)
-                } else {
-                    showNetworkErrorDialog(getString(R.string.unexpected_error))
+        val currentActivity = activity
+        if (currentActivity != null && !currentActivity.isFinishing) {
+            val message = when (coroutineException) {
+                is ApiException.ConnectionException -> {
+                    getString(R.string.no_internet_error)
                 }
+                is ApiException.ServerException -> {
+                    val errorMessage = coroutineException.errorMessage
+                    if (errorMessage.isNotEmpty()) {
+                        errorMessage
+                    } else {
+                        getString(R.string.unexpected_error)
+                    }
+                }
+                is ApiException.UnknownException -> {
+                    getString(R.string.unexpected_error)
+                }
+                else -> ""
             }
-
-            is ApiException.UnknownException -> {
-                showNetworkErrorDialog(getString(R.string.unexpected_error))
-            }
+            val dialogFragment = NetworkErrorDialogFragment.newInstance(message)
+            dialogFragment.show(childFragmentManager, NetworkErrorDialogFragment::class.simpleName)
         }
-    }
-
-    private fun showNetworkErrorDialog(message: String) {
-        networkErrorDialog?.dismiss()
-        networkErrorDialog = AlertDialog.Builder(requireContext())
-            .setTitle(R.string.network_error)
-            .setMessage(message)
-            .setCancelable(false)
-            .setPositiveButton(R.string.ok) { dialogInterface, _ ->
-                dialogInterface.dismiss()
-            }
-            .create()
-        networkErrorDialog?.show()
     }
 
     companion object {
