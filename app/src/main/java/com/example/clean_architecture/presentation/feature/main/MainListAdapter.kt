@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.example.clean_architecture.databinding.ItemRepoBinding
-import com.example.clean_architecture.presentation.model.RepoItem
+import com.example.clean_architecture.presentation.feature.main.model.RepoItem
 
 class MainListAdapter(
     private val onItemClickListener: (RepoItem) -> Unit

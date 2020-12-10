@@ -13,7 +13,7 @@ import com.example.clean_architecture.core_android.base.BaseFragment
 import com.example.clean_architecture.core_android.base.BaseViewModel
 import com.example.clean_architecture.core_android.extension.dismissKeyboard
 import com.example.clean_architecture.databinding.FragmentMainBinding
-import com.example.clean_architecture.presentation.model.RepoItem
+import com.example.clean_architecture.presentation.feature.main.model.RepoItem
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainFragment : BaseFragment<FragmentMainBinding>() {

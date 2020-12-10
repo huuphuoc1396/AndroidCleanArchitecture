@@ -9,8 +9,8 @@ import com.example.clean_architecture.core_lib.result.ResultWrapper
 import com.example.clean_architecture.core_unit_test.makeRandomListInstance
 import com.example.clean_architecture.domain.model.Repo
 import com.example.clean_architecture.domain.usecase.SearchReposUseCase
-import com.example.clean_architecture.presentation.mapper.RepoItemMapper
-import com.example.clean_architecture.presentation.model.RepoItem
+import com.example.clean_architecture.presentation.feature.main.mapper.RepoItemMapper
+import com.example.clean_architecture.presentation.feature.main.model.RepoItem
 import io.mockk.*
 import org.junit.Rule
 import org.junit.Test
