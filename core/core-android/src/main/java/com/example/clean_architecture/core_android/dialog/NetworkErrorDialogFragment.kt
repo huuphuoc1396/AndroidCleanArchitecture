@@ -4,12 +4,11 @@ import android.app.Dialog
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import androidx.core.os.bundleOf
-import androidx.databinding.ViewDataBinding
-import com.example.clean_architecture.core_android.base.BaseDialogFragment
+import androidx.fragment.app.DialogFragment
 import com.example.clean_architecture.core_lib.extension.defaultEmpty
 import com.example.common_android.R
 
-class NetworkErrorDialogFragment : BaseDialogFragment<ViewDataBinding>() {
+class NetworkErrorDialogFragment : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return createNetworkErrorDialog()

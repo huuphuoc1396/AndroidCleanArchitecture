@@ -8,9 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
-import androidx.annotation.LayoutRes
 import androidx.annotation.Size
-import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -25,10 +23,9 @@ import timber.log.Timber
 
 abstract class BaseFragment<V : ViewDataBinding> : Fragment(), EasyPermissions.PermissionCallbacks {
 
-    @get:LayoutRes
-    protected abstract val layoutResId: Int
+    abstract fun createViewDataBinding(inflater: LayoutInflater, container: ViewGroup?): V
 
-    protected var viewDataBinding: V by autoCleared()
+    var viewDataBinding: V by autoCleared()
 
     open fun getViewModel(): BaseViewModel? {
         return null
@@ -78,7 +75,7 @@ abstract class BaseFragment<V : ViewDataBinding> : Fragment(), EasyPermissions.P
         savedInstanceState: Bundle?
     ): View? {
         Timber.tag(LIFECYCLE_TAG).i("${this::class.simpleName} onCreateView")
-        viewDataBinding = DataBindingUtil.inflate(inflater, layoutResId, container, false)
+        viewDataBinding = createViewDataBinding(inflater, container)
         return viewDataBinding.root
     }
 

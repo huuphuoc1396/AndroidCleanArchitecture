@@ -2,12 +2,13 @@ package com.example.clean_architecture.presentation.feature.main
 
 import android.os.Bundle
 import android.view.KeyEvent
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import androidx.databinding.BindingAdapter
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.example.clean_architecture.R
 import com.example.clean_architecture.core_android.base.BaseFragment
 import com.example.clean_architecture.core_android.base.BaseViewModel
 import com.example.clean_architecture.core_android.extension.dismissKeyboard
@@ -19,7 +20,12 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
 
     private val viewModel: MainViewModel by viewModel()
 
-    override val layoutResId: Int = R.layout.fragment_main
+    override fun createViewDataBinding(
+        inflater: LayoutInflater,
+        container: ViewGroup?
+    ): FragmentMainBinding {
+        return FragmentMainBinding.inflate(inflater, container, false)
+    }
 
     override fun getViewModel(): BaseViewModel {
         return viewModel
