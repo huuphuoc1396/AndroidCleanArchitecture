@@ -1,4 +1,5 @@
 include(":app")
+include(":presentation")
 include(":data")
 include(":domain")
 include(":core:core-lib")
