@@ -15,18 +15,18 @@ android {
         versionCode = Android.versionCode
         versionName = Android.versionName
 
-        testInstrumentationRunner = AndroidJUnit.runner
+        testInstrumentationRunner = AndroidJUnitRunner.runner
     }
 
     buildTypes {
-        getByName(BuildType.release) {
-            isMinifyEnabled = BuildType.minifyRelease
-            proguardFiles(BuildType.proguardRelease)
+        getByName(BuildTypes.release) {
+            isMinifyEnabled = BuildTypes.minifyRelease
+            proguardFiles(BuildTypes.proguardRelease)
         }
 
-        getByName(BuildType.debug) {
-            isMinifyEnabled = BuildType.minifyDebug
-            proguardFiles(BuildType.proguardDebug)
+        getByName(BuildTypes.debug) {
+            isMinifyEnabled = BuildTypes.minifyDebug
+            proguardFiles(BuildTypes.proguardDebug)
         }
     }
 
@@ -34,11 +34,11 @@ android {
 
     productFlavors {
         create(ProductFlavors.develop) {
-            setMatchingFallbacks(listOf(BuildType.debug, BuildType.release))
+            setMatchingFallbacks(listOf(BuildTypes.debug, BuildTypes.release))
         }
 
         create(ProductFlavors.product) {
-            setMatchingFallbacks(listOf(BuildType.release))
+            setMatchingFallbacks(listOf(BuildTypes.release))
         }
     }
 
@@ -69,34 +69,34 @@ dependencies {
 
     implementation(project(Modules.coreLib))
 
-    implementation(Libs.kotlinStdlib)
-    implementation(Libs.androidxCore)
-    implementation(Libs.viewModel)
-    implementation(Libs.liveDataKtx)
-    implementation(Libs.viewModelSavedState)
+    implementation(KotlinLibs.kotlinStdlib)
+    implementation(AndroidSupportLibs.androidxCore)
+    implementation(LifecycleLibs.viewModel)
+    implementation(LifecycleLibs.liveDataKtx)
+    implementation(LifecycleLibs.viewModelSavedState)
 
-    implementation(Libs.koinAndroid)
-    implementation(Libs.koinAndroidScope)
-    implementation(Libs.koinViewModel)
-    implementation(Libs.koinFragment)
+    implementation(KoinLibs.koinAndroid)
+    implementation(KoinLibs.koinAndroidScope)
+    implementation(KoinLibs.koinViewModel)
+    implementation(KoinLibs.koinFragment)
 
-    implementation(Libs.coroutinesCore)
-    implementation(Libs.androidCoroutines)
+    implementation(CoroutinesLibs.coroutinesCore)
+    implementation(CoroutinesLibs.androidCoroutines)
 
-    implementation(Libs.navigationFragment)
-    implementation(Libs.navigationUi)
+    implementation(NavigationLibs.navigationFragment)
+    implementation(NavigationLibs.navigationUi)
 
-    implementation(Libs.annotations)
-    implementation(Libs.appCompat)
-    implementation(Libs.constraint)
-    implementation(Libs.cardView)
-    implementation(Libs.material)
-    implementation(Libs.recyclerView)
+    implementation(AndroidSupportLibs.annotations)
+    implementation(AndroidSupportLibs.appCompat)
+    implementation(AndroidSupportLibs.constraint)
+    implementation(AndroidSupportLibs.cardView)
+    implementation(AndroidSupportLibs.material)
+    implementation(AndroidSupportLibs.recyclerView)
 
-    implementation(Libs.timber)
-    implementation(Libs.glide)
-    implementation(Libs.easyPermissions)
+    implementation(TimberLibs.timber)
+    implementation(GlideLibs.glide)
+    implementation(EasyPermissionsLibs.easyPermissions)
 
-    kapt(Libs.lifecycleCompiler)
-    kapt(Libs.glideCompiler)
+    kapt(LifecycleLibs.lifecycleCompiler)
+    kapt(GlideLibs.glideCompiler)
 }
