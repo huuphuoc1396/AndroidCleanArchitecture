@@ -79,8 +79,6 @@ dependencies {
     implementation(project(Modules.presentation))
     implementation(project(Modules.data))
     implementation(project(Modules.domain))
-    implementation(project(Modules.coreLib))
-    implementation(project(Modules.coreAndroid))
 
     implementation(Libs.kotlinStdlib)
     implementation(Libs.androidxCore)
@@ -95,4 +93,13 @@ dependencies {
     implementation(Libs.timber)
 
     debugImplementation(Libs.leakCanary)
+
+    testImplementation(TestLibs.junit)
+    testImplementation(TestLibs.androidTestJunit)
+    testImplementation(TestLibs.archTestCore)
+    testImplementation(TestLibs.hamcrest)
+    testImplementation(TestLibs.mockk)
+    testImplementation(TestLibs.androidMockk)
+    testImplementation(TestLibs.koin)
+    testImplementation(TestLibs.robolectric)
 }

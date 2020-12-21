@@ -2,7 +2,7 @@ apply plugin: 'jacoco'
 
 // Filter out modules
 def jacocoCoveredProjects = subprojects.findAll { project ->
-    project.name == "app" || project.name == "data" || project.name == "domain"
+    project.name == "app" || project.name == "presentation" || project.name == "data" || project.name == "domain"
 }
 
 configure(jacocoCoveredProjects) { project ->
@@ -25,7 +25,7 @@ configure(jacocoCoveredProjects) { project ->
                     '**/*Test*.*', 'android/**/*.*'
             ]
         }
-        if (project.name == 'app') {
+        if (project.name == 'app' || project.name == 'presentation') {
             testTask = 'testDevDebugUnitTest'
             fileFilter = [
                     '**/R.class', '**/R$*.class', '**/BuildConfig.*', '**/Manifest*.*',

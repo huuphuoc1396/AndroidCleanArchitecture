@@ -5,27 +5,34 @@ digraph {
 
   # Projects
 
-  "app" [shape=box, fillcolor="#baffc9"];
+  "app" [fillcolor="#baffc9"];
   "core-android" [fillcolor="#baffc9"];
   "core-lib" [fillcolor="#ffb3ba"];
   "core-unit-test" [fillcolor="#ffb3ba"];
   "data" [fillcolor="#baffc9"];
   "domain" [fillcolor="#ffb3ba"];
+  "presentation" [fillcolor="#baffc9"];
 
-  {rank = same; "app";}
+  {rank = same;}
 
   # Dependencies
 
+  "app" -> "app"
+  "app" -> "presentation" [style=dotted]
   "app" -> "data" [style=dotted]
   "app" -> "domain" [style=dotted]
-  "app" -> "core-lib" [style=dotted]
-  "app" -> "core-android" [style=dotted]
-  "app" -> "core-unit-test" [style=dotted]
+  "data" -> "data"
   "data" -> "domain" [style=dotted]
   "data" -> "core-lib" [style=dotted]
   "data" -> "core-unit-test" [style=dotted]
   "domain" -> "core-lib" [style=dotted]
   "domain" -> "core-unit-test" [style=dotted]
+  "presentation" -> "presentation"
+  "presentation" -> "domain" [style=dotted]
+  "presentation" -> "core-lib" [style=dotted]
+  "presentation" -> "core-android" [style=dotted]
+  "presentation" -> "core-unit-test" [style=dotted]
+  "core-android" -> "core-android"
   "core-android" -> "core-lib" [style=dotted]
   "core-unit-test" -> "core-lib" [style=dotted]
 }
