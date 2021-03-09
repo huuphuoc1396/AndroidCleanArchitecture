@@ -19,7 +19,6 @@ class AppPrefsTest {
         context.getSharedPreferences(context.packageName, Context.MODE_PRIVATE)
 
     private val sharedPrefsApi = SharedPrefsApi(
-        gson = Gson(),
         sharedPreferences = sharedPreferences
     )
 

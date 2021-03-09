@@ -52,13 +52,7 @@ internal val remoteModule = module {
     }
 
     factory {
-        Gson()
-    }
-
-    factory {
-        RemoteCoroutineExceptionHandler(
-            gson = get()
-        )
+        RemoteCoroutineExceptionHandler()
     }
 
     factory {

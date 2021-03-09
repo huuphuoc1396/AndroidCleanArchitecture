@@ -11,9 +11,7 @@ import retrofit2.HttpException
 import timber.log.Timber
 import java.io.IOException
 
-class RemoteCoroutineExceptionHandler(
-    private val gson: Gson
-) : CoroutineExceptionHandler {
+class RemoteCoroutineExceptionHandler : CoroutineExceptionHandler {
     override fun handleException(exception: Exception): CoroutineException {
         return when (exception) {
             is IOException -> {
@@ -23,7 +21,7 @@ class RemoteCoroutineExceptionHandler(
                 val code = exception.code().default(-1)
                 val errorMessage = exception.response()?.errorBody()?.string()?.let { errorBody ->
                     try {
-                        val serverErrorResponse = gson.fromJson<ServerErrorResponse>(
+                        val serverErrorResponse = Gson().fromJson(
                             errorBody,
                             ServerErrorResponse::class.java
                         )
