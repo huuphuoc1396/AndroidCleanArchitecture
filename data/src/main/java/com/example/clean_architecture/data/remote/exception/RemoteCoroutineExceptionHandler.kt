@@ -19,18 +19,19 @@ class RemoteCoroutineExceptionHandler : CoroutineExceptionHandler {
             }
             is HttpException -> {
                 val code = exception.code().default(-1)
-                val errorMessage = exception.response()?.errorBody()?.string()?.let { errorBody ->
-                    try {
-                        val serverErrorResponse = Gson().fromJson(
-                            errorBody,
-                            ServerErrorResponse::class.java
-                        )
-                        return@let serverErrorResponse.message
-                    } catch (parseException: Exception) {
-                        Timber.e(parseException)
-                        return@let null
+                val errorMessage = exception.response()
+                    ?.errorBody()
+                    ?.string()
+                    ?.let { errorBody ->
+                        try {
+                            val serverErrorResponse =
+                                Gson().fromJson(errorBody, ServerErrorResponse::class.java)
+                            return@let serverErrorResponse.message
+                        } catch (parseException: Exception) {
+                            Timber.e(parseException)
+                            return@let null
+                        }
                     }
-                }
                 return ApiException.ServerException(
                     code = code,
                     errorMessage = errorMessage.defaultEmpty()
