@@ -29,7 +29,7 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>() {
         viewDataBinding.viewModel = viewModel
     }
 
-    override fun getViewModel(): BaseViewModel? {
+    override fun getViewModel(): BaseViewModel {
         return viewModel
     }
 
@@ -39,7 +39,7 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>() {
     }
 
     private fun initViews() {
-        viewModel.setDetailItem(
+        viewModel.init(
             repoName = args.repoName,
             ownerLogin = args.ownerLogin
         )

@@ -23,8 +23,8 @@ class MainViewModel(
     private var searchJob: Job? = null
 
     val repoItem = MutableLiveData<List<RepoItem>>(listOf())
-    val isLoading = MutableLiveData<Boolean>(false)
-    val query = MutableLiveData<String>("")
+    val isLoading = MutableLiveData(false)
+    val query = MutableLiveData("")
 
     val isNoResults: LiveData<Boolean> = Transformations.map(isLoading) { isLoading ->
         repoItem.value.isNullOrEmpty() && !query.value.isNullOrEmpty() && !isLoading
