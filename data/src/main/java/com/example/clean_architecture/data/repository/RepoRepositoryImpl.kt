@@ -10,7 +10,7 @@ import com.example.clean_architecture.domain.repository.RepoRepository
 class RepoRepositoryImpl(
     private val repoApi: RepoApi,
     private val repoMapper: RepoMapper,
-    private val remoteCoroutineExceptionHandler: RemoteCoroutineExceptionHandler
+    private val remoteCoroutineExceptionHandler: RemoteCoroutineExceptionHandler,
 ) : RepoRepository {
 
     override suspend fun searchRepos(query: String): ResultWrapper<List<Repo>> {

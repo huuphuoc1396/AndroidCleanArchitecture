@@ -8,13 +8,13 @@ dependencies {
 
     implementation(project(Modules.coreLib))
 
-    implementation(Libs.kotlinStdlib)
-    implementation(Libs.kotlinReflect)
+    implementation(KotlinLibs.kotlinStdlib)
+    implementation(KotlinLibs.kotlinReflect)
 
-    implementation(TestLibs.junit)
-    implementation(TestLibs.androidTestJunit)
-    implementation(TestLibs.archTestCore)
-    implementation(TestLibs.hamcrest)
-    implementation(TestLibs.mockk)
-    implementation(TestLibs.koin)
+    implementation(AndroidTestLibs.junit)
+    implementation(AndroidTestLibs.androidTestJunit)
+    implementation(AndroidTestLibs.archTestCore)
+    implementation(AndroidTestLibs.hamcrest)
+    implementation(MockKLibs.mockK)
+    implementation(KoinLibs.koinTest)
 }

@@ -17,20 +17,20 @@ android {
         versionCode = Android.versionCode
         versionName = Android.versionName
 
-        testInstrumentationRunner = AndroidJUnit.runner
+        testInstrumentationRunner = AndroidJUnitRunner.runner
     }
 
     buildTypes {
-        getByName(BuildType.release) {
-            isMinifyEnabled = BuildType.minifyRelease
-            isShrinkResources = BuildType.isShrinkResourcesRelease
-            proguardFiles(BuildType.proguardRelease)
+        getByName(BuildTypes.release) {
+            isMinifyEnabled = BuildTypes.minifyRelease
+            isShrinkResources = BuildTypes.isShrinkResourcesRelease
+            proguardFiles(BuildTypes.proguardRelease)
         }
 
-        getByName(BuildType.debug) {
-            isMinifyEnabled = BuildType.minifyDebug
-            isShrinkResources = BuildType.isShrinkResourcesDebug
-            proguardFiles(BuildType.proguardDebug)
+        getByName(BuildTypes.debug) {
+            isMinifyEnabled = BuildTypes.minifyDebug
+            isShrinkResources = BuildTypes.isShrinkResourcesDebug
+            proguardFiles(BuildTypes.proguardDebug)
         }
     }
 
@@ -40,13 +40,13 @@ android {
         val applicationName = "applicationName"
 
         create(ProductFlavors.develop) {
-            setMatchingFallbacks(listOf(BuildType.debug, BuildType.release))
+            setMatchingFallbacks(listOf(BuildTypes.debug, BuildTypes.release))
             applicationIdSuffix = ".dev"
             setManifestPlaceholders(mapOf(applicationName to "[DEV] Clean Architecture"))
         }
 
         create(ProductFlavors.product) {
-            setMatchingFallbacks(listOf(BuildType.release))
+            setMatchingFallbacks(listOf(BuildTypes.release))
             setManifestPlaceholders(mapOf(applicationName to "@string/app_name"))
         }
     }
@@ -80,26 +80,26 @@ dependencies {
     implementation(project(Modules.data))
     implementation(project(Modules.domain))
 
-    implementation(Libs.kotlinStdlib)
-    implementation(Libs.androidxCore)
+    implementation(KotlinLibs.kotlinStdlib)
+    implementation(AndroidSupportLibs.androidxCore)
 
-    implementation(Libs.koinAndroid)
-    implementation(Libs.koinAndroidScope)
+    implementation(KoinLibs.koinAndroid)
+    implementation(KoinLibs.koinAndroidScope)
 
-    implementation(platform(Libs.firebaseBom))
-    implementation(Libs.firebaseCrashlytics)
-    implementation(Libs.firebaseAnalytics)
+    implementation(platform(FirebaseLibs.firebaseBom))
+    implementation(FirebaseLibs.firebaseCrashlytics)
+    implementation(FirebaseLibs.firebaseAnalytics)
 
-    implementation(Libs.timber)
+    implementation(TimberLibs.timber)
 
-    debugImplementation(Libs.leakCanary)
+    debugImplementation(LeakCanaryLibs.leakCanary)
 
-    testImplementation(TestLibs.junit)
-    testImplementation(TestLibs.androidTestJunit)
-    testImplementation(TestLibs.archTestCore)
-    testImplementation(TestLibs.hamcrest)
-    testImplementation(TestLibs.mockk)
-    testImplementation(TestLibs.androidMockk)
-    testImplementation(TestLibs.koin)
-    testImplementation(TestLibs.robolectric)
+    testImplementation(AndroidTestLibs.junit)
+    testImplementation(AndroidTestLibs.androidTestJunit)
+    testImplementation(AndroidTestLibs.archTestCore)
+    testImplementation(AndroidTestLibs.hamcrest)
+    testImplementation(MockKLibs.mockK)
+    testImplementation(MockKLibs.androidMockK)
+    testImplementation(KoinLibs.koinTest)
+    testImplementation(AndroidTestLibs.robolectric)
 }

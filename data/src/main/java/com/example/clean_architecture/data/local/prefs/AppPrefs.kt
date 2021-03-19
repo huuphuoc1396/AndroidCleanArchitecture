@@ -3,7 +3,7 @@ package com.example.clean_architecture.data.local.prefs
 import com.example.clean_architecture.data.local.prefs.api.SharedPrefsApi
 
 class AppPrefs(
-    private val sharedPrefsApi: SharedPrefsApi
+    private val sharedPrefsApi: SharedPrefsApi,
 ) : PrefsHelper {
 
     override fun setFirstRun() {

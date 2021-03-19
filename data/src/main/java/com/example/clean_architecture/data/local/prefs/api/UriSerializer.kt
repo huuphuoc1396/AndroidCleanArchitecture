@@ -11,7 +11,7 @@ class UriSerializer : JsonSerializer<Uri?> {
     override fun serialize(
         src: Uri?,
         typeOfSrc: Type?,
-        context: JsonSerializationContext?
+        context: JsonSerializationContext?,
     ): JsonElement {
         return JsonPrimitive(src.toString())
     }

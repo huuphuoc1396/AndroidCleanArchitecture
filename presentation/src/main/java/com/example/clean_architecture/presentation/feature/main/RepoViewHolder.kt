@@ -7,7 +7,7 @@ import com.example.clean_architecture.presentation.feature.main.model.RepoItem
 
 class RepoViewHolder(
     private val itemRepoBinding: ItemRepoBinding,
-    private val onItemClickListener: (RepoItem) -> Unit
+    private val onItemClickListener: (RepoItem) -> Unit,
 ) : RecyclerView.ViewHolder(itemRepoBinding.root) {
 
     init {

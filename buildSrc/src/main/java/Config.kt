@@ -1,64 +1,17 @@
-object Versions {
-    internal const val androidPlugin = "4.1.1"
-    internal const val kotlin = "1.4.10"
-    internal const val googleServices = "4.3.4"
-    internal const val firebaseCrashlytics = "2.3.0"
-
-    internal const val androidxCore = "1.3.2"
-    internal const val lifecycle = "2.2.0"
-    internal const val navigation = "2.3.0"
-    internal const val room = "2.2.5"
-    internal const val koin = "2.1.6"
-    internal const val coroutines = "1.3.9"
-
-    // Support
-    internal const val annotations = "1.1.0"
-    internal const val appCompat = "1.2.0"
-    internal const val cardView = "1.0.0"
-    internal const val constraint = "2.0.2"
-    internal const val material = "1.2.1"
-    internal const val recyclerView = "1.1.0"
-
-    // Testing
-    internal const val junit = "4.12"
-    internal const val androidTest = "1.3.0"
-    internal const val androidTestJunit = "1.1.2"
-    internal const val archTestCore = "2.1.0"
-    internal const val espressoCore = "3.3.0"
-    internal const val hamcrest = "1.3"
-    internal const val mockk = "1.10.2"
-    internal const val mockWebServer = "4.9.0"
-    internal const val robolectric = "4.4"
-
-    // Firebase
-    internal const val firebaseBom = "26.0.0"
-
-    // Logging
-    internal const val loggingInterceptor = "4.9.0"
-    internal const val timber = "4.7.1"
-
-    // Third-party
-    internal const val retrofit = "2.9.0"
-    internal const val glide = "4.11.0"
-    internal const val easyPermission = "3.0.0"
-    internal const val chucker = "3.3.0"
-    internal const val leakCanary = "2.5"
-    internal const val junitDataProvider = "2.6"
-    internal const val okHttp3 = "4.9.0"
-}
-
 object Url {
     const val jitPack = "https://jitpack.io"
 }
 
 object BuildPlugins {
-    const val androidPlugin = "com.android.tools.build:gradle:${Versions.androidPlugin}"
-    const val kotlinPlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
-    const val navigationPlugin =
-        "androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.navigation}"
-    const val googleServices = "com.google.gms:google-services:${Versions.googleServices}"
-    const val firebaseCrashlytics =
-        "com.google.firebase:firebase-crashlytics-gradle:${Versions.firebaseCrashlytics}"
+    private const val androidPluginVersion = "4.1.1"
+    private const val googleServicesVersion = "4.3.4"
+    private const val firebaseCrashlyticsVersion = "2.3.0"
+
+    const val android = "com.android.tools.build:gradle:${androidPluginVersion}"
+    const val kotlin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${KotlinLibs.version}"
+    const val navigation = "androidx.navigation:navigation-safe-args-gradle-plugin:${NavigationLibs.version}"
+    const val googleServices = "com.google.gms:google-services:${googleServicesVersion}"
+    const val firebaseCrashlytics = "com.google.firebase:firebase-crashlytics-gradle:${firebaseCrashlyticsVersion}"
 }
 
 object Android {
@@ -91,11 +44,11 @@ object Modules {
     const val coreUnitTest = ":core:core-unit-test"
 }
 
-object AndroidJUnit {
+object AndroidJUnitRunner {
     const val runner = "androidx.test.runner.AndroidJUnitRunner"
 }
 
-object BuildType {
+object BuildTypes {
     const val debug = "debug"
     const val release = "release"
 
@@ -116,120 +69,172 @@ object ProductFlavors {
     const val product = "prod"
 }
 
-object TestLibs {
+object AndroidTestLibs {
+    private const val junitVersion = "4.12"
+    private const val androidTestVersion = "1.3.0"
+    private const val androidTestJunitVersion = "1.1.2"
+    private const val archTestCoreVersion = "2.1.0"
+    private const val espressoCoreVersion = "3.3.0"
+    private const val hamcrestVersion = "1.3"
+    private const val robolectricVersion = "4.4"
 
     // Core
-    const val junit = "junit:junit:${Versions.junit}"
-    const val androidTestCore = "androidx.test:core:${Versions.androidTest}"
+    const val junit = "junit:junit:${junitVersion}"
+    const val androidTestCore = "androidx.test:core:${androidTestVersion}"
 
     // AndroidJUnitRunner and JUnit Rules
-    const val androidTestRunner = "androidx.test:runner:${Versions.androidTest}"
-    const val androidTestRules = "androidx.test:rules:${Versions.androidTest}"
+    const val androidTestRunner = "androidx.test:runner:${androidTestJunitVersion}"
+    const val androidTestRules = "androidx.test:rules:${androidTestVersion}"
 
     // Assertions
-    const val androidTestTruth = "androidx.test.ext:truth:${Versions.androidTest}"
-    const val androidTestJunit = "androidx.test.ext:junit:${Versions.androidTestJunit}"
+    const val androidTestTruth = "androidx.test.ext:truth:${androidTestVersion}"
+    const val androidTestJunit = "androidx.test.ext:junit:${androidTestJunitVersion}"
 
     // LiveData
-    const val archTestCore = "androidx.arch.core:core-testing:${Versions.archTestCore}"
+    const val archTestCore = "androidx.arch.core:core-testing:${archTestCoreVersion}"
 
     // Espresso core
-    const val espressoCore = "androidx.test.espresso:espresso-core:${Versions.espressoCore}"
+    const val espressoCore = "androidx.test.espresso:espresso-core:${espressoCoreVersion}"
 
     // Hamcrest
-    const val hamcrest = "org.hamcrest:hamcrest-all:${Versions.hamcrest}"
-
-    // Mocking
-    const val mockk = "io.mockk:mockk:${Versions.mockk}"
-    const val androidMockk = "io.mockk:mockk-android:${Versions.mockk}"
-    const val mockWebServer = "com.squareup.okhttp3:mockwebserver:${Versions.mockWebServer}"
-
-    // Koin
-    const val koin = "org.koin:koin-test:${Versions.koin}"
+    const val hamcrest = "org.hamcrest:hamcrest-all:${hamcrestVersion}"
 
     // Robolectric
-    const val robolectric = "org.robolectric:robolectric:${Versions.robolectric}"
-
-    // Room
-    const val room = "androidx.room:room-testing:${Versions.room}"
-
-    // JUnit DataProvider
-    const val junitDataProvider =
-        "com.tngtech.junit.dataprovider:junit4-dataprovider:${Versions.junitDataProvider}"
+    const val robolectric = "org.robolectric:robolectric:${robolectricVersion}"
 }
 
-object Libs {
-    // Core
-    const val kotlinStdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${Versions.kotlin}"
-    const val kotlinReflect = "org.jetbrains.kotlin:kotlin-reflect:${Versions.kotlin}"
-    const val androidxCore = "androidx.core:core-ktx:${Versions.androidxCore}"
+object KotlinLibs {
+    internal const val version = "1.4.10"
 
-    // Lifecycle
-    const val viewModel = "androidx.lifecycle:lifecycle-viewmodel:${Versions.lifecycle}"
-    const val liveDataKtx = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.lifecycle}"
-    const val viewModelSavedState =
-        "androidx.lifecycle:lifecycle-viewmodel-savedstate:${Versions.lifecycle}"
-    const val lifecycleCompiler = "androidx.lifecycle:lifecycle-compiler:${Versions.lifecycle}"
+    const val kotlinStdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${version}"
+    const val kotlinReflect = "org.jetbrains.kotlin:kotlin-reflect:${version}"
+}
 
-    // Navigation
-    const val navigationFragment =
-        "androidx.navigation:navigation-fragment-ktx:${Versions.navigation}"
-    const val navigationUi = "androidx.navigation:navigation-ui-ktx:${Versions.navigation}"
+object LifecycleLibs {
+    private const val version = "2.2.0"
 
-    // Room
-    const val roomRuntime = "androidx.room:room-runtime:${Versions.room}"
-    const val roomCompiler = "androidx.room:room-compiler:${Versions.room}"
-    const val roomKtx = "androidx.room:room-ktx:${Versions.room}"
+    const val viewModel = "androidx.lifecycle:lifecycle-viewmodel:${version}"
+    const val liveDataKtx = "androidx.lifecycle:lifecycle-livedata-ktx:${version}"
+    const val viewModelSavedState = "androidx.lifecycle:lifecycle-viewmodel-savedstate:${version}"
+    const val lifecycleCompiler = "androidx.lifecycle:lifecycle-compiler:${version}"
+}
 
-    // Koin
-    const val koinCore = "org.koin:koin-core:${Versions.koin}"
-    const val koinAndroid = "org.koin:koin-android:${Versions.koin}"
-    const val koinAndroidScope = "org.koin:koin-androidx-scope:${Versions.koin}"
-    const val koinViewModel = "org.koin:koin-androidx-viewmodel:${Versions.koin}"
-    const val koinFragment = "org.koin:koin-androidx-fragment:${Versions.koin}"
+object AndroidSupportLibs {
+    private const val androidxCoreVersion = "1.3.2"
+    private const val annotationsVersion = "1.1.0"
+    private const val appCompatVersion = "1.2.0"
+    private const val cardViewVersion = "1.0.0"
+    private const val constraintVersion = "2.0.2"
+    private const val materialVersion = "1.2.1"
+    private const val recyclerViewVersion = "1.1.0"
 
-    // Coroutines
-    const val coroutinesCore =
-        "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}"
-    const val androidCoroutines =
-        "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}"
+    const val androidxCore = "androidx.core:core-ktx:${androidxCoreVersion}"
+    const val annotations = "androidx.annotation:annotation:${annotationsVersion}"
+    const val appCompat = "androidx.appcompat:appcompat:${appCompatVersion}"
+    const val cardView = "androidx.cardview:cardview:${cardViewVersion}"
+    const val material = "com.google.android.material:material:${materialVersion}"
+    const val constraint = "androidx.constraintlayout:constraintlayout:${constraintVersion}"
+    const val recyclerView = "androidx.recyclerview:recyclerview:${recyclerViewVersion}"
+}
 
-    // Support
-    const val annotations = "androidx.annotation:annotation:${Versions.annotations}"
-    const val appCompat = "androidx.appcompat:appcompat:${Versions.appCompat}"
-    const val cardView = "androidx.cardview:cardview:${Versions.cardView}"
-    const val material = "com.google.android.material:material:${Versions.material}"
-    const val constraint = "androidx.constraintlayout:constraintlayout:${Versions.constraint}"
-    const val recyclerView = "androidx.recyclerview:recyclerview:${Versions.recyclerView}"
+object NavigationLibs {
+    internal const val version = "2.3.0"
 
-    // Firebase
-    const val firebaseBom = "com.google.firebase:firebase-bom:${Versions.firebaseBom}"
+    const val navigationFragment = "androidx.navigation:navigation-fragment-ktx:${version}"
+    const val navigationUi = "androidx.navigation:navigation-ui-ktx:${version}"
+}
+
+object RoomLibs {
+    private const val version = "2.2.5"
+
+    const val roomRuntime = "androidx.room:room-runtime:${version}"
+    const val roomCompiler = "androidx.room:room-compiler:${version}"
+    const val roomKtx = "androidx.room:room-ktx:${version}"
+    const val roomTesting = "androidx.room:room-testing:$version"
+}
+
+object CoroutinesLibs {
+    private const val version = "1.3.9"
+
+    const val coroutinesCore = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${version}"
+    const val androidCoroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${version}"
+}
+
+object KoinLibs {
+    private const val version = "2.1.6"
+
+    const val koinCore = "org.koin:koin-core:${version}"
+    const val koinAndroid = "org.koin:koin-android:${version}"
+    const val koinAndroidScope = "org.koin:koin-androidx-scope:${version}"
+    const val koinViewModel = "org.koin:koin-androidx-viewmodel:${version}"
+    const val koinFragment = "org.koin:koin-androidx-fragment:${version}"
+    const val koinTest = "org.koin:koin-test:${version}"
+}
+
+object FirebaseLibs {
+    private const val version = "26.0.0"
+
+    const val firebaseBom = "com.google.firebase:firebase-bom:${version}"
     const val firebaseCrashlytics = "com.google.firebase:firebase-crashlytics-ktx"
     const val firebaseAnalytics = "com.google.firebase:firebase-analytics-ktx"
+}
 
-    // Logging
-    const val timber = "com.jakewharton.timber:timber:${Versions.timber}"
-    const val loggingInterceptor =
-        "com.squareup.okhttp3:logging-interceptor:${Versions.loggingInterceptor}"
+object RetrofitLibs {
+    private const val version = "2.9.0"
 
-    // Retrofit
-    const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
-    const val retrofitGson = "com.squareup.retrofit2:converter-gson:${Versions.retrofit}"
+    const val retrofit = "com.squareup.retrofit2:retrofit:${version}"
+    const val retrofitGson = "com.squareup.retrofit2:converter-gson:${version}"
+}
 
-    // Glide
-    const val glide = "com.github.bumptech.glide:glide:${Versions.glide}"
-    const val glideCompiler = "com.github.bumptech.glide:compiler:${Versions.glide}"
+object GlideLibs {
+    private const val version = "4.11.0"
 
-    // Permission
-    const val easyPermissions = "pub.devrel:easypermissions:${Versions.easyPermission}"
+    const val glide = "com.github.bumptech.glide:glide:${version}"
+    const val glideCompiler = "com.github.bumptech.glide:compiler:${version}"
+}
 
-    // Chucker
-    const val debugChucker = "com.github.chuckerteam.chucker:library:${Versions.chucker}"
-    const val releaseChucker = "com.github.chuckerteam.chucker:library-no-op:${Versions.chucker}"
+object EasyPermissionsLibs {
+    private const val version = "3.0.0"
 
-    // Leak Canary
-    const val leakCanary = "com.squareup.leakcanary:leakcanary-android:${Versions.leakCanary}"
+    const val easyPermissions = "pub.devrel:easypermissions:${version}"
+}
 
-    // OkHttp3
-    const val okHttp3 = "com.squareup.okhttp3:okhttp:${Versions.okHttp3}"
+object TimberLibs {
+    private const val version = "4.7.1"
+
+    const val timber = "com.jakewharton.timber:timber:${version}"
+}
+
+object ChuckerLibs {
+    private const val version = "3.3.0"
+
+    const val debugChucker = "com.github.chuckerteam.chucker:library:${version}"
+    const val releaseChucker = "com.github.chuckerteam.chucker:library-no-op:${version}"
+}
+
+object LeakCanaryLibs {
+    private const val version = "2.5"
+
+    const val leakCanary = "com.squareup.leakcanary:leakcanary-android:${version}"
+}
+
+object OkHttp3Libs {
+    private const val version = "4.9.0"
+
+    const val okHttp3 = "com.squareup.okhttp3:okhttp:${version}"
+    const val loggingInterceptor = "com.squareup.okhttp3:logging-interceptor:${version}"
+    const val mockWebServer = "com.squareup.okhttp3:mockwebserver:${version}"
+}
+
+object JunitDataProviderLibs {
+    private const val version = "2.6"
+
+    const val junitDataProvider = "com.tngtech.junit.dataprovider:junit4-dataprovider:${version}"
+}
+
+object MockKLibs {
+    private const val version = "1.10.2"
+
+    const val mockK = "io.mockk:mockk:${version}"
+    const val androidMockK = "io.mockk:mockk-android:${version}"
 }

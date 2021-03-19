@@ -7,7 +7,7 @@ import com.example.clean_architecture.data.remote.response.ItemResponse
 import com.example.clean_architecture.domain.model.Repo
 
 class RepoMapper(
-    private val ownerMapper: OwnerMapper
+    private val ownerMapper: OwnerMapper,
 ) : Mapper<ItemResponse?, Repo>() {
     override fun map(input: ItemResponse?): Repo {
         val owner = ownerMapper.map(input?.owner)

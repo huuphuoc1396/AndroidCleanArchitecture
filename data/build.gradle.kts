@@ -14,18 +14,18 @@ android {
         versionCode = Android.versionCode
         versionName = Android.versionName
 
-        testInstrumentationRunner = AndroidJUnit.runner
+        testInstrumentationRunner = AndroidJUnitRunner.runner
     }
 
     buildTypes {
-        getByName(BuildType.release) {
-            isMinifyEnabled = BuildType.minifyRelease
-            proguardFiles(BuildType.proguardRelease)
+        getByName(BuildTypes.release) {
+            isMinifyEnabled = BuildTypes.minifyRelease
+            proguardFiles(BuildTypes.proguardRelease)
         }
 
-        getByName(BuildType.debug) {
-            isMinifyEnabled = BuildType.minifyDebug
-            proguardFiles(BuildType.proguardDebug)
+        getByName(BuildTypes.debug) {
+            isMinifyEnabled = BuildTypes.minifyDebug
+            proguardFiles(BuildTypes.proguardDebug)
         }
     }
 
@@ -34,13 +34,13 @@ android {
     productFlavors {
 
         create(ProductFlavors.develop) {
-            setMatchingFallbacks(listOf(BuildType.debug, BuildType.release))
+            setMatchingFallbacks(listOf(BuildTypes.debug, BuildTypes.release))
 
             buildConfigField("String", "BASE_URL", "\"https://api.github.com/\"")
         }
 
         create(ProductFlavors.product) {
-            setMatchingFallbacks(listOf(BuildType.release))
+            setMatchingFallbacks(listOf(BuildTypes.release))
 
             buildConfigField("String", "BASE_URL", "\"https://api.github.com/\"")
         }
@@ -53,42 +53,42 @@ dependencies {
     implementation(project(Modules.domain))
     implementation(project(Modules.coreLib))
 
-    implementation(Libs.kotlinStdlib)
-    implementation(Libs.androidxCore)
+    implementation(KotlinLibs.kotlinStdlib)
+    implementation(AndroidSupportLibs.androidxCore)
 
-    implementation(Libs.coroutinesCore)
-    implementation(Libs.androidCoroutines)
+    implementation(CoroutinesLibs.coroutinesCore)
+    implementation(CoroutinesLibs.androidCoroutines)
 
-    implementation(Libs.roomRuntime)
-    implementation(Libs.roomKtx)
+    implementation(RoomLibs.roomRuntime)
+    implementation(RoomLibs.roomKtx)
 
-    implementation(Libs.koinAndroid)
+    implementation(KoinLibs.koinAndroid)
 
-    implementation(Libs.timber)
-    implementation(Libs.loggingInterceptor)
+    implementation(TimberLibs.timber)
+    implementation(OkHttp3Libs.loggingInterceptor)
 
-    implementation(Libs.retrofit)
-    implementation(Libs.retrofitGson)
+    implementation(RetrofitLibs.retrofit)
+    implementation(RetrofitLibs.retrofitGson)
 
-    implementation(Libs.okHttp3)
+    implementation(OkHttp3Libs.okHttp3)
 
-    debugImplementation(Libs.debugChucker)
-    releaseImplementation(Libs.releaseChucker)
+    debugImplementation(ChuckerLibs.debugChucker)
+    releaseImplementation(ChuckerLibs.releaseChucker)
 
-    kapt(Libs.roomCompiler)
+    kapt(RoomLibs.roomCompiler)
 
-    testImplementation(TestLibs.junit)
-    testImplementation(TestLibs.androidTestJunit)
-    testImplementation(TestLibs.archTestCore)
-    testImplementation(TestLibs.hamcrest)
-    testImplementation(TestLibs.mockk)
-    testImplementation(TestLibs.androidMockk)
-    testImplementation(TestLibs.mockWebServer)
-    testImplementation(TestLibs.koin)
-    testImplementation(TestLibs.robolectric)
-    testImplementation(TestLibs.room)
-    testImplementation(TestLibs.junitDataProvider)
+    testImplementation(AndroidTestLibs.junit)
+    testImplementation(AndroidTestLibs.androidTestJunit)
+    testImplementation(AndroidTestLibs.archTestCore)
+    testImplementation(AndroidTestLibs.hamcrest)
+    testImplementation(MockKLibs.mockK)
+    testImplementation(MockKLibs.androidMockK)
+    testImplementation(OkHttp3Libs.mockWebServer)
+    testImplementation(KoinLibs.koinTest)
+    testImplementation(AndroidTestLibs.robolectric)
+    testImplementation(RoomLibs.roomTesting)
+    testImplementation(JunitDataProviderLibs.junitDataProvider)
     testImplementation(project(Modules.coreUnitTest))
 
-    androidTestImplementation(TestLibs.androidTestJunit)
+    androidTestImplementation(AndroidTestLibs.androidTestJunit)
 }

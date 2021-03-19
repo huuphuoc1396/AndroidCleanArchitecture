@@ -18,7 +18,6 @@ internal val localModule = module {
 
     single {
         SharedPrefsApi(
-            gson = get(),
             sharedPreferences = get()
         )
     }

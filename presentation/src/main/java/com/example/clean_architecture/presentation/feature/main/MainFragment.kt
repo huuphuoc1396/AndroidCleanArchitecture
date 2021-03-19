@@ -47,7 +47,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
                 findNavController().navigate(
                     MainFragmentDirections.actionMainFragmentToDetailFragment(
                         repoName = repoItem.name,
-                        ownerLogin = repoItem.owner.login
+                        ownerLogin = repoItem.owner.login,
                     )
                 )
             }

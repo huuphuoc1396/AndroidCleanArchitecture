@@ -6,8 +6,7 @@ import android.util.LongSparseArray
 import com.google.gson.Gson
 
 class SharedPrefsApi(
-    val gson: Gson,
-    val sharedPreferences: SharedPreferences
+    val sharedPreferences: SharedPreferences,
 ) {
     fun set(key: String, value: String) = sharedPreferences.edit().putString(key, value).apply()
 
@@ -30,19 +29,19 @@ class SharedPrefsApi(
     fun remove(key: String) = sharedPreferences.edit().remove(key).apply()
 
     fun <T> setList(key: String, list: List<T>) {
-        val json = gson.toJson(list)
+        val json = Gson().toJson(list)
         set(key, json)
     }
 
     fun setLongSparseArray(key: String, array: LongSparseArray<Boolean>) {
-        val json = gson.toJson(array)
+        val json = Gson().toJson(array)
         set(key, json)
     }
 
     fun contains(key: String) = sharedPreferences.contains(key)
 
     inline fun <reified T> setObject(key: String, value: T) = sharedPreferences.edit().apply {
-        val json: String = gson.newBuilder()
+        val json: String = Gson().newBuilder()
             .registerTypeAdapter(Uri::class.java, UriSerializer())
             .create()
             .toJson(value)
@@ -54,7 +53,7 @@ class SharedPrefsApi(
         return if (data.isNullOrEmpty()) {
             null
         } else {
-            gson.newBuilder()
+            Gson().newBuilder()
                 .registerTypeAdapter(Uri::class.java, UriDeserializer())
                 .create()
                 .fromJson(data, T::class.java)

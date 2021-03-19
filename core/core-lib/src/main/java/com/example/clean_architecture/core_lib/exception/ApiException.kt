@@ -6,10 +6,10 @@ sealed class ApiException : CoroutineException {
 
     data class ServerException(
         val code: Int,
-        val errorMessage: String
+        val errorMessage: String,
     ) : ApiException()
 
     data class UnknownException(
-        val exception: Exception
+        val exception: Exception,
     ) : ApiException()
 }

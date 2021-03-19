@@ -8,5 +8,5 @@ data class RepoListResponse(
     @SerializedName("incomplete_results")
     val incompleteResults: Boolean?,
     @SerializedName("items")
-    val items: List<ItemResponse?>?
+    val items: List<ItemResponse?>?,
 )

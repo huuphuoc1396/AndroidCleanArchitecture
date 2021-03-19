@@ -6,7 +6,7 @@ import com.example.clean_architecture.domain.model.Repo
 import com.example.clean_architecture.domain.repository.RepoRepository
 
 class SearchReposUseCase(
-    private val repoRepository: RepoRepository
+    private val repoRepository: RepoRepository,
 ) : UseCase<SearchReposUseCase.Params, ResultWrapper<List<Repo>>>() {
 
     override suspend fun executeInternal(params: Params): ResultWrapper<List<Repo>> {
@@ -14,6 +14,6 @@ class SearchReposUseCase(
     }
 
     data class Params(
-        val query: String
+        val query: String,
     ) : UseCase.Params()
 }

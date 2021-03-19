@@ -12,7 +12,7 @@ val presentationModule = module {
     viewModel {
         MainViewModel(
             searchReposUseCase = get(),
-            repoItemMapper = get()
+            repoItemMapper = get(),
         )
     }
 
@@ -22,7 +22,7 @@ val presentationModule = module {
 
     factory {
         RepoItemMapper(
-            ownerItemMapper = get()
+            ownerItemMapper = get(),
         )
     }
 
