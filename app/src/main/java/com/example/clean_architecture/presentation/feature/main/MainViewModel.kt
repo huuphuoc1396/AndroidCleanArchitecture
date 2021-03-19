@@ -17,7 +17,7 @@ import java.util.*
 
 class MainViewModel(
     private val searchReposUseCase: SearchReposUseCase,
-    private val repoItemMapper: RepoItemMapper
+    private val repoItemMapper: RepoItemMapper,
 ) : BaseViewModel() {
 
     private var searchJob: Job? = null

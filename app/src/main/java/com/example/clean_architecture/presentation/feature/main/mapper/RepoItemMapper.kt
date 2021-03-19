@@ -13,7 +13,7 @@ class RepoItemMapper(
             id = input.id,
             name = input.name,
             description = input.description,
-            owner = ownerItem
+            owner = ownerItem,
         )
     }
 }

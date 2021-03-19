@@ -6,7 +6,7 @@ import android.util.LongSparseArray
 import com.google.gson.Gson
 
 class SharedPrefsApi(
-    val sharedPreferences: SharedPreferences
+    val sharedPreferences: SharedPreferences,
 ) {
     fun set(key: String, value: String) = sharedPreferences.edit().putString(key, value).apply()
 

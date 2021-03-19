@@ -9,7 +9,7 @@ class OwnerItemMapper : Mapper<Owner, OwnerItem>() {
         return OwnerItem(
             id = input.id,
             login = input.login,
-            avatarUrl = input.avatarUrl
+            avatarUrl = input.avatarUrl,
         )
     }
 }

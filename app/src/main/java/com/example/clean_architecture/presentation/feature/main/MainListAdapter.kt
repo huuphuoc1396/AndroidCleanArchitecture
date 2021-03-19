@@ -8,7 +8,7 @@ import com.example.clean_architecture.databinding.ItemRepoBinding
 import com.example.clean_architecture.presentation.feature.main.model.RepoItem
 
 class MainListAdapter(
-    private val onItemClickListener: (RepoItem) -> Unit
+    private val onItemClickListener: (RepoItem) -> Unit,
 ) : ListAdapter<RepoItem, RepoViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepoViewHolder {

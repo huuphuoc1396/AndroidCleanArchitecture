@@ -7,7 +7,6 @@ import com.example.clean_architecture.data.remote.interceptor.HeaderInterceptor
 import com.example.clean_architecture.data.remote.mapper.OwnerMapper
 import com.example.clean_architecture.data.remote.mapper.RepoMapper
 import com.example.data.BuildConfig
-import com.google.gson.Gson
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidContext
@@ -31,7 +30,7 @@ internal val remoteModule = module {
             headerInterceptor = get(),
             chuckerInterceptor = get(),
             loggingInterceptor = get(),
-            isLoggingEnable = BuildConfig.DEBUG
+            isLoggingEnable = BuildConfig.DEBUG,
         )
     }
 
@@ -47,7 +46,7 @@ internal val remoteModule = module {
 
     factory {
         ChuckerInterceptor(
-            context = androidContext()
+            context = androidContext(),
         )
     }
 
