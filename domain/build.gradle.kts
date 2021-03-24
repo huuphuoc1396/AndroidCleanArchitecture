@@ -6,21 +6,21 @@ plugins {
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 
-    implementation(project(Modules.commonLib))
+    implementation(project(Modules.coreLib))
 
-    implementation(Libs.kotlinStdlib)
+    implementation(KotlinLibs.kotlinStdlib)
 
-    implementation(Libs.coroutinesCore)
+    implementation(CoroutinesLibs.coroutinesCore)
 
-    implementation(Libs.koinCore)
+    implementation(KoinLibs.koinCore)
 
-    implementation(Libs.timber)
+    implementation(TimberLibs.timber)
 
-    testImplementation(TestLibs.junit)
-    testImplementation(TestLibs.androidTestJunit)
-    testImplementation(TestLibs.archTestCore)
-    testImplementation(TestLibs.hamcrest)
-    testImplementation(TestLibs.mockk)
-    testImplementation(TestLibs.koin)
-    testImplementation(project(Modules.commonUnitTest))
+    testImplementation(AndroidTestLibs.junit)
+    testImplementation(AndroidTestLibs.androidTestJunit)
+    testImplementation(AndroidTestLibs.archTestCore)
+    testImplementation(AndroidTestLibs.hamcrest)
+    testImplementation(MockKLibs.mockK)
+    testImplementation(KoinLibs.koinTest)
+    testImplementation(project(Modules.coreUnitTest))
 }

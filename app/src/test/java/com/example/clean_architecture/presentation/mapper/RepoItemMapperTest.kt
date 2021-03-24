@@ -1,10 +1,12 @@
 package com.example.clean_architecture.presentation.mapper
 
-import com.example.clean_architecture.presentation.model.OwnerItem
-import com.example.clean_architecture.presentation.model.RepoItem
-import com.example.common_unit_test.makeRandomInstance
-import com.example.domain.model.Owner
-import com.example.domain.model.Repo
+import com.example.clean_architecture.core_unit_test.makeRandomInstance
+import com.example.clean_architecture.domain.model.Owner
+import com.example.clean_architecture.domain.model.Repo
+import com.example.clean_architecture.presentation.feature.main.mapper.OwnerItemMapper
+import com.example.clean_architecture.presentation.feature.main.mapper.RepoItemMapper
+import com.example.clean_architecture.presentation.feature.main.model.OwnerItem
+import com.example.clean_architecture.presentation.feature.main.model.RepoItem
 import com.tngtech.java.junit.dataprovider.DataProvider
 import com.tngtech.java.junit.dataprovider.DataProviderRunner
 import com.tngtech.java.junit.dataprovider.UseDataProvider
@@ -20,9 +22,10 @@ class RepoItemMapperTest {
 
     private val ownerItemMapper: OwnerItemMapper = mockk()
 
-    private val repoItemMapper = RepoItemMapper(
-        ownerItemMapper = ownerItemMapper
-    )
+    private val repoItemMapper =
+        RepoItemMapper(
+            ownerItemMapper = ownerItemMapper
+        )
 
     @Test
     @UseDataProvider("dataProvider")

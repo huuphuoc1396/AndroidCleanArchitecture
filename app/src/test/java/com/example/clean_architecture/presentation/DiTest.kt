@@ -1,12 +1,7 @@
 package com.example.clean_architecture.presentation
 
 import androidx.test.platform.app.InstrumentationRegistry
-import com.example.clean_architecture.presentation.di.presentationModule
-import com.example.clean_architecture.presentation.di.viewModelModule
-import com.example.data.local.di.localModule
-import com.example.data.remote.di.remoteModule
-import com.example.data.repository.di.repositoryModule
-import com.example.domain.di.domainModule
+import com.example.clean_architecture.di.appModules
 import org.junit.Test
 import org.junit.experimental.categories.Category
 import org.junit.runner.RunWith
@@ -24,13 +19,6 @@ class DiTest : AutoCloseKoinTest() {
     fun checkModules() = checkModules {
         val context = InstrumentationRegistry.getInstrumentation().context
         androidContext(context)
-        modules(
-            presentationModule,
-            viewModelModule,
-            localModule,
-            remoteModule,
-            repositoryModule,
-            domainModule
-        )
+        modules(appModules)
     }
 }

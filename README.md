@@ -1,6 +1,6 @@
 # Clean Architecture
 
-<img src=https://github.com/huuphuoc1396/clean-architecture/blob/develop/images/app-recording.gif width="405" height="720">
+<img src=images/app-recording.gif width="405" height="720">
 
 ## Summary
 This is an Android Architecture sample written in Kotlin using [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) and [Jetpack components](https://developer.android.com/jetpack).
@@ -26,18 +26,20 @@ In this sample you'll find:
 * [JaCoCo](https://www.eclemma.org/jacoco/) generates an aggregated JaCoCo test coverage report for all sub-projects.
 
 ## Structure
-<img src=https://github.com/huuphuoc1396/clean-architecture/blob/develop/images/clean-architecture-structure.png width="800" height="320">
 
 * **Presentation**: The **Views** (Fragments or Activities) will interact with **ViewModels** which access the **business logic** through **use cases**.
 * **Domain**: Holds all **business logic** and **use cases** represent all the possible actions able to being performed by the **presentation** module.
 * **Data**: Contains all **repository implements** to access **local** or **remote** data
+
+## Dependency Graph
+![](dependency-graph/project.dot.png)
 
 ## Testing
 The project uses local unit tests that run on your computer. To run it and generate a coverage report, you can run:
 `./gradlew jacocoFullReport`
 
 You can see this report at: `./build/reports/jacoco/html/index.html`
-<img src=https://github.com/huuphuoc1396/clean-architecture/blob/develop/images/jacoco-full-report.png width="800" height="314">
+<img src=images/jacoco-full-report.png width="800" height="314">
 
 You can easily write Unit Test up to 70% code coverage lines of code (LOC), if you write focus on
 * **Presentation**: `ViewModel`, `Mapper`

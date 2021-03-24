@@ -2,7 +2,7 @@ package com.example.clean_architecture.presentation
 
 import android.os.Bundle
 import com.example.clean_architecture.R
-import com.example.clean_architecture.common.base.BaseActivity
+import com.example.clean_architecture.core_android.base.BaseActivity
 
 class MainActivity : BaseActivity() {
 

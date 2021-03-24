@@ -1,5 +1,6 @@
 include(":app")
 include(":data")
 include(":domain")
-include(":common-lib")
-include(":common-unit-test")
+include(":core:core-lib")
+include(":core:core-android")
+include(":core:core-unit-test")

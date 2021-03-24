@@ -1,31 +1,19 @@
 package com.example.clean_architecture.presentation.feature.detail
 
 import androidx.lifecycle.MutableLiveData
-import com.example.clean_architecture.common.base.BaseViewModel
+import com.example.clean_architecture.core_android.base.BaseViewModel
 
 class DetailViewModel : BaseViewModel() {
 
-    val detailItem = MutableLiveData<DetailItem>(initDetailItem())
+    private var ownerLogin = ""
 
-    fun setDetailItem(
+    val repoName = MutableLiveData("")
+
+    fun init(
         repoName: String,
-        ownerLogin: String
+        ownerLogin: String,
     ) {
-        detailItem.value = detailItem.value?.copy(
-            repoName = repoName,
-            ownerLogin = ownerLogin
-        )
+        this.repoName.value = repoName
+        this.ownerLogin = ownerLogin
     }
-
-    private fun initDetailItem(): DetailItem {
-        return DetailItem(
-            repoName = "",
-            ownerLogin = ""
-        )
-    }
-
-    data class DetailItem(
-        val repoName: String,
-        val ownerLogin: String
-    )
 }

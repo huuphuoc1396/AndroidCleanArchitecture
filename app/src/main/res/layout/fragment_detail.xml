@@ -29,7 +29,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:navigationIcon="@drawable/ic_baseline_arrow_back"
-                app:title="@{viewModel.detailItem.repoName}"
+                app:title="@{viewModel.repoName}"
                 app:titleTextColor="@android:color/white"
                 tools:title="Android" />
         </com.google.android.material.appbar.AppBarLayout>

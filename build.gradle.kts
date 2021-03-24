@@ -8,9 +8,9 @@ buildscript {
         }
     }
     dependencies {
-        classpath(BuildPlugins.androidPlugin)
-        classpath(BuildPlugins.kotlinPlugin)
-        classpath(BuildPlugins.navigationPlugin)
+        classpath(BuildPlugins.android)
+        classpath(BuildPlugins.kotlin)
+        classpath(BuildPlugins.navigation)
         classpath(BuildPlugins.googleServices)
         classpath(BuildPlugins.firebaseCrashlytics)
 
@@ -21,6 +21,7 @@ buildscript {
 
 apply {
     from("jacoco.gradle")
+    from("dependency_graph.gradle")
 }
 
 allprojects {

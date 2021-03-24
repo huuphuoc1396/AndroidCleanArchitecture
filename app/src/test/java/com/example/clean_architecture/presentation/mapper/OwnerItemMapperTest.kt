@@ -1,7 +1,8 @@
 package com.example.clean_architecture.presentation.mapper
 
-import com.example.clean_architecture.presentation.model.OwnerItem
-import com.example.domain.model.Owner
+import com.example.clean_architecture.domain.model.Owner
+import com.example.clean_architecture.presentation.feature.main.mapper.OwnerItemMapper
+import com.example.clean_architecture.presentation.feature.main.model.OwnerItem
 import com.tngtech.java.junit.dataprovider.DataProvider
 import com.tngtech.java.junit.dataprovider.DataProviderRunner
 import com.tngtech.java.junit.dataprovider.UseDataProvider
@@ -12,7 +13,8 @@ import org.junit.runner.RunWith
 @RunWith(DataProviderRunner::class)
 class OwnerItemMapperTest {
 
-    private val ownerItemMapper = OwnerItemMapper()
+    private val ownerItemMapper =
+        OwnerItemMapper()
 
     @Test
     @UseDataProvider("dataProvider")

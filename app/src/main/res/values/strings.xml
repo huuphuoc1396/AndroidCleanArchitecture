@@ -1,10 +1,7 @@
 <resources>
     <string name="app_name">Clean Architecture</string>
-    <string name="unexpected_error">Network connection failed. Please try again!</string>
-    <string name="no_internet_error">Please check internet connection and try again!</string>
 
-    <string name="network_error">Network error</string>
-    <string name="ok">OK</string>
+    <!-- Main -->
     <string name="by_owner">by %s</string>
     <string name="type_your_query">Type your query</string>
     <string name="empty_search_result">No results</string>
