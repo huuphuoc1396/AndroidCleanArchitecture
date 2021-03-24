@@ -26,7 +26,6 @@ In this sample you'll find:
 * [JaCoCo](https://www.eclemma.org/jacoco/) generates an aggregated JaCoCo test coverage report for all sub-projects.
 
 ## Structure
-<img src=images/clean-architecture-structure.png width="800" height="320">
 
 * **Presentation**: The **Views** (Fragments or Activities) will interact with **ViewModels** which access the **business logic** through **use cases**.
 * **Domain**: Holds all **business logic** and **use cases** represent all the possible actions able to being performed by the **presentation** module.
