@@ -14,10 +14,6 @@ abstract class BaseDialogFragment<V : ViewDataBinding> : DialogFragment() {
 
     var viewDataBinding: V by autoCleared()
 
-    open fun getViewModel(): BaseViewModel? {
-        return null
-    }
-
     open fun setBindingVariable() {}
 
     override fun onCreateView(
