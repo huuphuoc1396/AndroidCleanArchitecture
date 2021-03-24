@@ -11,12 +11,8 @@ import androidx.activity.OnBackPressedCallback
 import androidx.annotation.Size
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import com.example.clean_architecture.core_android.dialog.NetworkErrorDialogFragment
+import com.example.clean_architecture.core_android.extension.handleNetworkError
 import com.example.clean_architecture.core_android.livedata.autoCleared
-import com.example.clean_architecture.core_lib.exception.ApiException
-import com.example.clean_architecture.core_lib.exception.CoroutineException
-import com.example.common_android.R
 import pub.devrel.easypermissions.AppSettingsDialog
 import pub.devrel.easypermissions.EasyPermissions
 import timber.log.Timber
@@ -86,7 +82,7 @@ abstract class BaseFragment<V : ViewDataBinding> : Fragment(), EasyPermissions.P
         viewDataBinding.lifecycleOwner = viewLifecycleOwner
         viewDataBinding.executePendingBindings()
 
-        getViewModel()?.networkError?.observe(viewLifecycleOwner, Observer { coroutineException ->
+        getViewModel()?.networkError?.observe(viewLifecycleOwner, { coroutineException ->
             handleNetworkError(coroutineException)
         })
     }
@@ -151,31 +147,6 @@ abstract class BaseFragment<V : ViewDataBinding> : Fragment(), EasyPermissions.P
     override fun onPermissionsDenied(requestCode: Int, perms: MutableList<String>) {}
 
     override fun onPermissionsGranted(requestCode: Int, perms: MutableList<String>) {}
-
-    private fun handleNetworkError(coroutineException: CoroutineException) {
-        val currentActivity = activity
-        if (currentActivity != null && !currentActivity.isFinishing) {
-            val message = when (coroutineException) {
-                is ApiException.ConnectionException -> {
-                    getString(R.string.no_internet_error)
-                }
-                is ApiException.ServerException -> {
-                    val errorMessage = coroutineException.errorMessage
-                    if (errorMessage.isNotEmpty()) {
-                        errorMessage
-                    } else {
-                        getString(R.string.unexpected_error)
-                    }
-                }
-                is ApiException.UnknownException -> {
-                    getString(R.string.unexpected_error)
-                }
-                else -> ""
-            }
-            val dialogFragment = NetworkErrorDialogFragment.newInstance(message)
-            dialogFragment.show(childFragmentManager, NetworkErrorDialogFragment::class.simpleName)
-        }
-    }
 
     companion object {
         private const val LIFECYCLE_TAG = "FragmentLifecycle"
