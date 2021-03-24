@@ -14,10 +14,6 @@ abstract class BaseBottomSheetDialogFragment<V : ViewDataBinding> : BottomSheetD
 
     var viewDataBinding: V by autoCleared()
 
-    open fun getViewModel(): BaseViewModel? {
-        return null
-    }
-
     open fun setBindingVariable() {}
 
     override fun onCreateView(
