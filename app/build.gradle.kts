@@ -1,7 +1,7 @@
 plugins {
     id(GradlePlugins.android)
     id(GradlePlugins.kotlinAndroid)
-    id(GradlePlugins.kotlinAndroidExt)
+    id(GradlePlugins.kotlinParcelize)
     id(GradlePlugins.kotlinApt)
     id(GradlePlugins.navigation)
     id(GradlePlugins.googleServices)
@@ -57,11 +57,8 @@ android {
     }
 
     buildFeatures {
+        viewBinding = true
         dataBinding = true
-    }
-
-    androidExtensions {
-        isExperimental = true
     }
 
     compileOptions {

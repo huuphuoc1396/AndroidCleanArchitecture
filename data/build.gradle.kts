@@ -1,7 +1,6 @@
 plugins {
     id(GradlePlugins.androidLib)
     id(GradlePlugins.kotlinAndroid)
-    id(GradlePlugins.kotlinAndroidExt)
     id(GradlePlugins.kotlinApt)
 }
 
