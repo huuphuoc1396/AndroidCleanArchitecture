@@ -45,9 +45,9 @@ internal val remoteModule = module {
     }
 
     factory {
-        ChuckerInterceptor(
+        ChuckerInterceptor.Builder(
             context = androidContext(),
-        )
+        ).build()
     }
 
     factory {
