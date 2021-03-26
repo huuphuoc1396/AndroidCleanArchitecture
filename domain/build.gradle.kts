@@ -1,6 +1,19 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
     id(GradlePlugins.javaLib)
     id(GradlePlugins.kotlin)
+}
+
+project.tasks.withType(JavaCompile::class.java).configureEach {
+    sourceCompatibility = JavaVersion.VERSION_1_8.toString()
+    targetCompatibility = JavaVersion.VERSION_1_8.toString()
+}
+
+project.tasks.withType(KotlinCompile::class.java).configureEach {
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
 }
 
 dependencies {
