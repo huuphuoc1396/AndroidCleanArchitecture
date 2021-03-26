@@ -76,34 +76,14 @@ android {
         unitTests.isReturnDefaultValues = true
     }
 
-    applicationVariants.all(ApplicationVariantAction())
-}
-
-class ApplicationVariantAction : Action<ApplicationVariant> {
-    override fun execute(variant: ApplicationVariant) {
-        val fileName = createFileName(variant)
-        variant.outputs.all(VariantOutputAction(fileName))
-    }
-
-    private fun createFileName(variant: ApplicationVariant): String {
-        return "CleanArchitecture" +
-                "_${variant.name}" +
+    applicationVariants.all {
+        val outputFileName = "CleanArchitecture" +
+                "_${name}" +
                 "_verCode${Android.versionCode}" +
-                "_${getDateTimeFormat()}.apk"
-    }
-
-    private fun getDateTimeFormat(): String {
-        val simpleDateFormat = SimpleDateFormat("yyMdHms", Locale.US)
-        return simpleDateFormat.format(Date())
-    }
-
-    class VariantOutputAction(
-        private val fileName: String
-    ) : Action<BaseVariantOutput> {
-        override fun execute(output: BaseVariantOutput) {
-            if (output is BaseVariantOutputImpl) {
-                output.outputFileName = fileName
-            }
+                "_${SimpleDateFormat("yyMdHms", Locale.US).format(Date())}.apk"
+        outputs.all {
+            val output = this as? BaseVariantOutputImpl
+            output?.outputFileName = outputFileName
         }
     }
 }
