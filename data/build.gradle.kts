@@ -1,7 +1,6 @@
 plugins {
     id(GradlePlugins.androidLib)
     id(GradlePlugins.kotlinAndroid)
-    id(GradlePlugins.kotlinAndroidExt)
     id(GradlePlugins.kotlinApt)
 }
 
@@ -44,6 +43,15 @@ android {
 
             buildConfigField("String", "BASE_URL", "\"https://api.github.com/\"")
         }
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
     }
 }
 

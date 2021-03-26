@@ -2,18 +2,6 @@ object Url {
     const val jitPack = "https://jitpack.io"
 }
 
-object BuildPlugins {
-    private const val androidPluginVersion = "4.1.1"
-    private const val googleServicesVersion = "4.3.4"
-    private const val firebaseCrashlyticsVersion = "2.3.0"
-
-    const val android = "com.android.tools.build:gradle:${androidPluginVersion}"
-    const val kotlin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${KotlinLibs.version}"
-    const val navigation = "androidx.navigation:navigation-safe-args-gradle-plugin:${NavigationLibs.version}"
-    const val googleServices = "com.google.gms:google-services:${googleServicesVersion}"
-    const val firebaseCrashlytics = "com.google.firebase:firebase-crashlytics-gradle:${firebaseCrashlyticsVersion}"
-}
-
 object Android {
     const val minSdk = 21
     const val targetSdk = 30
@@ -22,29 +10,12 @@ object Android {
     const val versionName = "1.0.0"
 }
 
-object GradlePlugins {
-    const val android = "com.android.application"
-    const val kotlin = "kotlin"
-    const val kotlinAndroid = "kotlin-android"
-    const val kotlinAndroidExt = "kotlin-android-extensions"
-    const val kotlinApt = "kotlin-kapt"
-    const val javaLib = "java-library"
-    const val androidLib = "com.android.library"
-    const val navigation = "androidx.navigation.safeargs.kotlin"
-    const val googleServices = "com.google.gms.google-services"
-    const val firebaseCrashlytics = "com.google.firebase.crashlytics"
-}
-
 object Modules {
     const val data = ":data"
     const val domain = ":domain"
     const val coreLib = ":core:core-lib"
     const val coreAndroid = ":core:core-android"
     const val coreUnitTest = ":core:core-unit-test"
-}
-
-object AndroidJUnitRunner {
-    const val runner = "androidx.test.runner.AndroidJUnitRunner"
 }
 
 object BuildTypes {
@@ -66,6 +37,35 @@ object ProductFlavors {
     const val dimensions = "default"
     const val develop = "dev"
     const val product = "prod"
+}
+
+object BuildPlugins {
+    private const val androidPluginVersion = "4.1.3"
+    private const val googleServicesVersion = "4.3.4"
+    private const val firebaseCrashlyticsVersion = "2.3.0"
+
+    const val android = "com.android.tools.build:gradle:${androidPluginVersion}"
+    const val kotlin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${KotlinLibs.version}"
+    const val navigation = "androidx.navigation:navigation-safe-args-gradle-plugin:${NavigationLibs.version}"
+    const val googleServices = "com.google.gms:google-services:${googleServicesVersion}"
+    const val firebaseCrashlytics = "com.google.firebase:firebase-crashlytics-gradle:${firebaseCrashlyticsVersion}"
+}
+
+object GradlePlugins {
+    const val android = "com.android.application"
+    const val kotlin = "kotlin"
+    const val kotlinAndroid = "kotlin-android"
+    const val kotlinParcelize = "kotlin-parcelize"
+    const val kotlinApt = "kotlin-kapt"
+    const val javaLib = "java-library"
+    const val androidLib = "com.android.library"
+    const val navigation = "androidx.navigation.safeargs.kotlin"
+    const val googleServices = "com.google.gms.google-services"
+    const val firebaseCrashlytics = "com.google.firebase.crashlytics"
+}
+
+object AndroidJUnitRunner {
+    const val runner = "androidx.test.runner.AndroidJUnitRunner"
 }
 
 object AndroidTestLibs {
@@ -103,14 +103,14 @@ object AndroidTestLibs {
 }
 
 object KotlinLibs {
-    internal const val version = "1.4.10"
+    internal const val version = "1.4.31"
 
     const val kotlinStdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${version}"
     const val kotlinReflect = "org.jetbrains.kotlin:kotlin-reflect:${version}"
 }
 
 object LifecycleLibs {
-    private const val version = "2.2.0"
+    private const val version = "2.3.1"
 
     const val viewModel = "androidx.lifecycle:lifecycle-viewmodel:${version}"
     const val liveDataKtx = "androidx.lifecycle:lifecycle-livedata-ktx:${version}"
@@ -123,9 +123,10 @@ object AndroidSupportLibs {
     private const val annotationsVersion = "1.1.0"
     private const val appCompatVersion = "1.2.0"
     private const val cardViewVersion = "1.0.0"
-    private const val constraintVersion = "2.0.2"
-    private const val materialVersion = "1.2.1"
+    private const val materialVersion = "1.3.0"
+    private const val constraintVersion = "2.0.4"
     private const val recyclerViewVersion = "1.1.0"
+    private const val swipeRefreshLayoutVersion = "1.1.0"
 
     const val androidxCore = "androidx.core:core-ktx:${androidxCoreVersion}"
     const val annotations = "androidx.annotation:annotation:${annotationsVersion}"
@@ -134,17 +135,18 @@ object AndroidSupportLibs {
     const val material = "com.google.android.material:material:${materialVersion}"
     const val constraint = "androidx.constraintlayout:constraintlayout:${constraintVersion}"
     const val recyclerView = "androidx.recyclerview:recyclerview:${recyclerViewVersion}"
+    const val swipeRefreshLayout = "androidx.swiperefreshlayout:swiperefreshlayout:${swipeRefreshLayoutVersion}"
 }
 
 object NavigationLibs {
-    internal const val version = "2.3.0"
+    internal const val version = "2.3.4"
 
     const val navigationFragment = "androidx.navigation:navigation-fragment-ktx:${version}"
     const val navigationUi = "androidx.navigation:navigation-ui-ktx:${version}"
 }
 
 object RoomLibs {
-    private const val version = "2.2.5"
+    private const val version = "2.2.6"
 
     const val roomRuntime = "androidx.room:room-runtime:${version}"
     const val roomCompiler = "androidx.room:room-compiler:${version}"
@@ -153,14 +155,14 @@ object RoomLibs {
 }
 
 object CoroutinesLibs {
-    private const val version = "1.3.9"
+    private const val version = "1.4.3"
 
     const val coroutinesCore = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${version}"
     const val androidCoroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${version}"
 }
 
 object KoinLibs {
-    private const val version = "2.1.6"
+    private const val version = "2.2.2"
 
     const val koinCore = "org.koin:koin-core:${version}"
     const val koinAndroid = "org.koin:koin-android:${version}"
@@ -171,7 +173,7 @@ object KoinLibs {
 }
 
 object FirebaseLibs {
-    private const val version = "26.0.0"
+    private const val version = "26.7.0"
 
     const val firebaseBom = "com.google.firebase:firebase-bom:${version}"
     const val firebaseCrashlytics = "com.google.firebase:firebase-crashlytics-ktx"
@@ -186,7 +188,7 @@ object RetrofitLibs {
 }
 
 object GlideLibs {
-    private const val version = "4.11.0"
+    private const val version = "4.12.0"
 
     const val glide = "com.github.bumptech.glide:glide:${version}"
     const val glideCompiler = "com.github.bumptech.glide:compiler:${version}"
@@ -205,14 +207,14 @@ object TimberLibs {
 }
 
 object ChuckerLibs {
-    private const val version = "3.3.0"
+    private const val version = "3.4.0"
 
     const val debugChucker = "com.github.chuckerteam.chucker:library:${version}"
     const val releaseChucker = "com.github.chuckerteam.chucker:library-no-op:${version}"
 }
 
 object LeakCanaryLibs {
-    private const val version = "2.5"
+    private const val version = "2.6"
 
     const val leakCanary = "com.squareup.leakcanary:leakcanary-android:${version}"
 }
@@ -232,7 +234,7 @@ object JunitDataProviderLibs {
 }
 
 object MockKLibs {
-    private const val version = "1.10.2"
+    private const val version = "1.11.0"
 
     const val mockK = "io.mockk:mockk:${version}"
     const val androidMockK = "io.mockk:mockk-android:${version}"

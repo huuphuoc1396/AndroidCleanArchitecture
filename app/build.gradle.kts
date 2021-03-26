@@ -1,7 +1,13 @@
+import com.android.build.gradle.api.ApplicationVariant
+import com.android.build.gradle.api.BaseVariantOutput
+import com.android.build.gradle.internal.api.BaseVariantOutputImpl
+import java.text.SimpleDateFormat
+import java.util.*
+
 plugins {
     id(GradlePlugins.android)
     id(GradlePlugins.kotlinAndroid)
-    id(GradlePlugins.kotlinAndroidExt)
+    id(GradlePlugins.kotlinParcelize)
     id(GradlePlugins.kotlinApt)
     id(GradlePlugins.navigation)
     id(GradlePlugins.googleServices)
@@ -57,11 +63,8 @@ android {
     }
 
     buildFeatures {
+        viewBinding = true
         dataBinding = true
-    }
-
-    androidExtensions {
-        isExperimental = true
     }
 
     compileOptions {
@@ -71,6 +74,37 @@ android {
 
     testOptions {
         unitTests.isReturnDefaultValues = true
+    }
+
+    applicationVariants.all(ApplicationVariantAction())
+}
+
+class ApplicationVariantAction : Action<ApplicationVariant> {
+    override fun execute(variant: ApplicationVariant) {
+        val fileName = createFileName(variant)
+        variant.outputs.all(VariantOutputAction(fileName))
+    }
+
+    private fun createFileName(variant: ApplicationVariant): String {
+        return "CleanArchitecture" +
+                "_${variant.name}" +
+                "_verCode${Android.versionCode}" +
+                "_${getDateTimeFormat()}.apk"
+    }
+
+    private fun getDateTimeFormat(): String {
+        val simpleDateFormat = SimpleDateFormat("yyMdHms", Locale.US)
+        return simpleDateFormat.format(Date())
+    }
+
+    class VariantOutputAction(
+        private val fileName: String
+    ) : Action<BaseVariantOutput> {
+        override fun execute(output: BaseVariantOutput) {
+            if (output is BaseVariantOutputImpl) {
+                output.outputFileName = fileName
+            }
+        }
     }
 }
 
