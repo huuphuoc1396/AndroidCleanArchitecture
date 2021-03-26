@@ -2,7 +2,7 @@ name: devDebug Build
 
 on:
   push:
-    branches: [ develop ]
+    branches: [ master ]
 
 jobs:
   build:
