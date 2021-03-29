@@ -8,7 +8,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.clean_architecture.core_android.base.BaseFragment
 import com.example.clean_architecture.core_android.base.BaseViewModel
-import com.example.clean_architecture.databinding.FragmentDetailBinding
+import com.example.clean_architecture.presentation.databinding.FragmentDetailBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DetailFragment : BaseFragment<FragmentDetailBinding>() {

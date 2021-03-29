@@ -11,6 +11,7 @@ object Android {
 }
 
 object Modules {
+    const val presentation = ":presentation"
     const val data = ":data"
     const val domain = ":domain"
     const val coreLib = ":core:core-lib"

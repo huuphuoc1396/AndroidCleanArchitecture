@@ -1,4 +1,4 @@
-package com.example.clean_architecture.presentation
+package com.example.clean_architecture
 
 import androidx.test.platform.app.InstrumentationRegistry
 import com.example.clean_architecture.di.appModules

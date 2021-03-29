@@ -1,23 +1,15 @@
-import com.android.build.gradle.api.ApplicationVariant
-import com.android.build.gradle.api.BaseVariantOutput
-import com.android.build.gradle.internal.api.BaseVariantOutputImpl
-import java.text.SimpleDateFormat
-import java.util.*
-
 plugins {
-    id(GradlePlugins.android)
+    id(GradlePlugins.androidLib)
     id(GradlePlugins.kotlinAndroid)
     id(GradlePlugins.kotlinParcelize)
     id(GradlePlugins.kotlinApt)
-    id(GradlePlugins.googleServices)
-    id(GradlePlugins.firebaseCrashlytics)
+    id(GradlePlugins.navigation)
 }
 
 android {
     compileSdkVersion(Android.targetSdk)
 
     defaultConfig {
-        applicationId = Android.applicationId
         minSdkVersion(Android.minSdk)
         targetSdkVersion(Android.targetSdk)
         versionCode = Android.versionCode
@@ -43,17 +35,13 @@ android {
     flavorDimensions(ProductFlavors.dimensions)
 
     productFlavors {
-        val applicationName = "applicationName"
 
         create(ProductFlavors.develop) {
             setMatchingFallbacks(listOf(BuildTypes.debug, BuildTypes.release))
-            applicationIdSuffix = ".dev"
-            setManifestPlaceholders(mapOf(applicationName to "[DEV] Clean Architecture"))
         }
 
         create(ProductFlavors.product) {
             setMatchingFallbacks(listOf(BuildTypes.release))
-            setManifestPlaceholders(mapOf(applicationName to "@string/app_name"))
         }
     }
 
@@ -74,39 +62,49 @@ android {
     testOptions {
         unitTests.isReturnDefaultValues = true
     }
-
-    applicationVariants.all {
-        val outputFileName = "CleanArchitecture" +
-                "_${name}" +
-                "_verCode${Android.versionCode}" +
-                "_${SimpleDateFormat("yyMdHms", Locale.US).format(Date())}.apk"
-        outputs.all {
-            val output = this as? BaseVariantOutputImpl
-            output?.outputFileName = outputFileName
-        }
-    }
 }
 
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 
-    implementation(project(Modules.presentation))
-    implementation(project(Modules.data))
     implementation(project(Modules.domain))
+    implementation(project(Modules.coreLib))
+    implementation(project(Modules.coreAndroid))
 
     implementation(KotlinLibs.kotlinStdlib)
     implementation(AndroidSupportLibs.androidxCore)
+    implementation(LifecycleLibs.viewModel)
+    implementation(LifecycleLibs.liveDataKtx)
+    implementation(LifecycleLibs.viewModelSavedState)
 
     implementation(KoinLibs.koinAndroid)
     implementation(KoinLibs.koinAndroidScope)
+    implementation(KoinLibs.koinViewModel)
+    implementation(KoinLibs.koinFragment)
+
+    implementation(CoroutinesLibs.coroutinesCore)
+    implementation(CoroutinesLibs.androidCoroutines)
+
+    implementation(NavigationLibs.navigationFragment)
+    implementation(NavigationLibs.navigationUi)
+
+    implementation(AndroidSupportLibs.annotations)
+    implementation(AndroidSupportLibs.appCompat)
+    implementation(AndroidSupportLibs.constraint)
+    implementation(AndroidSupportLibs.cardView)
+    implementation(AndroidSupportLibs.material)
+    implementation(AndroidSupportLibs.recyclerView)
 
     implementation(platform(FirebaseLibs.firebaseBom))
     implementation(FirebaseLibs.firebaseCrashlytics)
     implementation(FirebaseLibs.firebaseAnalytics)
 
     implementation(TimberLibs.timber)
+    implementation(GlideLibs.glide)
+    implementation(EasyPermissionsLibs.easyPermissions)
 
-    debugImplementation(LeakCanaryLibs.leakCanary)
+    kapt(LifecycleLibs.lifecycleCompiler)
+    kapt(GlideLibs.glideCompiler)
 
     testImplementation(AndroidTestLibs.junit)
     testImplementation(AndroidTestLibs.androidTestJunit)
@@ -116,4 +114,9 @@ dependencies {
     testImplementation(MockKLibs.androidMockK)
     testImplementation(KoinLibs.koinTest)
     testImplementation(AndroidTestLibs.robolectric)
+    testImplementation(JunitDataProviderLibs.junitDataProvider)
+    testImplementation(project(Modules.coreUnitTest))
+
+    androidTestImplementation(AndroidTestLibs.androidTestJunit)
+    androidTestImplementation(AndroidTestLibs.espressoCore)
 }

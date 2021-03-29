@@ -2,7 +2,7 @@ package com.example.clean_architecture.presentation
 
 import android.os.Bundle
 import com.example.clean_architecture.core_android.base.BaseActivity
-import com.example.clean_architecture.databinding.ActivityMainBinding
+import com.example.clean_architecture.presentation.databinding.ActivityMainBinding
 
 class MainActivity : BaseActivity() {
 
