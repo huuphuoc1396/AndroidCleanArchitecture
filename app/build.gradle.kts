@@ -1,3 +1,9 @@
+import com.android.build.gradle.api.ApplicationVariant
+import com.android.build.gradle.api.BaseVariantOutput
+import com.android.build.gradle.internal.api.BaseVariantOutputImpl
+import java.text.SimpleDateFormat
+import java.util.*
+
 plugins {
     id(GradlePlugins.android)
     id(GradlePlugins.kotlinAndroid)
@@ -67,6 +73,17 @@ android {
 
     testOptions {
         unitTests.isReturnDefaultValues = true
+    }
+
+    applicationVariants.all {
+        val outputFileName = "CleanArchitecture" +
+                "_${name}" +
+                "_verCode${Android.versionCode}" +
+                "_${SimpleDateFormat("yyMdHms", Locale.US).format(Date())}.apk"
+        outputs.all {
+            val output = this as? BaseVariantOutputImpl
+            output?.outputFileName = outputFileName
+        }
     }
 }
 

@@ -22,7 +22,7 @@ task projectDependencyGraph {
 
         def projects = new LinkedHashSet<Project>()
         def dependencies = new LinkedHashMap<Tuple2<Project, Project>, List<String>>()
-        def multiplatformProjects = []
+        def multiPlatformProjects = []
         def jsProjects = []
         def androidProjects = []
         def javaProjects = []
@@ -33,7 +33,7 @@ task projectDependencyGraph {
             queue.addAll(project.childProjects.values())
 
             if (project.plugins.hasPlugin('org.jetbrains.kotlin.multiplatform')) {
-                multiplatformProjects.add(project)
+                multiPlatformProjects.add(project)
             }
             if (project.plugins.hasPlugin('org.jetbrains.kotlin.js')) {
                 jsProjects.add(project)
@@ -74,7 +74,7 @@ task projectDependencyGraph {
                 traits.add('shape=box')
             }
 
-            if (multiplatformProjects.contains(project)) {
+            if (multiPlatformProjects.contains(project)) {
                 traits.add('fillcolor="#ffd2b3"')
             } else if (jsProjects.contains(project)) {
                 traits.add('fillcolor="#ffffba"')

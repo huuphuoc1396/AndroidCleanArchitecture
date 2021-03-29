@@ -1,13 +1,16 @@
 package com.example.clean_architecture.presentation
 
 import android.os.Bundle
-import com.example.clean_architecture.presentation.R
 import com.example.clean_architecture.core_android.base.BaseActivity
+import com.example.clean_architecture.presentation.databinding.ActivityMainBinding
 
 class MainActivity : BaseActivity() {
 
+    private lateinit var viewDataBinding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        viewDataBinding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(viewDataBinding.root)
     }
 }

@@ -1,0 +1,42 @@
+name: devDebug Build
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2.3.3
+
+      - name: Set up our JDK environment
+        uses: actions/setup-java@v1.4.3
+        with:
+          java-version: 1.8
+
+      - name: Add google-services.json
+        env:
+          FIREBASE_SECRET: ${{ secrets.FIREBASE_SECRET }}
+        run: echo $FIREBASE_SECRET > app/google-services.json
+
+      - name: Run Unit Tests
+        run: ./gradlew jacocoFullReport
+
+      - name: Generate Release APK
+        run: ./gradlew assembleDevDebug
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v2.2.0
+        with:
+          name: release-bundle
+          path: app/build/outputs/apk/dev/debug/CleanArchitecture_*.apk
+
+      - name: Upload JaCoCo report
+        uses: actions/upload-artifact@v2.2.0
+        with:
+          name: jacoco-report
+          path: build/reports/jacoco
+
