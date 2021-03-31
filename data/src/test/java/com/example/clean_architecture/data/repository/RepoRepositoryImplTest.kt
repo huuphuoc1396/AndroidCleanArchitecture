@@ -1,13 +1,13 @@
 package com.example.clean_architecture.data.repository
 
-import com.example.clean_architecture.core_lib.exception.ApiException
+import com.example.clean_architecture.core_lib.error.ApiError
 import com.example.clean_architecture.core_lib.extension.nextString
 import com.example.clean_architecture.core_unit_test.assertError
 import com.example.clean_architecture.core_unit_test.assertSuccess
 import com.example.clean_architecture.core_unit_test.makeRandomInstance
 import com.example.clean_architecture.core_unit_test.makeRandomListInstance
 import com.example.clean_architecture.data.remote.api.RepoApi
-import com.example.clean_architecture.data.remote.exception.RemoteCoroutineExceptionHandler
+import com.example.clean_architecture.data.remote.error.RemoteCoroutineErrorHandler
 import com.example.clean_architecture.data.remote.mapper.RepoMapper
 import com.example.clean_architecture.data.remote.response.RepoListResponse
 import com.example.clean_architecture.domain.model.Repo
@@ -22,12 +22,12 @@ import kotlin.random.Random
 class RepoRepositoryImplTest {
     private val repoApi: RepoApi = mockk()
     private val repoMapper: RepoMapper = mockk()
-    private val remoteCoroutineExceptionHandler: RemoteCoroutineExceptionHandler = mockk()
+    private val remoteCoroutineErrorHandler: RemoteCoroutineErrorHandler = mockk()
 
     private val repoRepositoryImpl = RepoRepositoryImpl(
         repoApi = repoApi,
         repoMapper = repoMapper,
-        remoteCoroutineExceptionHandler = remoteCoroutineExceptionHandler
+        remoteCoroutineErrorHandler = remoteCoroutineErrorHandler
     )
 
     @Test
@@ -53,14 +53,14 @@ class RepoRepositoryImplTest {
     fun `searchRepos is Error`() = runBlocking {
         val query = Random.nextString()
         val exception = Exception()
-        val error = ApiException.ConnectionException
+        val error = ApiError.ConnectionError
 
         coEvery {
             repoApi.searchRepos(query)
         } throws exception
 
         every {
-            remoteCoroutineExceptionHandler.handleException(exception)
+            remoteCoroutineErrorHandler.handleException(exception)
         } returns error
 
         val resultWrapper = repoRepositoryImpl.searchRepos(query)

@@ -1,6 +1,6 @@
 package com.example.clean_architecture.domain.usecase
 
-import com.example.clean_architecture.core_lib.exception.ApiException
+import com.example.clean_architecture.core_lib.error.ApiError
 import com.example.clean_architecture.core_lib.extension.nextString
 import com.example.clean_architecture.core_lib.result.ResultWrapper
 import com.example.clean_architecture.core_unit_test.assertError
@@ -40,7 +40,7 @@ class SearchReposUseCaseTest {
     @Test
     fun `searchRepos is Error`() = runBlocking {
         val query = Random.nextString()
-        val error = ApiException.ConnectionException
+        val error = ApiError.ConnectionError
 
         coEvery {
             repoRepository.searchRepos(query)

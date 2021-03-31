@@ -1,6 +1,6 @@
 package com.example.clean_architecture.core_unit_test
 
-import com.example.clean_architecture.core_lib.exception.CoroutineException
+import com.example.clean_architecture.core_lib.error.CoroutineError
 import com.example.clean_architecture.core_lib.result.ResultWrapper
 import org.junit.Assert
 
@@ -15,7 +15,7 @@ fun <R> ResultWrapper<R>.assertSuccess(expected: R) {
     )
 }
 
-fun <R> ResultWrapper<R>.assertError(expected: CoroutineException) {
+fun <R> ResultWrapper<R>.assertError(expected: CoroutineError) {
     subscribe(
         success = {
             Assert.assertTrue(false)

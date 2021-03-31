@@ -82,8 +82,8 @@ abstract class BaseFragment<V : ViewDataBinding> : Fragment(), EasyPermissions.P
         viewDataBinding.lifecycleOwner = viewLifecycleOwner
         viewDataBinding.executePendingBindings()
 
-        getViewModel()?.networkError?.observe(viewLifecycleOwner, { coroutineException ->
-            handleNetworkError(coroutineException)
+        getViewModel()?.networkError?.observe(viewLifecycleOwner, { coroutineError ->
+            handleNetworkError(coroutineError)
         })
     }
 

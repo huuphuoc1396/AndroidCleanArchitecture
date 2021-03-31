@@ -10,7 +10,7 @@ internal val repositoryModule = module {
         RepoRepositoryImpl(
             repoApi = get(),
             repoMapper = get(),
-            remoteCoroutineExceptionHandler = get()
+            remoteCoroutineErrorHandler = get()
         )
     }
 }

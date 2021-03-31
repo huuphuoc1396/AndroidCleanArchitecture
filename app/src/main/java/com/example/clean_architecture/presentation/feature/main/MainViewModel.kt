@@ -22,12 +22,12 @@ class MainViewModel(
 
     private var searchJob: Job? = null
 
-    val repoItem = MutableLiveData<List<RepoItem>>(listOf())
+    val repoItems = MutableLiveData<List<RepoItem>>(listOf())
     val isLoading = MutableLiveData(false)
     val query = MutableLiveData("")
 
     val isNoResults: LiveData<Boolean> = Transformations.map(isLoading) { isLoading ->
-        repoItem.value.isNullOrEmpty() && !query.value.isNullOrEmpty() && !isLoading
+        repoItems.value.isNullOrEmpty() && !query.value.isNullOrEmpty() && !isLoading
     }
 
     fun searchRepos() {
@@ -41,7 +41,7 @@ class MainViewModel(
                 }
                 resultWrapper.subscribe(
                     success = { repos ->
-                        repoItem.value = repoItemMapper.mapList(repos)
+                        repoItems.value = repoItemMapper.mapList(repos)
                         isLoading.value = false
                     },
                     error = { exception ->

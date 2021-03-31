@@ -1,38 +1,38 @@
 package com.example.clean_architecture.core_lib.result
 
-import com.example.clean_architecture.core_lib.exception.CoroutineException
-import com.example.clean_architecture.core_lib.exception.CoroutineExceptionHandler
-import com.example.clean_architecture.core_lib.exception.DefaultCoroutineException
+import com.example.clean_architecture.core_lib.error.CoroutineError
+import com.example.clean_architecture.core_lib.error.CoroutineErrorHandler
+import com.example.clean_architecture.core_lib.error.DefaultCoroutineError
 
 sealed class ResultWrapper<out R> {
     data class Success<out T>(val data: T) : ResultWrapper<T>()
     data class Error(
-        val coroutineException: CoroutineException
+        val coroutineError: CoroutineError
     ) : ResultWrapper<Nothing>()
 
     val isSuccess get() = this is Success
     val isError get() = this is Error
 
-    fun subscribe(success: (R) -> Unit, error: (CoroutineException) -> Unit) {
+    fun subscribe(success: (R) -> Unit, error: (CoroutineError) -> Unit) {
         when (this) {
             is Success -> success(this.data)
-            is Error -> error(this.coroutineException)
+            is Error -> error(this.coroutineError)
         }
     }
 
     companion object {
         suspend fun <R> safeSuspend(
-            coroutineExceptionHandler: CoroutineExceptionHandler? = null,
+            coroutineErrorHandler: CoroutineErrorHandler? = null,
             action: suspend () -> ResultWrapper<R>
         ): ResultWrapper<R> {
             try {
                 return action()
             } catch (exception: Exception) {
-                val coroutineException = coroutineExceptionHandler?.handleException(exception)
-                if (coroutineException != null) {
-                    return Error(coroutineException)
+                val coroutineError = coroutineErrorHandler?.handleException(exception)
+                if (coroutineError != null) {
+                    return Error(coroutineError)
                 }
-                return Error(DefaultCoroutineException(exception))
+                return Error(DefaultCoroutineError(exception))
             }
         }
     }

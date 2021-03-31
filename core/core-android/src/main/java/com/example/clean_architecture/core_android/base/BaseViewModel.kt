@@ -2,13 +2,13 @@ package com.example.clean_architecture.core_android.base
 
 import androidx.lifecycle.ViewModel
 import com.example.clean_architecture.core_android.livedata.SingleLiveData
-import com.example.clean_architecture.core_lib.exception.CoroutineException
+import com.example.clean_architecture.core_lib.error.CoroutineError
 
 abstract class BaseViewModel : ViewModel() {
 
-    val networkError = SingleLiveData<CoroutineException>()
+    val networkError = SingleLiveData<CoroutineError>()
 
-    fun handleNetworkError(coroutineException: CoroutineException) {
-        networkError.value = coroutineException
+    fun handleNetworkError(coroutineError: CoroutineError) {
+        networkError.value = coroutineError
     }
 }

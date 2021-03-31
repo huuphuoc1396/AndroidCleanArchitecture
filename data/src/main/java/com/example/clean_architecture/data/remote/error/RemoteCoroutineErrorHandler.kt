@@ -1,8 +1,8 @@
-package com.example.clean_architecture.data.remote.exception
+package com.example.clean_architecture.data.remote.error
 
-import com.example.clean_architecture.core_lib.exception.ApiException
-import com.example.clean_architecture.core_lib.exception.CoroutineException
-import com.example.clean_architecture.core_lib.exception.CoroutineExceptionHandler
+import com.example.clean_architecture.core_lib.error.ApiError
+import com.example.clean_architecture.core_lib.error.CoroutineError
+import com.example.clean_architecture.core_lib.error.CoroutineErrorHandler
 import com.example.clean_architecture.core_lib.extension.default
 import com.example.clean_architecture.core_lib.extension.defaultEmpty
 import com.example.clean_architecture.data.remote.response.ServerErrorResponse
@@ -11,11 +11,11 @@ import retrofit2.HttpException
 import timber.log.Timber
 import java.io.IOException
 
-class RemoteCoroutineExceptionHandler : CoroutineExceptionHandler {
-    override fun handleException(exception: Exception): CoroutineException {
+class RemoteCoroutineErrorHandler : CoroutineErrorHandler {
+    override fun handleException(exception: Exception): CoroutineError {
         return when (exception) {
             is IOException -> {
-                ApiException.ConnectionException
+                ApiError.ConnectionError
             }
             is HttpException -> {
                 val code = exception.code().default(-1)
@@ -32,13 +32,13 @@ class RemoteCoroutineExceptionHandler : CoroutineExceptionHandler {
                             return@let null
                         }
                     }
-                return ApiException.ServerException(
+                return ApiError.ServerError(
                     code = code,
                     errorMessage = errorMessage.defaultEmpty()
                 )
             }
             else -> {
-                ApiException.UnknownException(exception)
+                ApiError.UnknownError(exception)
             }
         }
     }

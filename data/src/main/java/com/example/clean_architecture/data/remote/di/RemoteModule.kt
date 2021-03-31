@@ -2,7 +2,7 @@ package com.example.clean_architecture.data.remote.di
 
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.example.clean_architecture.data.remote.api.RepoApi
-import com.example.clean_architecture.data.remote.exception.RemoteCoroutineExceptionHandler
+import com.example.clean_architecture.data.remote.error.RemoteCoroutineErrorHandler
 import com.example.clean_architecture.data.remote.interceptor.HeaderInterceptor
 import com.example.clean_architecture.data.remote.mapper.OwnerMapper
 import com.example.clean_architecture.data.remote.mapper.RepoMapper
@@ -51,7 +51,7 @@ internal val remoteModule = module {
     }
 
     factory {
-        RemoteCoroutineExceptionHandler()
+        RemoteCoroutineErrorHandler()
     }
 
     factory {
