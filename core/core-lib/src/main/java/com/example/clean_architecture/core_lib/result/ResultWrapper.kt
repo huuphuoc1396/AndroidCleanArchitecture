@@ -10,13 +10,23 @@ sealed class ResultWrapper<out R> {
         val coroutineError: CoroutineError
     ) : ResultWrapper<Nothing>()
 
-    val isSuccess get() = this is Success
-    val isError get() = this is Error
+    val isSuccess: Boolean
+        get() = this is Success
+
+    val isError: Boolean
+        get() = this is Error
 
     fun subscribe(success: (R) -> Unit, error: (CoroutineError) -> Unit) {
         when (this) {
-            is Success -> success(this.data)
-            is Error -> error(this.coroutineError)
+            is Success -> success(data)
+            is Error -> error(coroutineError)
+        }
+    }
+
+    fun <T> map(transform: (R) -> T): ResultWrapper<T> {
+        return when (this) {
+            is Success -> Success(transform(data))
+            is Error -> this
         }
     }
 
