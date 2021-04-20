@@ -7,9 +7,9 @@ import timber.log.Timber
 
 abstract class BaseActivity : AppCompatActivity() {
 
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
         Timber.tag(LIFECYCLE_TAG).i("${this::class.simpleName} onCreate")
-        super.onCreate(savedInstanceState, persistentState)
+        super.onCreate(savedInstanceState)
     }
 
     override fun onRestart() {
