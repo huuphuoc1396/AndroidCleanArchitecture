@@ -4,16 +4,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.clean_architecture.core_android.base.BaseFragment
 import com.example.clean_architecture.core_android.base.BaseViewModel
 import com.example.clean_architecture.databinding.FragmentDetailBinding
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class DetailFragment : BaseFragment<FragmentDetailBinding>() {
 
-    private val viewModel: DetailViewModel by viewModel()
+    private val viewModel: DetailViewModel by viewModels()
 
     private val args: DetailFragmentArgs by navArgs()
 

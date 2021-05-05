@@ -4,8 +4,9 @@ import android.content.SharedPreferences
 import android.net.Uri
 import android.util.LongSparseArray
 import com.google.gson.Gson
+import javax.inject.Inject
 
-class SharedPrefsApi(
+class SharedPrefsApi @Inject constructor(
     val sharedPreferences: SharedPreferences,
 ) {
     fun set(key: String, value: String) = sharedPreferences.edit().putString(key, value).apply()

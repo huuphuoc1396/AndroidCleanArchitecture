@@ -6,8 +6,9 @@ import com.example.clean_architecture.data.remote.error.RemoteCoroutineErrorHand
 import com.example.clean_architecture.data.remote.mapper.RepoMapper
 import com.example.clean_architecture.domain.model.Repo
 import com.example.clean_architecture.domain.repository.RepoRepository
+import javax.inject.Inject
 
-class RepoRepositoryImpl(
+class RepoRepositoryImpl @Inject constructor(
     private val repoApi: RepoApi,
     private val repoMapper: RepoMapper,
     private val remoteCoroutineErrorHandler: RemoteCoroutineErrorHandler,

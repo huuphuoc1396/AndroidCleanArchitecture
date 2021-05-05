@@ -2,15 +2,17 @@ package com.example.clean_architecture.data.repository.di
 
 import com.example.clean_architecture.data.repository.RepoRepositoryImpl
 import com.example.clean_architecture.domain.repository.RepoRepository
-import org.koin.dsl.module
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 
-internal val repositoryModule = module {
+@Module
+@InstallIn(SingletonComponent::class)
+class RepositoryModule {
 
-    single<RepoRepository> {
-        RepoRepositoryImpl(
-            repoApi = get(),
-            repoMapper = get(),
-            remoteCoroutineErrorHandler = get()
-        )
+    @Provides
+    fun provideRepoRepository(repoRepositoryImpl: RepoRepositoryImpl): RepoRepository {
+        return repoRepositoryImpl
     }
 }

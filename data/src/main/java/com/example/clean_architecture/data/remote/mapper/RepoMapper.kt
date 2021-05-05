@@ -5,8 +5,9 @@ import com.example.clean_architecture.core_lib.extension.defaultZero
 import com.example.clean_architecture.core_lib.mapper.Mapper
 import com.example.clean_architecture.data.remote.response.ItemResponse
 import com.example.clean_architecture.domain.model.Repo
+import javax.inject.Inject
 
-class RepoMapper(
+class RepoMapper @Inject constructor(
     private val ownerMapper: OwnerMapper,
 ) : Mapper<ItemResponse?, Repo>() {
     override fun map(input: ItemResponse?): Repo {

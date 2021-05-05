@@ -1,8 +1,9 @@
 package com.example.clean_architecture.data.local.prefs
 
 import com.example.clean_architecture.data.local.prefs.api.SharedPrefsApi
+import javax.inject.Inject
 
-class AppPrefs(
+class AppPrefs @Inject constructor(
     private val sharedPrefsApi: SharedPrefsApi,
 ) : PrefsHelper {
 
