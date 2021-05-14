@@ -1,4 +1,4 @@
-package com.example.clean_architecture.data.remote.interceptor
+package com.example.clean_architecture.data.remote.retrofit.interceptor
 
 import okhttp3.Interceptor
 import okhttp3.Response

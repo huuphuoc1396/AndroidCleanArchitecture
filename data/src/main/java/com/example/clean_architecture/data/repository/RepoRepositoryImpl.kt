@@ -1,7 +1,7 @@
 package com.example.clean_architecture.data.repository
 
 import com.example.clean_architecture.core_lib.result.ResultWrapper
-import com.example.clean_architecture.data.remote.api.RepoApi
+import com.example.clean_architecture.data.remote.retrofit.api.RepoApi
 import com.example.clean_architecture.data.remote.error.RemoteCoroutineErrorHandler
 import com.example.clean_architecture.data.remote.mapper.RepoMapper
 import com.example.clean_architecture.domain.model.Repo
