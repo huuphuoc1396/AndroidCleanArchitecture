@@ -3,13 +3,12 @@ package com.example.clean_architecture.data.remote.api
 import com.example.clean_architecture.core_lib.extension.nextString
 import com.example.clean_architecture.data.remote.api.common.BaseApiTest
 import com.example.clean_architecture.data.remote.api.common.HttpMethod
-import com.example.clean_architecture.data.remote.di.createRetrofit
-import com.example.clean_architecture.data.remote.interceptor.HeaderInterceptor
 import com.example.clean_architecture.data.remote.response.ItemResponse
 import com.example.clean_architecture.data.remote.response.OwnerResponse
 import com.example.clean_architecture.data.remote.response.RepoListResponse
 import com.example.clean_architecture.data.remote.response.ServerErrorResponse
-import io.mockk.mockk
+import com.example.clean_architecture.data.remote.retrofit.builder.DefaultRetrofitBuilder
+import com.example.clean_architecture.data.remote.retrofit.api.RepoApi
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert
 import org.junit.Test
@@ -69,14 +68,7 @@ class RepoApiTest : BaseApiTest() {
 
     override fun onStartMockServer(url: String) {
         super.onStartMockServer(url)
-        repoApi = createRetrofit(
-            baseUrl = url,
-            connectionTimeout = 15000,
-            headerInterceptor = HeaderInterceptor(),
-            chuckerInterceptor = mockk(),
-            loggingInterceptor = mockk(),
-            isLoggingEnable = false
-        ).create(RepoApi::class.java)
+        repoApi = DefaultRetrofitBuilder().baseUrl(url).build().create(RepoApi::class.java)
     }
 
     @Test

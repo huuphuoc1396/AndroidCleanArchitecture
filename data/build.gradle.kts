@@ -70,7 +70,7 @@ dependencies {
     implementation(RoomLibs.roomRuntime)
     implementation(RoomLibs.roomKtx)
 
-    implementation(KoinLibs.koinAndroid)
+    implementation(HiltLibs.hiltAndroid)
 
     implementation(TimberLibs.timber)
     implementation(OkHttp3Libs.loggingInterceptor)
@@ -84,6 +84,7 @@ dependencies {
     releaseImplementation(ChuckerLibs.releaseChucker)
 
     kapt(RoomLibs.roomCompiler)
+    kapt(HiltLibs.hiltCompiler)
 
     testImplementation(AndroidTestLibs.junit)
     testImplementation(AndroidTestLibs.androidTestJunit)
@@ -92,7 +93,6 @@ dependencies {
     testImplementation(MockKLibs.mockK)
     testImplementation(MockKLibs.androidMockK)
     testImplementation(OkHttp3Libs.mockWebServer)
-    testImplementation(KoinLibs.koinTest)
     testImplementation(AndroidTestLibs.robolectric)
     testImplementation(RoomLibs.roomTesting)
     testImplementation(JunitDataProviderLibs.junitDataProvider)

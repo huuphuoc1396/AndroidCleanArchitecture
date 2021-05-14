@@ -6,7 +6,7 @@ import com.example.clean_architecture.core_unit_test.assertError
 import com.example.clean_architecture.core_unit_test.assertSuccess
 import com.example.clean_architecture.core_unit_test.makeRandomInstance
 import com.example.clean_architecture.core_unit_test.makeRandomListInstance
-import com.example.clean_architecture.data.remote.api.RepoApi
+import com.example.clean_architecture.data.remote.retrofit.api.RepoApi
 import com.example.clean_architecture.data.remote.error.RemoteCoroutineErrorHandler
 import com.example.clean_architecture.data.remote.mapper.RepoMapper
 import com.example.clean_architecture.data.remote.response.RepoListResponse

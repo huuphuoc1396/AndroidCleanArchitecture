@@ -9,13 +9,16 @@ import com.example.clean_architecture.core_lib.extension.defaultEmpty
 import com.example.clean_architecture.domain.usecase.SearchReposUseCase
 import com.example.clean_architecture.presentation.feature.main.mapper.RepoItemMapper
 import com.example.clean_architecture.presentation.feature.main.model.RepoItem
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.util.*
+import javax.inject.Inject
 
-class MainViewModel(
+@HiltViewModel
+class MainViewModel @Inject constructor(
     private val searchReposUseCase: SearchReposUseCase,
     private val repoItemMapper: RepoItemMapper,
 ) : BaseViewModel() {

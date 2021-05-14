@@ -20,7 +20,7 @@ dependencies {
 
     implementation(CoroutinesLibs.coroutinesCore)
 
-    implementation(KoinLibs.koinCore)
+    implementation(HiltLibs.hiltCore)
 
     implementation(TimberLibs.timber)
 
@@ -29,6 +29,5 @@ dependencies {
     testImplementation(AndroidTestLibs.archTestCore)
     testImplementation(AndroidTestLibs.hamcrest)
     testImplementation(MockKLibs.mockK)
-    testImplementation(KoinLibs.koinTest)
     testImplementation(project(Modules.coreUnitTest))
 }

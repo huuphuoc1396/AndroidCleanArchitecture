@@ -10,8 +10,9 @@ import com.google.gson.Gson
 import retrofit2.HttpException
 import timber.log.Timber
 import java.io.IOException
+import javax.inject.Inject
 
-class RemoteCoroutineErrorHandler : CoroutineErrorHandler {
+class RemoteCoroutineErrorHandler @Inject constructor() : CoroutineErrorHandler {
     override fun handleException(exception: Exception): CoroutineError {
         return when (exception) {
             is IOException -> {

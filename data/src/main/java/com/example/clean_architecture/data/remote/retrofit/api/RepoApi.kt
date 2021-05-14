@@ -1,4 +1,4 @@
-package com.example.clean_architecture.data.remote.api
+package com.example.clean_architecture.data.remote.retrofit.api
 
 import com.example.clean_architecture.data.remote.response.RepoListResponse
 import retrofit2.http.GET
