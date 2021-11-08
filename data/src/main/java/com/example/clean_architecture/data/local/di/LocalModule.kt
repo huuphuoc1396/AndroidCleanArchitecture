@@ -4,26 +4,23 @@ import android.content.Context
 import android.content.SharedPreferences
 import com.example.clean_architecture.data.local.prefs.AppPrefs
 import com.example.clean_architecture.data.local.prefs.PrefsHelper
-import com.example.clean_architecture.data.local.prefs.api.SharedPrefsApi
-import org.koin.android.ext.koin.androidContext
-import org.koin.dsl.module
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
 
-internal val localModule = module {
+@Module
+@InstallIn(SingletonComponent::class)
+class LocalModule {
 
-    single<PrefsHelper> {
-        AppPrefs(
-            sharedPrefsApi = get()
-        )
+    @Provides
+    fun providePrefsHelper(appPrefs: AppPrefs): PrefsHelper {
+        return appPrefs
     }
 
-    single {
-        SharedPrefsApi(
-            sharedPreferences = get()
-        )
-    }
-
-    single<SharedPreferences> {
-        val context: Context = androidContext()
-        return@single context.getSharedPreferences(context.packageName, Context.MODE_PRIVATE)
+    @Provides
+    fun provideSharedPreferences(@ApplicationContext context: Context): SharedPreferences {
+        return context.getSharedPreferences(context.packageName, Context.MODE_PRIVATE)
     }
 }

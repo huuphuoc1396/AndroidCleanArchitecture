@@ -10,6 +10,7 @@ plugins {
     id(GradlePlugins.navigation)
     id(GradlePlugins.googleServices)
     id(GradlePlugins.firebaseCrashlytics)
+    id(GradlePlugins.hilt)
 }
 
 android {
@@ -100,7 +101,7 @@ dependencies {
     implementation(LifecycleLibs.liveDataKtx)
     implementation(LifecycleLibs.viewModelSavedState)
 
-    implementation(KoinLibs.koinAndroid)
+    implementation(HiltLibs.hiltAndroid)
 
     implementation(CoroutinesLibs.coroutinesCore)
     implementation(CoroutinesLibs.androidCoroutines)
@@ -127,6 +128,7 @@ dependencies {
 
     kapt(LifecycleLibs.lifecycleCompiler)
     kapt(GlideLibs.glideCompiler)
+    kapt(HiltLibs.hiltCompiler)
 
     testImplementation(AndroidTestLibs.junit)
     testImplementation(AndroidTestLibs.androidTestJunit)
@@ -134,7 +136,6 @@ dependencies {
     testImplementation(AndroidTestLibs.hamcrest)
     testImplementation(MockKLibs.mockK)
     testImplementation(MockKLibs.androidMockK)
-    testImplementation(KoinLibs.koinTest)
     testImplementation(AndroidTestLibs.robolectric)
     testImplementation(JunitDataProviderLibs.junitDataProvider)
     testImplementation(project(Modules.coreUnitTest))

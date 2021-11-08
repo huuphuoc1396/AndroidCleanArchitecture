@@ -4,8 +4,9 @@ import com.example.clean_architecture.core_lib.result.ResultWrapper
 import com.example.clean_architecture.core_lib.usecase.UseCase
 import com.example.clean_architecture.domain.model.Repo
 import com.example.clean_architecture.domain.repository.RepoRepository
+import javax.inject.Inject
 
-class SearchReposUseCase(
+class SearchReposUseCase @Inject constructor(
     private val repoRepository: RepoRepository,
 ) : UseCase<SearchReposUseCase.Params, ResultWrapper<List<Repo>>>() {
 

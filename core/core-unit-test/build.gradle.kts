@@ -16,5 +16,4 @@ dependencies {
     implementation(AndroidTestLibs.archTestCore)
     implementation(AndroidTestLibs.hamcrest)
     implementation(MockKLibs.mockK)
-    implementation(KoinLibs.koinTest)
 }

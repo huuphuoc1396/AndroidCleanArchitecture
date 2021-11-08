@@ -71,7 +71,7 @@ dependencies {
     implementation(LifecycleLibs.liveDataKtx)
     implementation(LifecycleLibs.viewModelSavedState)
 
-    implementation(KoinLibs.koinAndroid)
+    implementation(HiltLibs.hiltAndroid)
 
     implementation(CoroutinesLibs.coroutinesCore)
     implementation(CoroutinesLibs.androidCoroutines)
@@ -92,4 +92,5 @@ dependencies {
 
     kapt(LifecycleLibs.lifecycleCompiler)
     kapt(GlideLibs.glideCompiler)
+    kapt(HiltLibs.hiltCompiler)
 }

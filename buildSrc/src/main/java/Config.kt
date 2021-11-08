@@ -49,6 +49,7 @@ object BuildPlugins {
     const val navigation = "androidx.navigation:navigation-safe-args-gradle-plugin:${NavigationLibs.version}"
     const val googleServices = "com.google.gms:google-services:${googleServicesVersion}"
     const val firebaseCrashlytics = "com.google.firebase:firebase-crashlytics-gradle:${firebaseCrashlyticsVersion}"
+    const val hilt = "com.google.dagger:hilt-android-gradle-plugin:${HiltLibs.version}"
 }
 
 object GradlePlugins {
@@ -62,6 +63,7 @@ object GradlePlugins {
     const val navigation = "androidx.navigation.safeargs.kotlin"
     const val googleServices = "com.google.gms.google-services"
     const val firebaseCrashlytics = "com.google.firebase.crashlytics"
+    const val hilt = "dagger.hilt.android.plugin"
 }
 
 object AndroidJUnitRunner {
@@ -161,14 +163,6 @@ object CoroutinesLibs {
     const val androidCoroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${version}"
 }
 
-object KoinLibs {
-    private const val version = "3.1.3"
-
-    const val koinCore = "io.insert-koin:koin-core:${version}"
-    const val koinAndroid = "io.insert-koin:koin-android:${version}"
-    const val koinTest = "io.insert-koin:koin-test:${version}"
-}
-
 object FirebaseLibs {
     private const val version = "29.0.0"
 
@@ -229,4 +223,12 @@ object MockKLibs {
 
     const val mockK = "io.mockk:mockk:${version}"
     const val androidMockK = "io.mockk:mockk-android:${version}"
+}
+
+object HiltLibs {
+    const val version = "2.38.1"
+
+    const val hiltCore = "com.google.dagger:hilt-core:$version"
+    const val hiltAndroid = "com.google.dagger:hilt-android:$version"
+    const val hiltCompiler = "com.google.dagger:hilt-compiler:$version"
 }
