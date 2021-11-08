@@ -85,10 +85,10 @@ dependencies {
     implementation(AndroidSupportLibs.cardView)
     implementation(AndroidSupportLibs.material)
     implementation(AndroidSupportLibs.recyclerView)
+    implementation(AndroidSupportLibs.swipeRefreshLayout)
 
     implementation(TimberLibs.timber)
     implementation(GlideLibs.glide)
-    implementation(EasyPermissionsLibs.easyPermissions)
 
     kapt(LifecycleLibs.lifecycleCompiler)
     kapt(GlideLibs.glideCompiler)

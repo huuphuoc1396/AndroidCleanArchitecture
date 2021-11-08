@@ -4,7 +4,7 @@ object Url {
 
 object Android {
     const val minSdk = 21
-    const val targetSdk = 30
+    const val targetSdk = 31
     const val applicationId = "com.example.clean_architecture"
     const val versionCode = 1
     const val versionName = "1.0.0"
@@ -40,9 +40,9 @@ object ProductFlavors {
 }
 
 object BuildPlugins {
-    private const val androidPluginVersion = "4.1.3"
-    private const val googleServicesVersion = "4.3.4"
-    private const val firebaseCrashlyticsVersion = "2.3.0"
+    private const val androidPluginVersion = "4.2.2"
+    private const val googleServicesVersion = "4.3.10"
+    private const val firebaseCrashlyticsVersion = "2.8.0"
 
     const val android = "com.android.tools.build:gradle:${androidPluginVersion}"
     const val kotlin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${KotlinLibs.version}"
@@ -71,20 +71,20 @@ object AndroidJUnitRunner {
 }
 
 object AndroidTestLibs {
-    private const val junitVersion = "4.12"
-    private const val androidTestVersion = "1.3.0"
-    private const val androidTestJunitVersion = "1.1.2"
+    private const val junitVersion = "4.13.2"
+    private const val androidTestVersion = "1.4.0"
+    private const val androidTestJunitVersion = "1.1.3"
     private const val archTestCoreVersion = "2.1.0"
-    private const val espressoCoreVersion = "3.3.0"
+    private const val espressoCoreVersion = "3.4.0"
     private const val hamcrestVersion = "1.3"
-    private const val robolectricVersion = "4.4"
+    private const val robolectricVersion = "4.6.1"
 
     // Core
     const val junit = "junit:junit:${junitVersion}"
     const val androidTestCore = "androidx.test:core:${androidTestVersion}"
 
     // AndroidJUnitRunner and JUnit Rules
-    const val androidTestRunner = "androidx.test:runner:${androidTestJunitVersion}"
+    const val androidTestRunner = "androidx.test:runner:${androidTestVersion}"
     const val androidTestRules = "androidx.test:rules:${androidTestVersion}"
 
     // Assertions
@@ -105,29 +105,29 @@ object AndroidTestLibs {
 }
 
 object KotlinLibs {
-    internal const val version = "1.4.31"
+    internal const val version = "1.5.31"
 
     const val kotlinStdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${version}"
     const val kotlinReflect = "org.jetbrains.kotlin:kotlin-reflect:${version}"
 }
 
 object LifecycleLibs {
-    private const val version = "2.3.1"
+    private const val version = "2.4.0"
 
-    const val viewModel = "androidx.lifecycle:lifecycle-viewmodel:${version}"
+    const val viewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${version}"
     const val liveDataKtx = "androidx.lifecycle:lifecycle-livedata-ktx:${version}"
     const val viewModelSavedState = "androidx.lifecycle:lifecycle-viewmodel-savedstate:${version}"
     const val lifecycleCompiler = "androidx.lifecycle:lifecycle-compiler:${version}"
 }
 
 object AndroidSupportLibs {
-    private const val androidxCoreVersion = "1.3.2"
-    private const val annotationsVersion = "1.1.0"
-    private const val appCompatVersion = "1.2.0"
+    private const val androidxCoreVersion = "1.7.0"
+    private const val annotationsVersion = "1.3.0"
+    private const val appCompatVersion = "1.3.1"
     private const val cardViewVersion = "1.0.0"
-    private const val materialVersion = "1.3.0"
-    private const val constraintVersion = "2.0.4"
-    private const val recyclerViewVersion = "1.1.0"
+    private const val materialVersion = "1.4.0"
+    private const val constraintVersion = "2.1.0"
+    private const val recyclerViewVersion = "1.2.1"
     private const val swipeRefreshLayoutVersion = "1.1.0"
 
     const val androidxCore = "androidx.core:core-ktx:${androidxCoreVersion}"
@@ -141,14 +141,14 @@ object AndroidSupportLibs {
 }
 
 object NavigationLibs {
-    internal const val version = "2.3.4"
+    internal const val version = "2.3.5"
 
     const val navigationFragment = "androidx.navigation:navigation-fragment-ktx:${version}"
     const val navigationUi = "androidx.navigation:navigation-ui-ktx:${version}"
 }
 
 object RoomLibs {
-    private const val version = "2.2.6"
+    private const val version = "2.3.0"
 
     const val roomRuntime = "androidx.room:room-runtime:${version}"
     const val roomCompiler = "androidx.room:room-compiler:${version}"
@@ -164,7 +164,7 @@ object CoroutinesLibs {
 }
 
 object FirebaseLibs {
-    private const val version = "26.7.0"
+    private const val version = "29.0.0"
 
     const val firebaseBom = "com.google.firebase:firebase-bom:${version}"
     const val firebaseCrashlytics = "com.google.firebase:firebase-crashlytics-ktx"
@@ -185,12 +185,6 @@ object GlideLibs {
     const val glideCompiler = "com.github.bumptech.glide:compiler:${version}"
 }
 
-object EasyPermissionsLibs {
-    private const val version = "3.0.0"
-
-    const val easyPermissions = "pub.devrel:easypermissions:${version}"
-}
-
 object TimberLibs {
     private const val version = "4.7.1"
 
@@ -198,20 +192,20 @@ object TimberLibs {
 }
 
 object ChuckerLibs {
-    private const val version = "3.4.0"
+    private const val version = "3.5.2"
 
     const val debugChucker = "com.github.chuckerteam.chucker:library:${version}"
     const val releaseChucker = "com.github.chuckerteam.chucker:library-no-op:${version}"
 }
 
 object LeakCanaryLibs {
-    private const val version = "2.6"
+    private const val version = "2.7"
 
     const val leakCanary = "com.squareup.leakcanary:leakcanary-android:${version}"
 }
 
 object OkHttp3Libs {
-    private const val version = "4.9.0"
+    private const val version = "4.9.2"
 
     const val okHttp3 = "com.squareup.okhttp3:okhttp:${version}"
     const val loggingInterceptor = "com.squareup.okhttp3:logging-interceptor:${version}"
@@ -219,20 +213,20 @@ object OkHttp3Libs {
 }
 
 object JunitDataProviderLibs {
-    private const val version = "2.6"
+    private const val version = "2.8"
 
     const val junitDataProvider = "com.tngtech.junit.dataprovider:junit4-dataprovider:${version}"
 }
 
 object MockKLibs {
-    private const val version = "1.11.0"
+    private const val version = "1.12.0"
 
     const val mockK = "io.mockk:mockk:${version}"
     const val androidMockK = "io.mockk:mockk-android:${version}"
 }
 
 object HiltLibs {
-    const val version = "2.35"
+    const val version = "2.38.1"
 
     const val hiltCore = "com.google.dagger:hilt-core:$version"
     const val hiltAndroid = "com.google.dagger:hilt-android:$version"

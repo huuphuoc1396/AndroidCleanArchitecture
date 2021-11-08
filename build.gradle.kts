@@ -4,7 +4,7 @@ buildscript {
         google()
         mavenCentral()
         maven {
-            url = uri(Url.jitPack)
+            setUrl(Url.jitPack)
         }
     }
     dependencies {
@@ -30,7 +30,7 @@ allprojects {
         google()
         mavenCentral()
         maven {
-            url = uri(Url.jitPack)
+            setUrl(Url.jitPack)
         }
     }
 }
