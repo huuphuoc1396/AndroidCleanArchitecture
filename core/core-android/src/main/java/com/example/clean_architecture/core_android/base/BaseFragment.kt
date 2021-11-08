@@ -13,11 +13,9 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import com.example.clean_architecture.core_android.extension.handleNetworkError
 import com.example.clean_architecture.core_android.livedata.autoCleared
-import pub.devrel.easypermissions.AppSettingsDialog
-import pub.devrel.easypermissions.EasyPermissions
 import timber.log.Timber
 
-abstract class BaseFragment<V : ViewDataBinding> : Fragment(), EasyPermissions.PermissionCallbacks {
+abstract class BaseFragment<V : ViewDataBinding> : Fragment() {
 
     abstract fun createViewDataBinding(inflater: LayoutInflater, container: ViewGroup?): V
 
@@ -34,18 +32,6 @@ abstract class BaseFragment<V : ViewDataBinding> : Fragment(), EasyPermissions.P
     }
 
     open fun onReturnedFromAppSettings() {}
-
-    fun hasPermission(@Size(min = 1) vararg permissions: String): Boolean {
-        return EasyPermissions.hasPermissions(requireContext(), *permissions)
-    }
-
-    fun requestPermission(
-        rationale: String,
-        requestCode: Int = PERMISSION_REQUEST_CODE,
-        @Size(min = 1) vararg permissions: String
-    ) {
-        EasyPermissions.requestPermissions(this, rationale, requestCode, *permissions)
-    }
 
     override fun onAttach(context: Context) {
         Timber.tag(LIFECYCLE_TAG).i("${this::class.simpleName} onAttach")
@@ -87,28 +73,6 @@ abstract class BaseFragment<V : ViewDataBinding> : Fragment(), EasyPermissions.P
         })
     }
 
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this)
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == AppSettingsDialog.DEFAULT_SETTINGS_REQ_CODE) {
-            Timber.i("${this::class.simpleName} returned from app settings screen")
-            onReturnedFromAppSettings()
-        }
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        Timber.tag(LIFECYCLE_TAG).i("${this::class.simpleName} onActivityCreated")
-        super.onActivityCreated(savedInstanceState)
-    }
-
     override fun onStart() {
         Timber.tag(LIFECYCLE_TAG).i("${this::class.simpleName} onStart")
         super.onStart()
@@ -143,10 +107,6 @@ abstract class BaseFragment<V : ViewDataBinding> : Fragment(), EasyPermissions.P
         Timber.tag(LIFECYCLE_TAG).i("${this::class.simpleName} onDetach")
         super.onDetach()
     }
-
-    override fun onPermissionsDenied(requestCode: Int, perms: MutableList<String>) {}
-
-    override fun onPermissionsGranted(requestCode: Int, perms: MutableList<String>) {}
 
     companion object {
         private const val LIFECYCLE_TAG = "FragmentLifecycle"
