@@ -72,9 +72,6 @@ dependencies {
     implementation(LifecycleLibs.viewModelSavedState)
 
     implementation(KoinLibs.koinAndroid)
-    implementation(KoinLibs.koinAndroidScope)
-    implementation(KoinLibs.koinViewModel)
-    implementation(KoinLibs.koinFragment)
 
     implementation(CoroutinesLibs.coroutinesCore)
     implementation(CoroutinesLibs.androidCoroutines)
@@ -88,10 +85,10 @@ dependencies {
     implementation(AndroidSupportLibs.cardView)
     implementation(AndroidSupportLibs.material)
     implementation(AndroidSupportLibs.recyclerView)
+    implementation(AndroidSupportLibs.swipeRefreshLayout)
 
     implementation(TimberLibs.timber)
     implementation(GlideLibs.glide)
-    implementation(EasyPermissionsLibs.easyPermissions)
 
     kapt(LifecycleLibs.lifecycleCompiler)
     kapt(GlideLibs.glideCompiler)
