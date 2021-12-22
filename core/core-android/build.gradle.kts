@@ -6,13 +6,11 @@ plugins {
 }
 
 android {
-    compileSdkVersion(Android.targetSdk)
+    compileSdk = Android.targetSdk
 
     defaultConfig {
-        minSdkVersion(Android.minSdk)
-        targetSdkVersion(Android.targetSdk)
-        versionCode = Android.versionCode
-        versionName = Android.versionName
+        minSdk = Android.minSdk
+        targetSdk = Android.targetSdk
 
         testInstrumentationRunner = AndroidJUnitRunner.runner
     }
@@ -29,15 +27,15 @@ android {
         }
     }
 
-    flavorDimensions(ProductFlavors.dimensions)
+    flavorDimensions += ProductFlavors.dimensions
 
     productFlavors {
         create(ProductFlavors.develop) {
-            setMatchingFallbacks(listOf(BuildTypes.debug, BuildTypes.release))
+            matchingFallbacks += listOf(BuildTypes.debug, BuildTypes.release)
         }
 
         create(ProductFlavors.product) {
-            setMatchingFallbacks(listOf(BuildTypes.release))
+            matchingFallbacks += listOf(BuildTypes.release)
         }
     }
 
