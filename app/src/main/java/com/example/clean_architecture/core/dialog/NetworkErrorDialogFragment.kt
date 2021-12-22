@@ -1,12 +1,12 @@
-package com.example.clean_architecture.core_android.dialog
+package com.example.clean_architecture.core.dialog
 
 import android.app.Dialog
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
+import com.example.clean_architecture.R
 import com.example.clean_architecture.core_lib.extension.defaultEmpty
-import com.example.common_android.R
 
 class NetworkErrorDialogFragment : DialogFragment() {
 

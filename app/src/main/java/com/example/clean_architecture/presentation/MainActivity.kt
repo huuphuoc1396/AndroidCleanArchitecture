@@ -1,7 +1,7 @@
 package com.example.clean_architecture.presentation
 
 import android.os.Bundle
-import com.example.clean_architecture.core_android.base.BaseActivity
+import com.example.clean_architecture.core.base.BaseActivity
 import com.example.clean_architecture.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 

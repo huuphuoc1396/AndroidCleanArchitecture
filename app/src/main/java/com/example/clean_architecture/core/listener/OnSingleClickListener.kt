@@ -1,4 +1,4 @@
-package com.example.clean_architecture.core_android.listener
+package com.example.clean_architecture.core.listener
 
 import android.view.View
 import java.util.concurrent.atomic.AtomicBoolean

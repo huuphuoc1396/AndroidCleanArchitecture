@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.example.clean_architecture.core_android.base.BaseFragment
-import com.example.clean_architecture.core_android.base.BaseViewModel
+import com.example.clean_architecture.core.base.BaseFragment
+import com.example.clean_architecture.core.base.BaseViewModel
 import com.example.clean_architecture.databinding.FragmentDetailBinding
 import dagger.hilt.android.AndroidEntryPoint
 

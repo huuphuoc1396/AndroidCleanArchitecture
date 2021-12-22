@@ -1,7 +1,7 @@
 package com.example.clean_architecture.presentation.feature.main
 
 import androidx.recyclerview.widget.RecyclerView
-import com.example.clean_architecture.core_android.extension.setOnSingleClickListener
+import com.example.clean_architecture.core.extension.setOnSingleClickListener
 import com.example.clean_architecture.databinding.ItemRepoBinding
 import com.example.clean_architecture.presentation.feature.main.model.RepoItem
 

@@ -1,8 +1,8 @@
-package com.example.clean_architecture.core_android.extension
+package com.example.clean_architecture.core.extension
 
 import android.view.View
 import androidx.databinding.BindingAdapter
-import com.example.clean_architecture.core_android.listener.OnSingleClickListener
+import com.example.clean_architecture.core.listener.OnSingleClickListener
 
 @BindingAdapter("onSingleClick")
 fun View.setOnSingleClickListener(onClickListener: View.OnClickListener?) {

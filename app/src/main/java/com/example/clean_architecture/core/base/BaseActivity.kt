@@ -1,7 +1,6 @@
-package com.example.clean_architecture.core_android.base
+package com.example.clean_architecture.core.base
 
 import android.os.Bundle
-import android.os.PersistableBundle
 import androidx.appcompat.app.AppCompatActivity
 import timber.log.Timber
 

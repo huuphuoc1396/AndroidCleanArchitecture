@@ -93,7 +93,6 @@ dependencies {
     implementation(project(Modules.data))
     implementation(project(Modules.domain))
     implementation(project(Modules.coreLib))
-    implementation(project(Modules.coreAndroid))
 
     implementation(KotlinLibs.kotlinStdlib)
     implementation(AndroidSupportLibs.androidxCore)
