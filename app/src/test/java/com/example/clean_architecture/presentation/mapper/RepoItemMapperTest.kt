@@ -1,6 +1,5 @@
 package com.example.clean_architecture.presentation.mapper
 
-import com.example.clean_architecture.core_unit_test.makeRandomInstance
 import com.example.clean_architecture.domain.model.Owner
 import com.example.clean_architecture.domain.model.Repo
 import com.example.clean_architecture.presentation.feature.main.mapper.OwnerItemMapper
@@ -38,8 +37,8 @@ class RepoItemMapperTest {
     }
 
     companion object {
-        private val owner: Owner = makeRandomInstance()
-        private val ownerItem: OwnerItem = makeRandomInstance()
+        private val owner: Owner = mockk()
+        private val ownerItem: OwnerItem = mockk()
 
         @JvmStatic
         @DataProvider

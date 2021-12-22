@@ -6,10 +6,11 @@ import com.example.clean_architecture.domain.core.error.ApiError
 import com.example.clean_architecture.domain.core.error.CoroutineError
 import com.example.clean_architecture.domain.core.extension.nextString
 import com.example.clean_architecture.domain.core.result.ResultWrapper
-import com.example.clean_architecture.core_unit_test.makeRandomListInstance
+import com.example.clean_architecture.domain.model.Owner
 import com.example.clean_architecture.domain.model.Repo
 import com.example.clean_architecture.domain.usecase.SearchReposUseCase
 import com.example.clean_architecture.presentation.feature.main.mapper.RepoItemMapper
+import com.example.clean_architecture.presentation.feature.main.model.OwnerItem
 import com.example.clean_architecture.presentation.feature.main.model.RepoItem
 import io.mockk.*
 import org.junit.Rule
@@ -38,12 +39,53 @@ class MainViewModelTest {
             repoItemMapper = repoItemMapper
         )
         val query = Random.nextString()
-        val repoList: List<Repo> = makeRandomListInstance(1, 10)
-        val repoItemList: List<RepoItem> = makeRandomListInstance(1, 10)
+        val repo1 = Repo(
+            id = 1,
+            name = "name 1",
+            description = "description 1",
+            owner = Owner(
+                id = 1,
+                login = "login 1",
+                avatarUrl = "avatarUrl1"
+            )
+        )
+        val repo2 = Repo(
+            id = 2,
+            name = "name 2",
+            description = "description 2",
+            owner = Owner(
+                id = 2,
+                login = "login 2",
+                avatarUrl = "avatarUrl2"
+            )
+        )
+        val repoList: List<Repo> = listOf(repo1, repo2)
+
+        val repoItem1 = RepoItem(
+            id = 1,
+            name = "name 1",
+            description = "description 1",
+            owner = OwnerItem(
+                id = 1,
+                login = "login 1",
+                avatarUrl = "avatarUrl1"
+            )
+        )
+        val repoItem2 = RepoItem(
+            id = 2,
+            name = "name 2",
+            description = "description 2",
+            owner = OwnerItem(
+                id = 2,
+                login = "login 2",
+                avatarUrl = "avatarUrl2"
+            )
+        )
+        val repoItemList: List<RepoItem> = listOf(repoItem1, repoItem2)
 
         coEvery {
             searchReposUseCase.execute(
-                params = SearchReposUseCase.Params(query.toLowerCase())
+                params = SearchReposUseCase.Params(query.lowercase())
             )
         } returns ResultWrapper.Success(repoList)
 

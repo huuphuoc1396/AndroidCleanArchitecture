@@ -19,5 +19,4 @@ dependencies {
     testImplementation(AndroidTestLibs.archTestCore)
     testImplementation(AndroidTestLibs.hamcrest)
     testImplementation(MockKLibs.mockK)
-    testImplementation(project(Modules.coreUnitTest))
 }

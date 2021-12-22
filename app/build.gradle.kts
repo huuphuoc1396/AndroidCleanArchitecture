@@ -136,7 +136,6 @@ dependencies {
     testImplementation(MockKLibs.androidMockK)
     testImplementation(AndroidTestLibs.robolectric)
     testImplementation(JunitDataProviderLibs.junitDataProvider)
-    testImplementation(project(Modules.coreUnitTest))
 
     androidTestImplementation(AndroidTestLibs.androidTestJunit)
     androidTestImplementation(AndroidTestLibs.espressoCore)

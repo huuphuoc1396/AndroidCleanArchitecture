@@ -93,7 +93,6 @@ dependencies {
     testImplementation(AndroidTestLibs.robolectric)
     testImplementation(RoomLibs.roomTesting)
     testImplementation(JunitDataProviderLibs.junitDataProvider)
-    testImplementation(project(Modules.coreUnitTest))
 
     androidTestImplementation(AndroidTestLibs.androidTestJunit)
 }

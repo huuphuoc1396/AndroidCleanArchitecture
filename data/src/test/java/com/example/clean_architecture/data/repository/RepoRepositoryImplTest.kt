@@ -1,20 +1,19 @@
 package com.example.clean_architecture.data.repository
 
-import com.example.clean_architecture.domain.core.error.ApiError
-import com.example.clean_architecture.domain.core.extension.nextString
-import com.example.clean_architecture.core_unit_test.assertError
-import com.example.clean_architecture.core_unit_test.assertSuccess
-import com.example.clean_architecture.core_unit_test.makeRandomInstance
-import com.example.clean_architecture.core_unit_test.makeRandomListInstance
-import com.example.clean_architecture.data.remote.retrofit.api.RepoApi
 import com.example.clean_architecture.data.remote.error.RemoteCoroutineErrorHandler
 import com.example.clean_architecture.data.remote.mapper.RepoMapper
+import com.example.clean_architecture.data.remote.response.ItemResponse
 import com.example.clean_architecture.data.remote.response.RepoListResponse
+import com.example.clean_architecture.data.remote.retrofit.api.RepoApi
+import com.example.clean_architecture.domain.core.error.ApiError
+import com.example.clean_architecture.domain.core.extension.nextString
+import com.example.clean_architecture.domain.core.result.ResultWrapper
 import com.example.clean_architecture.domain.model.Repo
 import io.mockk.coEvery
 import io.mockk.every
 import io.mockk.mockk
 import kotlinx.coroutines.runBlocking
+import org.junit.Assert
 import org.junit.Test
 import kotlin.random.Random
 
@@ -33,20 +32,26 @@ class RepoRepositoryImplTest {
     @Test
     fun `searchRepos is Success`() = runBlocking {
         val query = Random.nextString()
-        val repoListResponse: RepoListResponse = makeRandomInstance()
-        val repoList: List<Repo> = makeRandomListInstance(0, 100)
+        val repoItemListResponse: List<ItemResponse> = mockk()
+        val repoListResponse = RepoListResponse(
+            totalCount = Random.nextInt(),
+            incompleteResults = false,
+            items = repoItemListResponse
+        )
+        val repoList: List<Repo> = mockk()
 
         coEvery {
             repoApi.searchRepos(query)
         } returns repoListResponse
 
         every {
-            repoMapper.mapList(repoListResponse.items)
+            repoMapper.mapList(repoItemListResponse)
         } returns repoList
 
-        val resultWrapper = repoRepositoryImpl.searchRepos(query)
+        val actual = repoRepositoryImpl.searchRepos(query)
+        val expected = ResultWrapper.Success(repoList)
 
-        resultWrapper.assertSuccess(repoList)
+        Assert.assertEquals(expected, actual)
     }
 
     @Test
@@ -63,8 +68,8 @@ class RepoRepositoryImplTest {
             remoteCoroutineErrorHandler.handleException(exception)
         } returns error
 
-        val resultWrapper = repoRepositoryImpl.searchRepos(query)
-
-        resultWrapper.assertError(error)
+        val actual = repoRepositoryImpl.searchRepos(query)
+        val expected = ResultWrapper.Error(error)
+        Assert.assertEquals(expected, actual)
     }
 }

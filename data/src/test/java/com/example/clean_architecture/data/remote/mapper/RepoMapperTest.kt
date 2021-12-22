@@ -1,6 +1,5 @@
 package com.example.clean_architecture.data.remote.mapper
 
-import com.example.clean_architecture.core_unit_test.makeRandomInstance
 import com.example.clean_architecture.data.remote.response.ItemResponse
 import com.example.clean_architecture.data.remote.response.OwnerResponse
 import com.example.clean_architecture.domain.model.Owner
@@ -34,8 +33,8 @@ class RepoMapperTest {
     }
 
     companion object {
-        private val ownerResponse: OwnerResponse = makeRandomInstance()
-        private val owner: Owner = makeRandomInstance()
+        private val ownerResponse: OwnerResponse = mockk()
+        private val owner: Owner = mockk()
 
         @JvmStatic
         @DataProvider
