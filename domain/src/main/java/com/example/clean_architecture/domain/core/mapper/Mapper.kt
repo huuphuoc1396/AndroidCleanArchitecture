@@ -1,6 +1,6 @@
-package com.example.clean_architecture.core_lib.mapper
+package com.example.clean_architecture.domain.core.mapper
 
-import com.example.clean_architecture.core_lib.extension.defaultEmpty
+import com.example.clean_architecture.domain.core.extension.defaultEmpty
 
 abstract class Mapper<Input, Output> {
     abstract fun map(input: Input): Output

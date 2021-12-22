@@ -6,7 +6,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import com.example.clean_architecture.R
-import com.example.clean_architecture.core_lib.extension.defaultEmpty
+import com.example.clean_architecture.domain.core.extension.defaultEmpty
 
 class NetworkErrorDialogFragment : DialogFragment() {
 

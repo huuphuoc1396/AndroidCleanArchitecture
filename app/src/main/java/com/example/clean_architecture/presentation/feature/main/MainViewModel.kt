@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.viewModelScope
 import com.example.clean_architecture.core.base.BaseViewModel
-import com.example.clean_architecture.core_lib.extension.defaultEmpty
+import com.example.clean_architecture.domain.core.extension.defaultEmpty
 import com.example.clean_architecture.domain.usecase.SearchReposUseCase
 import com.example.clean_architecture.presentation.feature.main.mapper.RepoItemMapper
 import com.example.clean_architecture.presentation.feature.main.model.RepoItem

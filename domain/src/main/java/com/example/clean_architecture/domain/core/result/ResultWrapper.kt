@@ -1,8 +1,8 @@
-package com.example.clean_architecture.core_lib.result
+package com.example.clean_architecture.domain.core.result
 
-import com.example.clean_architecture.core_lib.error.CoroutineError
-import com.example.clean_architecture.core_lib.error.CoroutineErrorHandler
-import com.example.clean_architecture.core_lib.error.DefaultCoroutineError
+import com.example.clean_architecture.domain.core.error.CoroutineError
+import com.example.clean_architecture.domain.core.error.CoroutineErrorHandler
+import com.example.clean_architecture.domain.core.error.DefaultCoroutineError
 
 sealed class ResultWrapper<out R> {
     data class Success<out T>(val data: T) : ResultWrapper<T>()

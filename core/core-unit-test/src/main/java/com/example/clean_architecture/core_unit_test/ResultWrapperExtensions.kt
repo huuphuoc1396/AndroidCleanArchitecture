@@ -1,8 +1,7 @@
 package com.example.clean_architecture.core_unit_test
 
-import com.example.clean_architecture.core_lib.error.CoroutineError
-import com.example.clean_architecture.core_lib.result.ResultWrapper
-import org.junit.Assert
+import com.example.clean_architecture.domain.core.error.CoroutineError
+import com.example.clean_architecture.domain.core.result.ResultWrapper
 
 fun <R> ResultWrapper<R>.assertSuccess(expected: R) {
     subscribe(

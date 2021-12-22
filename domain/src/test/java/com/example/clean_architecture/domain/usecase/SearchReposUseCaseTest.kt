@@ -1,8 +1,8 @@
 package com.example.clean_architecture.domain.usecase
 
-import com.example.clean_architecture.core_lib.error.ApiError
-import com.example.clean_architecture.core_lib.extension.nextString
-import com.example.clean_architecture.core_lib.result.ResultWrapper
+import com.example.clean_architecture.domain.core.error.ApiError
+import com.example.clean_architecture.domain.core.extension.nextString
+import com.example.clean_architecture.domain.core.result.ResultWrapper
 import com.example.clean_architecture.core_unit_test.assertError
 import com.example.clean_architecture.core_unit_test.assertSuccess
 import com.example.clean_architecture.core_unit_test.makeRandomListInstance

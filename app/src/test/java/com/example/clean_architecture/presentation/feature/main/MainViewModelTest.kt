@@ -2,10 +2,10 @@ package com.example.clean_architecture.presentation.feature.main
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
-import com.example.clean_architecture.core_lib.error.ApiError
-import com.example.clean_architecture.core_lib.error.CoroutineError
-import com.example.clean_architecture.core_lib.extension.nextString
-import com.example.clean_architecture.core_lib.result.ResultWrapper
+import com.example.clean_architecture.domain.core.error.ApiError
+import com.example.clean_architecture.domain.core.error.CoroutineError
+import com.example.clean_architecture.domain.core.extension.nextString
+import com.example.clean_architecture.domain.core.result.ResultWrapper
 import com.example.clean_architecture.core_unit_test.makeRandomListInstance
 import com.example.clean_architecture.domain.model.Repo
 import com.example.clean_architecture.domain.usecase.SearchReposUseCase

@@ -2,8 +2,8 @@
 
 package com.example.clean_architecture.core_unit_test
 
-import com.example.clean_architecture.core_lib.extension.nextChar
-import com.example.clean_architecture.core_lib.extension.nextString
+import com.example.clean_architecture.domain.core.extension.nextChar
+import com.example.clean_architecture.domain.core.extension.nextString
 import kotlin.random.Random
 import kotlin.reflect.KClass
 import kotlin.reflect.KType

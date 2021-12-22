@@ -1,6 +1,6 @@
 package com.example.clean_architecture.data.remote.api
 
-import com.example.clean_architecture.core_lib.extension.nextString
+import com.example.clean_architecture.domain.core.extension.nextString
 import com.example.clean_architecture.data.remote.api.common.BaseApiTest
 import com.example.clean_architecture.data.remote.api.common.HttpMethod
 import com.example.clean_architecture.data.remote.response.ItemResponse

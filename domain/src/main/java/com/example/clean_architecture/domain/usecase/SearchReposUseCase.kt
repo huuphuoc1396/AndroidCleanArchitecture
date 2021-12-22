@@ -1,7 +1,7 @@
 package com.example.clean_architecture.domain.usecase
 
-import com.example.clean_architecture.core_lib.result.ResultWrapper
-import com.example.clean_architecture.core_lib.usecase.UseCase
+import com.example.clean_architecture.domain.core.result.ResultWrapper
+import com.example.clean_architecture.domain.core.usecase.UseCase
 import com.example.clean_architecture.domain.model.Repo
 import com.example.clean_architecture.domain.repository.RepoRepository
 import javax.inject.Inject

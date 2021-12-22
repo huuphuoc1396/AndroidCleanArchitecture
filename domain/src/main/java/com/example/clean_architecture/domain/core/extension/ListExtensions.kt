@@ -1,4 +1,4 @@
-package com.example.clean_architecture.core_lib.extension
+package com.example.clean_architecture.domain.core.extension
 
 /**
  * Returns second element.

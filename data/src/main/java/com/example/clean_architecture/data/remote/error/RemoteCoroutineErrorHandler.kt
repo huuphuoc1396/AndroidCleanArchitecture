@@ -1,10 +1,10 @@
 package com.example.clean_architecture.data.remote.error
 
-import com.example.clean_architecture.core_lib.error.ApiError
-import com.example.clean_architecture.core_lib.error.CoroutineError
-import com.example.clean_architecture.core_lib.error.CoroutineErrorHandler
-import com.example.clean_architecture.core_lib.extension.default
-import com.example.clean_architecture.core_lib.extension.defaultEmpty
+import com.example.clean_architecture.domain.core.error.ApiError
+import com.example.clean_architecture.domain.core.error.CoroutineError
+import com.example.clean_architecture.domain.core.error.CoroutineErrorHandler
+import com.example.clean_architecture.domain.core.extension.default
+import com.example.clean_architecture.domain.core.extension.defaultEmpty
 import com.example.clean_architecture.data.remote.response.ServerErrorResponse
 import com.google.gson.Gson
 import retrofit2.HttpException

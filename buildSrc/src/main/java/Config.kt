@@ -13,8 +13,6 @@ object Android {
 object Modules {
     const val data = ":data"
     const val domain = ":domain"
-    const val coreLib = ":core:core-lib"
-    const val coreAndroid = ":core:core-android"
     const val coreUnitTest = ":core:core-unit-test"
 }
 

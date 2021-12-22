@@ -3,8 +3,8 @@ package com.example.clean_architecture.core.extension
 import androidx.fragment.app.Fragment
 import com.example.clean_architecture.R
 import com.example.clean_architecture.core.dialog.NetworkErrorDialogFragment
-import com.example.clean_architecture.core_lib.error.ApiError
-import com.example.clean_architecture.core_lib.error.CoroutineError
+import com.example.clean_architecture.domain.core.error.ApiError
+import com.example.clean_architecture.domain.core.error.CoroutineError
 
 fun Fragment.handleNetworkError(coroutineError: CoroutineError) {
     val currentActivity = activity

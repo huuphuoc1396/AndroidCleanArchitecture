@@ -1,4 +1,4 @@
-package com.example.clean_architecture.core_lib.error
+package com.example.clean_architecture.domain.core.error
 
 data class DefaultCoroutineError(
     val exception: Exception,

@@ -2,7 +2,7 @@ package com.example.clean_architecture.core.base
 
 import androidx.lifecycle.ViewModel
 import com.example.clean_architecture.core.livedata.SingleLiveData
-import com.example.clean_architecture.core_lib.error.CoroutineError
+import com.example.clean_architecture.domain.core.error.CoroutineError
 
 abstract class BaseViewModel : ViewModel() {
 

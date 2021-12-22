@@ -1,4 +1,4 @@
-package com.example.clean_architecture.core_lib.usecase
+package com.example.clean_architecture.domain.core.usecase
 
 abstract class UseCase<Params : UseCase.Params, Result> {
 
