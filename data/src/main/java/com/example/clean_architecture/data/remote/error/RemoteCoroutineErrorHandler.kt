@@ -19,28 +19,27 @@ class RemoteCoroutineErrorHandler @Inject constructor() : CoroutineErrorHandler 
                 ApiError.ConnectionError
             }
             is HttpException -> {
-                val code = exception.code().default(-1)
-                val errorMessage = exception.response()
-                    ?.errorBody()
-                    ?.string()
-                    ?.let { errorBody ->
-                        try {
-                            val serverErrorResponse =
-                                Gson().fromJson(errorBody, ServerErrorResponse::class.java)
-                            return@let serverErrorResponse.message
-                        } catch (parseException: Exception) {
-                            Timber.e(parseException)
-                            return@let null
-                        }
-                    }
-                return ApiError.ServerError(
-                    code = code,
-                    errorMessage = errorMessage.defaultEmpty()
-                )
+                handleHttpException(exception)
             }
             else -> {
                 ApiError.UnknownError(exception)
             }
         }
+    }
+
+    private fun handleHttpException(httpException: HttpException): ApiError.ServerError {
+        val code = httpException.code().default(-1)
+        val errorBody = httpException.response()?.errorBody()?.string()
+        val errorMessage = try {
+            val serverErrorResponse = Gson().fromJson(errorBody, ServerErrorResponse::class.java)
+            serverErrorResponse.message.defaultEmpty()
+        } catch (parseException: Exception) {
+            Timber.e(parseException)
+            ""
+        }
+        return ApiError.ServerError(
+            code = code,
+            errorMessage = errorMessage
+        )
     }
 }
