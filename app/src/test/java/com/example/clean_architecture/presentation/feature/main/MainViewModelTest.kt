@@ -8,7 +8,7 @@ import com.example.clean_architecture.domain.core.extension.nextString
 import com.example.clean_architecture.domain.core.result.ResultWrapper
 import com.example.clean_architecture.domain.model.Owner
 import com.example.clean_architecture.domain.model.Repo
-import com.example.clean_architecture.domain.usecase.SearchReposUseCase
+import com.example.clean_architecture.domain.usecase.SearchRepos
 import com.example.clean_architecture.presentation.feature.main.mapper.RepoItemMapper
 import com.example.clean_architecture.presentation.feature.main.model.OwnerItem
 import com.example.clean_architecture.presentation.feature.main.model.RepoItem
@@ -24,7 +24,7 @@ class MainViewModelTest {
     @JvmField
     val instantExecutorRule = InstantTaskExecutorRule()
 
-    private val searchReposUseCase: SearchReposUseCase = mockk()
+    private val searchRepos: SearchRepos = mockk()
     private val repoItemMapper: RepoItemMapper = mockk()
 
     private val repoItemObserver: Observer<List<RepoItem>> = mockk(relaxed = true)
@@ -35,7 +35,7 @@ class MainViewModelTest {
     @Test
     fun `searchRepos query isn't empty and repoList isn't empty`() {
         val mainViewModel = MainViewModel(
-            searchReposUseCase = searchReposUseCase,
+            searchReposUseCase = searchRepos,
             repoItemMapper = repoItemMapper
         )
         val query = Random.nextString()
@@ -84,8 +84,8 @@ class MainViewModelTest {
         val repoItemList: List<RepoItem> = listOf(repoItem1, repoItem2)
 
         coEvery {
-            searchReposUseCase.execute(
-                params = SearchReposUseCase.Params(query.lowercase())
+            searchRepos.execute(
+                params = SearchRepos.Params(query.lowercase())
             )
         } returns ResultWrapper.Success(repoList)
 
@@ -119,7 +119,7 @@ class MainViewModelTest {
     @Test
     fun `searchRepos query isn't empty and repoList is empty`() {
         val mainViewModel = MainViewModel(
-            searchReposUseCase = searchReposUseCase,
+            searchReposUseCase = searchRepos,
             repoItemMapper = repoItemMapper
         )
         val query = Random.nextString()
@@ -127,8 +127,8 @@ class MainViewModelTest {
         val repoItemList: List<RepoItem> = listOf()
 
         coEvery {
-            searchReposUseCase.execute(
-                params = SearchReposUseCase.Params(query.toLowerCase())
+            searchRepos.execute(
+                params = SearchRepos.Params(query.toLowerCase())
             )
         } returns ResultWrapper.Success(repoList)
 
@@ -162,7 +162,7 @@ class MainViewModelTest {
     @Test
     fun `searchRepos query is empty`() {
         val mainViewModel = MainViewModel(
-            searchReposUseCase = searchReposUseCase,
+            searchReposUseCase = searchRepos,
             repoItemMapper = repoItemMapper
         )
         val query = ""
@@ -186,15 +186,15 @@ class MainViewModelTest {
     @Test
     fun `searchRepos is error`() {
         val mainViewModel = MainViewModel(
-            searchReposUseCase = searchReposUseCase,
+            searchReposUseCase = searchRepos,
             repoItemMapper = repoItemMapper
         )
         val query = Random.nextString()
         val error = ApiError.ConnectionError
 
         coEvery {
-            searchReposUseCase.execute(
-                params = SearchReposUseCase.Params(query.toLowerCase())
+            searchRepos.execute(
+                params = SearchRepos.Params(query.toLowerCase())
             )
         } returns ResultWrapper.Error(error)
 

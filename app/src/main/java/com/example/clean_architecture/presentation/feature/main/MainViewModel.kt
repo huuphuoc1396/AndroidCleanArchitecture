@@ -6,20 +6,18 @@ import androidx.lifecycle.Transformations
 import androidx.lifecycle.viewModelScope
 import com.example.clean_architecture.core.base.BaseViewModel
 import com.example.clean_architecture.domain.core.extension.defaultEmpty
-import com.example.clean_architecture.domain.usecase.SearchReposUseCase
+import com.example.clean_architecture.domain.core.functional.map
+import com.example.clean_architecture.domain.usecase.SearchRepos
 import com.example.clean_architecture.presentation.feature.main.mapper.RepoItemMapper
 import com.example.clean_architecture.presentation.feature.main.model.RepoItem
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val searchReposUseCase: SearchReposUseCase,
+    private val searchRepos: SearchRepos,
     private val repoItemMapper: RepoItemMapper,
 ) : BaseViewModel() {
 
@@ -34,24 +32,17 @@ class MainViewModel @Inject constructor(
     }
 
     fun searchRepos() {
-        val query = query.value.defaultEmpty().toLowerCase(Locale.getDefault()).trim()
+        val query = query.value.defaultEmpty().lowercase().trim()
         if (query.isNotEmpty()) {
             searchJob?.cancel()
             searchJob = viewModelScope.launch {
                 isLoading.value = true
-                val resultWrapper = withContext(Dispatchers.IO) {
-                    searchReposUseCase.execute(SearchReposUseCase.Params(query))
-                }
-                resultWrapper.subscribe(
-                    success = { repos ->
-                        repoItems.value = repoItemMapper.mapList(repos)
-                        isLoading.value = false
-                    },
-                    error = { exception ->
-                        handleNetworkError(exception)
-                        isLoading.value = false
+                searchRepos(SearchRepos.Params(query))
+                    .map { repoItemMapper.mapList(it) }
+                    .fold(::handleNetworkError) {
+                        repoItems.value = it
                     }
-                )
+                isLoading.value = false
             }
         }
     }
