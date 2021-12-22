@@ -40,7 +40,7 @@ object ProductFlavors {
 }
 
 object BuildPlugins {
-    private const val androidPluginVersion = "4.2.2"
+    private const val androidPluginVersion = "7.0.3"
     private const val googleServicesVersion = "4.3.10"
     private const val firebaseCrashlyticsVersion = "2.8.0"
 
@@ -123,10 +123,10 @@ object LifecycleLibs {
 object AndroidSupportLibs {
     private const val androidxCoreVersion = "1.7.0"
     private const val annotationsVersion = "1.3.0"
-    private const val appCompatVersion = "1.3.1"
+    private const val appCompatVersion = "1.4.0"
     private const val cardViewVersion = "1.0.0"
     private const val materialVersion = "1.4.0"
-    private const val constraintVersion = "2.1.0"
+    private const val constraintVersion = "2.1.2"
     private const val recyclerViewVersion = "1.2.1"
     private const val swipeRefreshLayoutVersion = "1.1.0"
 

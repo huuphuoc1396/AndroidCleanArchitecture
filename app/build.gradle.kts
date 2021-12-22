@@ -14,12 +14,12 @@ plugins {
 }
 
 android {
-    compileSdkVersion(Android.targetSdk)
+    compileSdk = Android.targetSdk
 
     defaultConfig {
         applicationId = Android.applicationId
-        minSdkVersion(Android.minSdk)
-        targetSdkVersion(Android.targetSdk)
+        minSdk = Android.minSdk
+        targetSdk = Android.targetSdk
         versionCode = Android.versionCode
         versionName = Android.versionName
 
@@ -40,20 +40,20 @@ android {
         }
     }
 
-    flavorDimensions(ProductFlavors.dimensions)
+    flavorDimensions += ProductFlavors.dimensions
 
     productFlavors {
         val applicationName = "applicationName"
 
         create(ProductFlavors.develop) {
-            setMatchingFallbacks(listOf(BuildTypes.debug, BuildTypes.release))
             applicationIdSuffix = ".dev"
-            setManifestPlaceholders(mapOf(applicationName to "[DEV] Clean Architecture"))
+            manifestPlaceholders[applicationName] = "[DEV] Clean Architecture"
+            matchingFallbacks += listOf(BuildTypes.debug, BuildTypes.release)
         }
 
         create(ProductFlavors.product) {
-            setMatchingFallbacks(listOf(BuildTypes.release))
-            setManifestPlaceholders(mapOf(applicationName to "@string/app_name"))
+            manifestPlaceholders[applicationName] = "@string/app_name"
+            matchingFallbacks += listOf(BuildTypes.release)
         }
     }
 
