@@ -1,4 +1,4 @@
-package com.example.clean_architecture.core.base
+package com.example.clean_architecture.core.platform
 
 import android.app.Activity
 import android.content.Context

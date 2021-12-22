@@ -1,7 +1,7 @@
 package com.example.clean_architecture.presentation.feature.detail
 
 import androidx.lifecycle.MutableLiveData
-import com.example.clean_architecture.core.base.BaseViewModel
+import com.example.clean_architecture.core.platform.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

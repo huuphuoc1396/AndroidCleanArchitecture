@@ -10,8 +10,8 @@ import androidx.databinding.BindingAdapter
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.example.clean_architecture.core.base.BaseFragment
-import com.example.clean_architecture.core.base.BaseViewModel
+import com.example.clean_architecture.core.platform.BaseFragment
+import com.example.clean_architecture.core.platform.BaseViewModel
 import com.example.clean_architecture.core.extension.dismissKeyboard
 import com.example.clean_architecture.databinding.FragmentMainBinding
 import com.example.clean_architecture.presentation.feature.main.model.RepoItem

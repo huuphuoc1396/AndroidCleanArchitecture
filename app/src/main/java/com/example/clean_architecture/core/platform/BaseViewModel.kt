@@ -1,4 +1,4 @@
-package com.example.clean_architecture.core.base
+package com.example.clean_architecture.core.platform
 
 import androidx.lifecycle.ViewModel
 import com.example.clean_architecture.core.livedata.SingleLiveData
