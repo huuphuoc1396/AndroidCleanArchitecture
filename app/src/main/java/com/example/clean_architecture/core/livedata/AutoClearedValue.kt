@@ -1,9 +1,7 @@
 package com.example.clean_architecture.core.livedata
 
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleObserver
-import androidx.lifecycle.OnLifecycleEvent
+import androidx.lifecycle.*
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
 
@@ -11,10 +9,11 @@ class AutoClearedValue<T : Any>(fragment: Fragment) : ReadWriteProperty<Fragment
     private var _value: T? = null
 
     init {
-        fragment.lifecycle.addObserver(object : LifecycleObserver {
-            @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
-            fun onDestroy() {
-                _value = null
+        fragment.lifecycle.addObserver(object : LifecycleEventObserver {
+            override fun onStateChanged(source: LifecycleOwner, event: Lifecycle.Event) {
+                if (event == Lifecycle.Event.ON_DESTROY) {
+                    _value = null
+                }
             }
         })
     }

@@ -1,6 +1,5 @@
 package com.example.clean_architecture.core.platform
 
-import android.app.Activity
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,8 +8,12 @@ import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
-import com.example.clean_architecture.core.extension.handleNetworkError
+import com.example.clean_architecture.R
+import com.example.clean_architecture.core.extension.isAvailable
 import com.example.clean_architecture.core.livedata.autoCleared
+import com.example.clean_architecture.domain.core.error.ApiError
+import com.example.clean_architecture.domain.core.error.CoroutineError
+import com.example.clean_architecture.presentation.dialog.NetworkErrorDialogFragment
 import timber.log.Timber
 
 abstract class BaseFragment<V : ViewDataBinding> : Fragment() {
@@ -19,17 +22,11 @@ abstract class BaseFragment<V : ViewDataBinding> : Fragment() {
 
     var viewDataBinding: V by autoCleared()
 
-    open fun getViewModel(): BaseViewModel? {
-        return null
-    }
+    open fun getViewModel(): BaseViewModel? = null
 
-    open fun setBindingVariable() {}
+    open fun setBindingVariable() = Unit
 
-    open fun onBackPressed(): Boolean {
-        return true
-    }
-
-    open fun onReturnedFromAppSettings() {}
+    open fun onBackPressed(): Boolean = true
 
     override fun onAttach(context: Context) {
         Timber.tag(LIFECYCLE_TAG).i("${this::class.simpleName} onAttach")
@@ -46,6 +43,9 @@ abstract class BaseFragment<V : ViewDataBinding> : Fragment() {
                     activity?.onBackPressed()
                 }
             }
+        })
+        getViewModel()?.networkError?.observe(this, { coroutineError ->
+            handleNetworkError(coroutineError)
         })
     }
 
@@ -65,10 +65,6 @@ abstract class BaseFragment<V : ViewDataBinding> : Fragment() {
         setBindingVariable()
         viewDataBinding.lifecycleOwner = viewLifecycleOwner
         viewDataBinding.executePendingBindings()
-
-        getViewModel()?.networkError?.observe(viewLifecycleOwner, { coroutineError ->
-            handleNetworkError(coroutineError)
-        })
     }
 
     override fun onStart() {
@@ -106,8 +102,31 @@ abstract class BaseFragment<V : ViewDataBinding> : Fragment() {
         super.onDetach()
     }
 
+    open fun handleNetworkError(coroutineError: CoroutineError) {
+        val message = when (coroutineError) {
+            is ApiError.ConnectionError -> {
+                getString(R.string.no_internet_error)
+            }
+            is ApiError.ServerError -> {
+                val errorMessage = coroutineError.errorMessage
+                if (errorMessage.isNotEmpty()) {
+                    errorMessage
+                } else {
+                    getString(R.string.unexpected_error)
+                }
+            }
+            is ApiError.UnknownError -> {
+                getString(R.string.unexpected_error)
+            }
+            else -> ""
+        }
+        if (activity.isAvailable()) {
+            val dialogFragment = NetworkErrorDialogFragment.newInstance(message)
+            dialogFragment.show(childFragmentManager, NetworkErrorDialogFragment::class.simpleName)
+        }
+    }
+
     companion object {
         private const val LIFECYCLE_TAG = "FragmentLifecycle"
-        private const val PERMISSION_REQUEST_CODE: Int = Activity.RESULT_FIRST_USER + 1
     }
 }

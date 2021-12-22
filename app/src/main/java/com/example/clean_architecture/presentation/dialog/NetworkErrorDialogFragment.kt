@@ -1,4 +1,4 @@
-package com.example.clean_architecture.core.dialog
+package com.example.clean_architecture.presentation.dialog
 
 import android.app.Dialog
 import android.os.Bundle

@@ -50,4 +50,5 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>() {
             findNavController().navigateUp()
         }
     }
+
 }
