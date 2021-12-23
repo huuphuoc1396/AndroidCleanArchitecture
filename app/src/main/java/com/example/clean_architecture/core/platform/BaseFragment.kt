@@ -5,7 +5,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
+import androidx.annotation.IdRes
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import com.example.clean_architecture.R
@@ -105,18 +107,18 @@ abstract class BaseFragment<V : ViewDataBinding> : Fragment() {
     open fun handleNetworkError(coroutineError: CoroutineError) {
         val message = when (coroutineError) {
             is ApiError.ConnectionError -> {
-                getString(R.string.no_internet_error)
+                getString(R.string.msg_no_internet_error)
             }
             is ApiError.ServerError -> {
                 val errorMessage = coroutineError.errorMessage
                 if (errorMessage.isNotEmpty()) {
                     errorMessage
                 } else {
-                    getString(R.string.unexpected_error)
+                    getString(R.string.msg_unexpected_error)
                 }
             }
             is ApiError.UnknownError -> {
-                getString(R.string.unexpected_error)
+                getString(R.string.msg_unexpected_error)
             }
             else -> ""
         }
@@ -124,6 +126,14 @@ abstract class BaseFragment<V : ViewDataBinding> : Fragment() {
             val dialogFragment = NetworkErrorDialogFragment.newInstance(message)
             dialogFragment.show(childFragmentManager, NetworkErrorDialogFragment::class.simpleName)
         }
+    }
+
+    fun toast(message: String, length: Int = Toast.LENGTH_SHORT) {
+        Toast.makeText(context, message, length).show()
+    }
+
+    fun toast(resId: Int, length: Int = Toast.LENGTH_SHORT) {
+        toast(getString(resId), length)
     }
 
     companion object {

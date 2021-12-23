@@ -17,7 +17,7 @@ class NetworkErrorDialogFragment : DialogFragment() {
     private fun createNetworkErrorDialog(): AlertDialog {
         val message: String = getErrorMessage()
         return AlertDialog.Builder(requireContext())
-            .setTitle(R.string.network_error)
+            .setTitle(R.string.msg_network_error)
             .setMessage(message)
             .setCancelable(false)
             .setPositiveButton(R.string.ok) { dialogInterface, _ ->

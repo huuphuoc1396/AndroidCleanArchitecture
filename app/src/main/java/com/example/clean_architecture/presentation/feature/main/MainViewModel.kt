@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.viewModelScope
 import com.example.clean_architecture.core.platform.BaseViewModel
-import com.example.clean_architecture.domain.core.extension.defaultEmpty
 import com.example.clean_architecture.domain.core.functional.map
 import com.example.clean_architecture.domain.usecase.SearchRepos
 import com.example.clean_architecture.presentation.feature.main.mapper.RepoItemMapper
@@ -31,17 +30,16 @@ class MainViewModel @Inject constructor(
         repoItems.value.isNullOrEmpty() && !query.value.isNullOrEmpty() && !isLoading
     }
 
-    fun searchRepos() {
-        val query = query.value.defaultEmpty().lowercase().trim()
+    fun searchRepos(text: String) {
+        val query = text.trim().lowercase()
+        this.query.value = query
         if (query.isNotEmpty()) {
             searchJob?.cancel()
             searchJob = viewModelScope.launch {
                 isLoading.value = true
-                searchRepos(SearchRepos.Params(query))
+                searchRepos(SearchRepos.Params(text))
                     .map { repoItemMapper.mapList(it) }
-                    .fold(::handleNetworkError) {
-                        repoItems.value = it
-                    }
+                    .fold(::handleNetworkError) { repoItems.value = it }
                 isLoading.value = false
             }
         }
