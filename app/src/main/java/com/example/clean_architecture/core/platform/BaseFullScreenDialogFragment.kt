@@ -20,7 +20,7 @@ abstract class BaseFullScreenDialogFragment<V : ViewDataBinding> : DialogFragmen
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setStyle(STYLE_NO_TITLE, R.style.AppTheme_FullScreenDialog)
+        setStyle(STYLE_NO_TITLE, R.style.AppTheme_Dialog_FullScreen)
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
