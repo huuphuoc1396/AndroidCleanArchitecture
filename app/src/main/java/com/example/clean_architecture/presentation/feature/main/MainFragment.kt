@@ -13,6 +13,7 @@ import com.example.clean_architecture.core.platform.BaseFragment
 import com.example.clean_architecture.core.platform.BaseViewModel
 import com.example.clean_architecture.databinding.FragmentMainBinding
 import com.example.clean_architecture.presentation.feature.main.extension.setOnSearchAction
+import com.example.clean_architecture.presentation.feature.main.list.MainListAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
