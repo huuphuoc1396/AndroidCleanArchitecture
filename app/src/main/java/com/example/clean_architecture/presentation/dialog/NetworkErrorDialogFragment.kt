@@ -7,6 +7,7 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import com.example.clean_architecture.R
 import com.example.clean_architecture.domain.core.extension.defaultEmpty
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class NetworkErrorDialogFragment : DialogFragment() {
 
@@ -14,12 +15,16 @@ class NetworkErrorDialogFragment : DialogFragment() {
         return createNetworkErrorDialog()
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        isCancelable = false
+    }
+
     private fun createNetworkErrorDialog(): AlertDialog {
         val message: String = getErrorMessage()
-        return AlertDialog.Builder(requireContext())
+        return MaterialAlertDialogBuilder(requireContext())
             .setTitle(R.string.msg_network_error)
             .setMessage(message)
-            .setCancelable(false)
             .setPositiveButton(R.string.ok) { dialogInterface, _ ->
                 dialogInterface.dismiss()
             }.create()
@@ -30,6 +35,8 @@ class NetworkErrorDialogFragment : DialogFragment() {
     }
 
     companion object {
+
+        const val TAG = "NetworkErrorDialogFragment"
 
         private const val KEY_ERROR_MESSAGE = "KEY_ERROR_MESSAGE"
 

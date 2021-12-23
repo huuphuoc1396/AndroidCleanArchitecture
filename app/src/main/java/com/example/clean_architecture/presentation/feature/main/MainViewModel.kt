@@ -22,25 +22,23 @@ class MainViewModel @Inject constructor(
 
     private var searchJob: Job? = null
 
-    val repoItems = MutableLiveData<List<RepoItem>>(listOf())
-    val isLoading = MutableLiveData(false)
-    val query = MutableLiveData("")
+    private val _repoItems = MutableLiveData<List<RepoItem>>(listOf())
+    val repoItems: LiveData<List<RepoItem>> = _repoItems
 
-    val isNoResults: LiveData<Boolean> = Transformations.map(isLoading) { isLoading ->
-        repoItems.value.isNullOrEmpty() && !query.value.isNullOrEmpty() && !isLoading
+    val isNoResults: LiveData<Boolean> = Transformations.map(repoItems) {
+        it.isNullOrEmpty()
     }
 
     fun searchRepos(text: String) {
         val query = text.trim().lowercase()
-        this.query.value = query
         if (query.isNotEmpty()) {
             searchJob?.cancel()
             searchJob = viewModelScope.launch {
-                isLoading.value = true
+                setLoading(true)
                 searchRepos(SearchRepos.Params(text))
                     .map { repoItemMapper.mapList(it) }
-                    .fold(::handleNetworkError) { repoItems.value = it }
-                isLoading.value = false
+                    .fold(::handleNetworkError) { _repoItems.value = it }
+                setLoading(false)
             }
         }
     }

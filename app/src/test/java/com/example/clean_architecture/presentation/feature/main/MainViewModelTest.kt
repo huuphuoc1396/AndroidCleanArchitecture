@@ -93,9 +93,7 @@ class MainViewModelTest {
 
         registerObserver(mainViewModel)
 
-        mainViewModel.query.value = query
-
-        mainViewModel.searchRepos()
+        mainViewModel.searchRepos(query)
 
         verifyOrder {
             // Initializing
@@ -134,9 +132,7 @@ class MainViewModelTest {
 
         registerObserver(mainViewModel)
 
-        mainViewModel.query.value = query
-
-        mainViewModel.searchRepos()
+        mainViewModel.searchRepos(query)
 
         verifyOrder {
             // Initializing
@@ -165,9 +161,7 @@ class MainViewModelTest {
 
         registerObserver(mainViewModel)
 
-        mainViewModel.query.value = query
-
-        mainViewModel.searchRepos()
+        mainViewModel.searchRepos(query)
 
         verifyOrder {
             // Initializing
@@ -194,9 +188,7 @@ class MainViewModelTest {
 
         registerObserver(mainViewModel)
 
-        mainViewModel.query.value = query
-
-        mainViewModel.searchRepos()
+        mainViewModel.searchRepos(query)
 
         verifyOrder {
             // Initializing

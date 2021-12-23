@@ -7,22 +7,27 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
-import androidx.annotation.IdRes
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import com.example.clean_architecture.R
+import com.example.clean_architecture.core.extension.available
+import com.example.clean_architecture.core.extension.dismissIfAdded
 import com.example.clean_architecture.core.extension.isAvailable
+import com.example.clean_architecture.core.extension.showIfNotExist
 import com.example.clean_architecture.core.livedata.autoCleared
 import com.example.clean_architecture.domain.core.error.ApiError
 import com.example.clean_architecture.domain.core.error.CoroutineError
+import com.example.clean_architecture.presentation.dialog.LoadingDialogFragment
 import com.example.clean_architecture.presentation.dialog.NetworkErrorDialogFragment
 import timber.log.Timber
 
 abstract class BaseFragment<V : ViewDataBinding> : Fragment() {
 
-    abstract fun createViewDataBinding(inflater: LayoutInflater, container: ViewGroup?): V
+    private var loadingDialogFragment: LoadingDialogFragment? = null
 
     var viewDataBinding: V by autoCleared()
+
+    abstract fun createViewDataBinding(inflater: LayoutInflater, container: ViewGroup?): V
 
     open fun getViewModel(): BaseViewModel? = null
 
@@ -47,7 +52,11 @@ abstract class BaseFragment<V : ViewDataBinding> : Fragment() {
             }
         })
         getViewModel()?.networkError?.observe(this, { coroutineError ->
-            handleNetworkError(coroutineError)
+            showNetworkError(coroutineError)
+        })
+
+        getViewModel()?.isLoading?.observe(this, { isLoading ->
+            showLoading(isLoading)
         })
     }
 
@@ -104,7 +113,7 @@ abstract class BaseFragment<V : ViewDataBinding> : Fragment() {
         super.onDetach()
     }
 
-    open fun handleNetworkError(coroutineError: CoroutineError) {
+    open fun showNetworkError(coroutineError: CoroutineError) {
         val message = when (coroutineError) {
             is ApiError.ConnectionError -> {
                 getString(R.string.msg_no_internet_error)
@@ -122,17 +131,27 @@ abstract class BaseFragment<V : ViewDataBinding> : Fragment() {
             }
             else -> ""
         }
-        if (activity.isAvailable()) {
+        activity.available {
             val dialogFragment = NetworkErrorDialogFragment.newInstance(message)
-            dialogFragment.show(childFragmentManager, NetworkErrorDialogFragment::class.simpleName)
+            dialogFragment.showIfNotExist(childFragmentManager, NetworkErrorDialogFragment.TAG)
         }
     }
 
-    fun toast(message: String, length: Int = Toast.LENGTH_SHORT) {
+    open fun showLoading(isLoading: Boolean) {
+        if (isLoading && activity.isAvailable()) {
+            loadingDialogFragment = LoadingDialogFragment.newInstance()
+            loadingDialogFragment?.showIfNotExist(childFragmentManager, LoadingDialogFragment.TAG)
+        } else {
+            loadingDialogFragment?.dismissIfAdded()
+            loadingDialogFragment = null
+        }
+    }
+
+    open fun toast(message: String, length: Int = Toast.LENGTH_SHORT) {
         Toast.makeText(context, message, length).show()
     }
 
-    fun toast(resId: Int, length: Int = Toast.LENGTH_SHORT) {
+    open fun toast(resId: Int, length: Int = Toast.LENGTH_SHORT) {
         toast(getString(resId), length)
     }
 

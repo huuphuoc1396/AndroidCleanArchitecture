@@ -11,3 +11,9 @@ fun Activity.dismissKeyboard(windowToken: IBinder) {
 }
 
 fun Activity?.isAvailable() = this != null && !this.isFinishing
+
+fun Activity?.available(func: () -> Unit) {
+    if (isAvailable()) {
+        func()
+    }
+}
