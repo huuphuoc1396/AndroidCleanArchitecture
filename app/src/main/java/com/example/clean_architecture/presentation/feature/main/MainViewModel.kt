@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.viewModelScope
 import com.example.clean_architecture.core.platform.BaseViewModel
+import com.example.clean_architecture.domain.core.extension.defaultFalse
 import com.example.clean_architecture.domain.core.functional.map
 import com.example.clean_architecture.domain.usecase.SearchRepos
 import com.example.clean_architecture.presentation.feature.main.mapper.RepoItemMapper
@@ -22,11 +23,11 @@ class MainViewModel @Inject constructor(
 
     private var searchJob: Job? = null
 
-    private val _repoItems = MutableLiveData<List<RepoItem>>(listOf())
+    private val _repoItems = MutableLiveData<List<RepoItem>>()
     val repoItems: LiveData<List<RepoItem>> = _repoItems
 
-    val isNoResults: LiveData<Boolean> = Transformations.map(repoItems) {
-        it.isNullOrEmpty()
+    val isNoResults: LiveData<Boolean> = Transformations.map(isLoading) { isLoading ->
+        repoItems.value.isNullOrEmpty() && !isLoading
     }
 
     fun searchRepos(text: String) {

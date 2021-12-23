@@ -7,7 +7,7 @@ import com.example.clean_architecture.core.livedata.SingleLiveData
 import com.example.clean_architecture.domain.core.error.CoroutineError
 
 abstract class BaseViewModel : ViewModel() {
-    private val _isLoading = MutableLiveData(false)
+    private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
     val networkError = SingleLiveData<CoroutineError>()
