@@ -23,6 +23,15 @@ import timber.log.Timber
 
 abstract class BaseFragment<V : ViewDataBinding> : Fragment() {
 
+    private val onBackPressedCallback = object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            if (onBackPressed()) {
+                isEnabled = false
+                activity?.onBackPressed()
+            }
+        }
+    }
+
     private var loadingDialogFragment: LoadingDialogFragment? = null
 
     var viewDataBinding: V by autoCleared()
@@ -43,14 +52,9 @@ abstract class BaseFragment<V : ViewDataBinding> : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         Timber.tag(LIFECYCLE_TAG).i("${this::class.simpleName} onCreate")
         super.onCreate(savedInstanceState)
-        activity?.onBackPressedDispatcher?.addCallback(this, object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                isEnabled = !onBackPressed()
-                if (!isEnabled) {
-                    activity?.onBackPressed()
-                }
-            }
-        })
+
+        activity?.onBackPressedDispatcher?.addCallback(this, onBackPressedCallback)
+
         getViewModel()?.networkError?.observe(this, { coroutineError ->
             showNetworkError(coroutineError)
         })
@@ -81,6 +85,8 @@ abstract class BaseFragment<V : ViewDataBinding> : Fragment() {
     override fun onStart() {
         Timber.tag(LIFECYCLE_TAG).i("${this::class.simpleName} onStart")
         super.onStart()
+
+        onBackPressedCallback.isEnabled = true
     }
 
     override fun onResume() {

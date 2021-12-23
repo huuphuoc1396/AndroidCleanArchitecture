@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.clean_architecture.R
 import com.example.clean_architecture.core.extension.dismissKeyboard
@@ -15,6 +16,8 @@ import com.example.clean_architecture.databinding.FragmentMainBinding
 import com.example.clean_architecture.presentation.feature.main.extension.setOnSearchAction
 import com.example.clean_architecture.presentation.feature.main.list.MainListAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainFragment : BaseFragment<FragmentMainBinding>() {
@@ -23,7 +26,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
 
     private var mainListAdapter by autoCleared<MainListAdapter>()
 
-    private var doubleBackToExit = false
+    private var isDoubleBackToExit = false
 
     override fun createViewDataBinding(
         inflater: LayoutInflater,
@@ -77,11 +80,21 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
     }
 
     override fun onBackPressed(): Boolean {
-        if (!doubleBackToExit) {
-            doubleBackToExit = true
+        if (!isDoubleBackToExit) {
             toast(R.string.msg_double_back_to_exit)
+            isDoubleBackToExit = true
+            lifecycleScope.launch {
+                delay(DELAY_TO_RESET_DOUBLE_BACK)
+                isDoubleBackToExit = false
+            }
             return false
         }
+        isDoubleBackToExit = false
         return true
+    }
+
+    companion object {
+
+        private const val DELAY_TO_RESET_DOUBLE_BACK = 1500L
     }
 }
