@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.viewModelScope
 import com.example.clean_architecture.core.platform.BaseViewModel
-import com.example.clean_architecture.domain.core.extension.defaultFalse
 import com.example.clean_architecture.domain.core.functional.map
 import com.example.clean_architecture.domain.usecase.SearchRepos
 import com.example.clean_architecture.presentation.feature.main.mapper.RepoItemMapper
@@ -38,7 +37,7 @@ class MainViewModel @Inject constructor(
                 setLoading(true)
                 searchRepos(SearchRepos.Params(text))
                     .map { repoItemMapper.mapList(it) }
-                    .fold(::handleNetworkError) { _repoItems.value = it }
+                    .fold(::handleFailure) { _repoItems.value = it }
                 setLoading(false)
             }
         }

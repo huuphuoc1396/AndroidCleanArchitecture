@@ -1,11 +1,11 @@
 package com.example.clean_architecture.data.repository
 
-import com.example.clean_architecture.data.remote.error.RemoteCoroutineErrorHandler
+import com.example.clean_architecture.data.remote.error.RemoteFailureHandler
 import com.example.clean_architecture.data.remote.mapper.RepoMapper
 import com.example.clean_architecture.data.remote.response.ItemResponse
 import com.example.clean_architecture.data.remote.response.RepoListResponse
 import com.example.clean_architecture.data.remote.retrofit.api.RepoApi
-import com.example.clean_architecture.domain.core.error.ApiError
+import com.example.clean_architecture.domain.core.error.ApiFailure
 import com.example.clean_architecture.domain.core.extension.nextString
 import com.example.clean_architecture.domain.core.functional.Either
 import com.example.clean_architecture.domain.model.Repo
@@ -21,7 +21,7 @@ import kotlin.random.Random
 class RepoRepositoryImplTest {
     private val repoApi: RepoApi = mockk()
     private val repoMapper: RepoMapper = mockk()
-    private val remoteCoroutineErrorHandler: RemoteCoroutineErrorHandler = mockk()
+    private val remoteCoroutineErrorHandler: RemoteFailureHandler = mockk()
 
     private val repoRepositoryImpl = RepoRepositoryImpl(
         repoApi = repoApi,
@@ -58,7 +58,7 @@ class RepoRepositoryImplTest {
     fun `searchRepos is Error`() = runBlocking {
         val query = Random.nextString()
         val exception = Exception()
-        val error = ApiError.ConnectionError
+        val error = ApiFailure.Connection
 
         coEvery {
             repoApi.searchRepos(query)

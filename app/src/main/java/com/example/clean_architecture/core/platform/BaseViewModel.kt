@@ -4,16 +4,16 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.clean_architecture.core.livedata.SingleLiveData
-import com.example.clean_architecture.domain.core.error.CoroutineError
+import com.example.clean_architecture.domain.core.error.Failure
 
 abstract class BaseViewModel : ViewModel() {
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
-    val networkError = SingleLiveData<CoroutineError>()
+    val failure = SingleLiveData<Failure>()
 
-    fun handleNetworkError(coroutineError: CoroutineError) {
-        networkError.value = coroutineError
+    fun handleFailure(failure: Failure) {
+        this.failure.value = failure
     }
 
     fun setLoading(isLoading: Boolean) {

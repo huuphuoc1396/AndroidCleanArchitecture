@@ -15,9 +15,9 @@
  */
 package com.example.clean_architecture.domain.core.functional
 
-import com.example.clean_architecture.domain.core.error.CoroutineError
-import com.example.clean_architecture.domain.core.error.CoroutineErrorHandler
-import com.example.clean_architecture.domain.core.error.DefaultCoroutineError
+import com.example.clean_architecture.domain.core.error.Failure
+import com.example.clean_architecture.domain.core.error.FailureHandler
+import com.example.clean_architecture.domain.core.error.DefaultFailure
 
 /**
  * Represents a value of one of two possible types (a disjoint union).
@@ -72,17 +72,17 @@ sealed class Either<out L, out R> {
 
     companion object {
         suspend fun <R> safeSuspend(
-            coroutineErrorHandler: CoroutineErrorHandler? = null,
-            action: suspend () -> Either<CoroutineError, R>
-        ): Either<CoroutineError, R> {
+            failureHandler: FailureHandler? = null,
+            action: suspend () -> Either<Failure, R>
+        ): Either<Failure, R> {
             try {
                 return action()
             } catch (exception: Exception) {
-                val coroutineError = coroutineErrorHandler?.handleException(exception)
+                val coroutineError = failureHandler?.handleException(exception)
                 if (coroutineError != null) {
                     return Left(coroutineError)
                 }
-                return Left(DefaultCoroutineError(exception))
+                return Left(DefaultFailure(exception))
             }
         }
     }

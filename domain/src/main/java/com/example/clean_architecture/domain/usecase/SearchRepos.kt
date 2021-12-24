@@ -1,6 +1,6 @@
 package com.example.clean_architecture.domain.usecase
 
-import com.example.clean_architecture.domain.core.error.CoroutineError
+import com.example.clean_architecture.domain.core.error.Failure
 import com.example.clean_architecture.domain.core.functional.Either
 import com.example.clean_architecture.domain.core.interactor.UseCase
 import com.example.clean_architecture.domain.core.interactor.UseCaseParams
@@ -10,9 +10,9 @@ import javax.inject.Inject
 
 class SearchRepos @Inject constructor(
     private val repoRepository: RepoRepository,
-) : UseCase<SearchRepos.Params, Either<CoroutineError, List<Repo>>>() {
+) : UseCase<SearchRepos.Params, Either<Failure, List<Repo>>>() {
 
-    override suspend fun executeInternal(params: Params): Either<CoroutineError, List<Repo>> {
+    override suspend fun executeInternal(params: Params): Either<Failure, List<Repo>> {
         return repoRepository.searchRepos(params.query)
     }
 

@@ -1,6 +1,6 @@
 package com.example.clean_architecture.domain.usecase
 
-import com.example.clean_architecture.domain.core.error.ApiError
+import com.example.clean_architecture.domain.core.error.ApiFailure
 import com.example.clean_architecture.domain.core.extension.nextString
 import com.example.clean_architecture.domain.core.functional.Either
 import com.example.clean_architecture.domain.model.Repo
@@ -39,7 +39,7 @@ class SearchReposTest {
     @Test
     fun `searchRepos is Error`() = runBlocking {
         val query = Random.nextString()
-        val error = ApiError.ConnectionError
+        val error = ApiFailure.Connection
         val expected = Either.Left(error)
 
         coEvery {

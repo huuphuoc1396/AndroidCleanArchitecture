@@ -15,8 +15,9 @@ import com.example.clean_architecture.core.extension.dismissIfAdded
 import com.example.clean_architecture.core.extension.isAvailable
 import com.example.clean_architecture.core.extension.showIfNotExist
 import com.example.clean_architecture.core.livedata.autoCleared
-import com.example.clean_architecture.domain.core.error.ApiError
-import com.example.clean_architecture.domain.core.error.CoroutineError
+import com.example.clean_architecture.domain.core.error.ApiFailure
+import com.example.clean_architecture.domain.core.error.DefaultFailure
+import com.example.clean_architecture.domain.core.error.Failure
 import com.example.clean_architecture.presentation.dialog.LoadingDialogFragment
 import com.example.clean_architecture.presentation.dialog.NetworkErrorDialogFragment
 import timber.log.Timber
@@ -55,7 +56,7 @@ abstract class BaseFragment<V : ViewDataBinding> : Fragment() {
 
         activity?.onBackPressedDispatcher?.addCallback(this, onBackPressedCallback)
 
-        getViewModel()?.networkError?.observe(this, { coroutineError ->
+        getViewModel()?.failure?.observe(this, { coroutineError ->
             showNetworkError(coroutineError)
         })
 
@@ -119,20 +120,20 @@ abstract class BaseFragment<V : ViewDataBinding> : Fragment() {
         super.onDetach()
     }
 
-    open fun showNetworkError(coroutineError: CoroutineError) {
-        val message = when (coroutineError) {
-            is ApiError.ConnectionError -> {
+    open fun showNetworkError(failure: Failure) {
+        val message = when (failure) {
+            is ApiFailure.Connection -> {
                 getString(R.string.msg_no_internet_error)
             }
-            is ApiError.ServerError -> {
-                val errorMessage = coroutineError.errorMessage
+            is ApiFailure.Server -> {
+                val errorMessage = failure.errorMessage
                 if (errorMessage.isNotEmpty()) {
                     errorMessage
                 } else {
                     getString(R.string.msg_unexpected_error)
                 }
             }
-            is ApiError.UnknownError -> {
+            is ApiFailure.Unknown -> {
                 getString(R.string.msg_unexpected_error)
             }
             else -> ""

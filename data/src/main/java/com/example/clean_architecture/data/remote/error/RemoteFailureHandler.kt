@@ -1,8 +1,8 @@
 package com.example.clean_architecture.data.remote.error
 
-import com.example.clean_architecture.domain.core.error.ApiError
-import com.example.clean_architecture.domain.core.error.CoroutineError
-import com.example.clean_architecture.domain.core.error.CoroutineErrorHandler
+import com.example.clean_architecture.domain.core.error.ApiFailure
+import com.example.clean_architecture.domain.core.error.Failure
+import com.example.clean_architecture.domain.core.error.FailureHandler
 import com.example.clean_architecture.domain.core.extension.default
 import com.example.clean_architecture.domain.core.extension.defaultEmpty
 import com.example.clean_architecture.data.remote.response.ServerErrorResponse
@@ -12,22 +12,22 @@ import timber.log.Timber
 import java.io.IOException
 import javax.inject.Inject
 
-class RemoteCoroutineErrorHandler @Inject constructor() : CoroutineErrorHandler {
-    override fun handleException(exception: Exception): CoroutineError {
+class RemoteFailureHandler @Inject constructor() : FailureHandler {
+    override fun handleException(exception: Exception): Failure {
         return when (exception) {
             is IOException -> {
-                ApiError.ConnectionError
+                ApiFailure.Connection
             }
             is HttpException -> {
                 handleHttpException(exception)
             }
             else -> {
-                ApiError.UnknownError(exception)
+                ApiFailure.Unknown(exception)
             }
         }
     }
 
-    private fun handleHttpException(httpException: HttpException): ApiError.ServerError {
+    private fun handleHttpException(httpException: HttpException): ApiFailure.Server {
         val code = httpException.code().default(-1)
         val errorBody = httpException.response()?.errorBody()?.string()
         val errorMessage = try {
@@ -37,7 +37,7 @@ class RemoteCoroutineErrorHandler @Inject constructor() : CoroutineErrorHandler 
             Timber.e(parseException)
             ""
         }
-        return ApiError.ServerError(
+        return ApiFailure.Server(
             code = code,
             errorMessage = errorMessage
         )

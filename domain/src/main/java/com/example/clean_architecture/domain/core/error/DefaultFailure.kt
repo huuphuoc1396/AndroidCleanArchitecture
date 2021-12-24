@@ -1,5 +1,5 @@
 package com.example.clean_architecture.domain.core.error
 
-data class DefaultCoroutineError(
+data class DefaultFailure(
     val exception: Exception,
-) : CoroutineError
+) : Failure

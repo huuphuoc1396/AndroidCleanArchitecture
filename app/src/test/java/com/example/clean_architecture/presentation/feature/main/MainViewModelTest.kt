@@ -2,8 +2,8 @@ package com.example.clean_architecture.presentation.feature.main
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
-import com.example.clean_architecture.domain.core.error.ApiError
-import com.example.clean_architecture.domain.core.error.CoroutineError
+import com.example.clean_architecture.domain.core.error.ApiFailure
+import com.example.clean_architecture.domain.core.error.Failure
 import com.example.clean_architecture.domain.core.extension.nextString
 import com.example.clean_architecture.domain.core.functional.Either
 import com.example.clean_architecture.domain.model.Owner
@@ -30,7 +30,7 @@ class MainViewModelTest {
     private val repoItemObserver: Observer<List<RepoItem>> = mockk(relaxed = true)
     private val isLoadingObserver: Observer<Boolean> = mockk(relaxed = true)
     private val isNoResultsObserver: Observer<Boolean> = mockk(relaxed = true)
-    private val networkErrorObserver: Observer<CoroutineError> = mockk(relaxed = true)
+    private val networkErrorObserver: Observer<Failure> = mockk(relaxed = true)
 
     @Test
     fun `searchRepos query isn't empty and repoList isn't empty`() {
@@ -180,7 +180,7 @@ class MainViewModelTest {
             repoItemMapper = repoItemMapper
         )
         val query = Random.nextString()
-        val error = ApiError.ConnectionError
+        val error = ApiFailure.Connection
 
         coEvery {
             searchRepos(params = SearchRepos.Params(query.lowercase()))
@@ -209,6 +209,6 @@ class MainViewModelTest {
         mainViewModel.repoItems.observeForever(repoItemObserver)
         mainViewModel.isLoading.observeForever(isLoadingObserver)
         mainViewModel.isNoResults.observeForever(isNoResultsObserver)
-        mainViewModel.networkError.observeForever(networkErrorObserver)
+        mainViewModel.failure.observeForever(networkErrorObserver)
     }
 }
