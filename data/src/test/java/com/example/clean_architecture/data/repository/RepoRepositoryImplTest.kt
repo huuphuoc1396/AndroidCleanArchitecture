@@ -65,7 +65,7 @@ class RepoRepositoryImplTest {
         } throws exception
 
         every {
-            remoteCoroutineErrorHandler.handleException(exception)
+            remoteCoroutineErrorHandler.handleThrowable(exception)
         } returns error
 
         val actual = repoRepositoryImpl.searchRepos(query)

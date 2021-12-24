@@ -15,9 +15,8 @@
  */
 package com.example.clean_architecture.domain.core.functional
 
-import com.example.clean_architecture.domain.core.error.Failure
-import com.example.clean_architecture.domain.core.error.FailureHandler
-import com.example.clean_architecture.domain.core.error.DefaultFailure
+import com.example.clean_architecture.domain.core.functional.Either.Left
+import com.example.clean_architecture.domain.core.functional.Either.Right
 
 /**
  * Represents a value of one of two possible types (a disjoint union).
@@ -68,23 +67,6 @@ sealed class Either<out L, out R> {
     fun fold(fnL: (L) -> Unit, fnR: (R) -> Unit): Unit = when (this) {
         is Left -> fnL(a)
         is Right -> fnR(b)
-    }
-
-    companion object {
-        suspend fun <R> safeSuspend(
-            failureHandler: FailureHandler? = null,
-            action: suspend () -> Either<Failure, R>
-        ): Either<Failure, R> {
-            try {
-                return action()
-            } catch (exception: Exception) {
-                val coroutineError = failureHandler?.handleException(exception)
-                if (coroutineError != null) {
-                    return Left(coroutineError)
-                }
-                return Left(DefaultFailure(exception))
-            }
-        }
     }
 }
 

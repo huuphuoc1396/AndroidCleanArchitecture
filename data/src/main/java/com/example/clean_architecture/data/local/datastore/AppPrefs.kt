@@ -5,6 +5,7 @@ import androidx.datastore.preferences.core.MutablePreferences
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
+import com.example.clean_architecture.data.local.datastore.AppPrefs.PreferencesKeys.KEY_FIRST_RUN
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -32,7 +33,7 @@ class AppPrefs @Inject constructor(
         context.appPrefs.edit(transform)
     }
 
-    companion object {
-        private val KEY_FIRST_RUN = booleanPreferencesKey("key_first_run")
+    private object PreferencesKeys {
+        val KEY_FIRST_RUN = booleanPreferencesKey("key_first_run")
     }
 }

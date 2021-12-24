@@ -13,17 +13,15 @@ import java.io.IOException
 import javax.inject.Inject
 
 class RemoteFailureHandler @Inject constructor() : FailureHandler {
-    override fun handleException(exception: Exception): Failure {
-        return when (exception) {
-            is IOException -> {
-                ApiFailure.Connection
-            }
-            is HttpException -> {
-                handleHttpException(exception)
-            }
-            else -> {
-                ApiFailure.Unknown(exception)
-            }
+    override fun handleThrowable(throwable: Throwable) = when (throwable) {
+        is IOException -> {
+            ApiFailure.Connection
+        }
+        is HttpException -> {
+            handleHttpException(throwable)
+        }
+        else -> {
+            ApiFailure.Unknown(throwable)
         }
     }
 

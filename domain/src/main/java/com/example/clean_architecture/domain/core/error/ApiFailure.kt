@@ -10,6 +10,6 @@ sealed class ApiFailure : Failure {
     ) : ApiFailure()
 
     data class Unknown(
-        val exception: Exception,
+        val throwable: Throwable,
     ) : ApiFailure()
 }

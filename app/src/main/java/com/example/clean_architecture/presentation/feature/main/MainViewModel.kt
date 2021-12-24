@@ -2,6 +2,7 @@ package com.example.clean_architecture.presentation.feature.main
 
 import androidx.lifecycle.*
 import com.example.clean_architecture.core.platform.BaseViewModel
+import com.example.clean_architecture.domain.core.functional.getOrElse
 import com.example.clean_architecture.domain.core.functional.map
 import com.example.clean_architecture.domain.core.interactor.params.EmptyParams
 import com.example.clean_architecture.domain.usecase.IsFirstRun
@@ -31,7 +32,9 @@ class MainViewModel @Inject constructor(
         repoItems.value.isNullOrEmpty() && !isLoading
     }
 
-    val firstRunChecking: LiveData<Boolean> = isFirstRun(EmptyParams).asLiveData()
+    val firstRunChecking: LiveData<Boolean> = isFirstRun(EmptyParams)
+        .asLiveData()
+        .map { it.getOrElse(false) }
 
     fun searchRepos(text: String) {
         val query = text.trim().lowercase()

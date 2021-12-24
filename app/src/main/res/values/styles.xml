@@ -14,7 +14,7 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="AppTheme.Dialog.FullScreen" parent="Theme.MaterialComponents.Light.Dialog">
+    <style name="AppTheme.Dialog.FullScreen" parent="AppTheme">
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowIsFloating">false</item>
         <item name="android:windowContentOverlay">@null</item>
