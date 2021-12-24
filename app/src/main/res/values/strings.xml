@@ -10,4 +10,5 @@
     <string name="msg_type_your_query">Type your query</string>
     <string name="msg_empty_search_result">No results</string>
     <string name="msg_double_back_to_exit">Please click BACK again to exit</string>
+    <string name="msg_first_run">This is first time app running</string>
 </resources>

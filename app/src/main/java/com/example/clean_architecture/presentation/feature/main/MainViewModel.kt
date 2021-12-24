@@ -1,12 +1,12 @@
 package com.example.clean_architecture.presentation.feature.main
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.example.clean_architecture.core.platform.BaseViewModel
 import com.example.clean_architecture.domain.core.functional.map
+import com.example.clean_architecture.domain.core.interactor.params.EmptyParams
+import com.example.clean_architecture.domain.usecase.IsFirstRun
 import com.example.clean_architecture.domain.usecase.SearchRepos
+import com.example.clean_architecture.domain.usecase.SetFirstRun
 import com.example.clean_architecture.presentation.feature.main.mapper.RepoItemMapper
 import com.example.clean_architecture.presentation.feature.main.model.RepoItem
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -16,6 +16,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
+    isFirstRun: IsFirstRun,
+    private val setFirstRun: SetFirstRun,
     private val searchRepos: SearchRepos,
     private val repoItemMapper: RepoItemMapper,
 ) : BaseViewModel() {
@@ -29,6 +31,8 @@ class MainViewModel @Inject constructor(
         repoItems.value.isNullOrEmpty() && !isLoading
     }
 
+    val firstRunChecking: LiveData<Boolean> = isFirstRun(EmptyParams).asLiveData()
+
     fun searchRepos(text: String) {
         val query = text.trim().lowercase()
         if (query.isNotEmpty()) {
@@ -41,5 +45,9 @@ class MainViewModel @Inject constructor(
                 setLoading(false)
             }
         }
+    }
+
+    fun setFistRun() {
+        viewModelScope.launch { setFirstRun(EmptyParams) }
     }
 }

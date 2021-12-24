@@ -11,9 +11,9 @@ object Android {
 }
 
 object Modules {
+    const val app = ":app"
     const val data = ":data"
     const val domain = ":domain"
-    const val coreUnitTest = ":core:core-unit-test"
 }
 
 object BuildTypes {
@@ -44,9 +44,11 @@ object BuildPlugins {
 
     const val android = "com.android.tools.build:gradle:${androidPluginVersion}"
     const val kotlin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${KotlinLibs.version}"
-    const val navigation = "androidx.navigation:navigation-safe-args-gradle-plugin:${NavigationLibs.version}"
+    const val navigation =
+        "androidx.navigation:navigation-safe-args-gradle-plugin:${NavigationLibs.version}"
     const val googleServices = "com.google.gms:google-services:${googleServicesVersion}"
-    const val firebaseCrashlytics = "com.google.firebase:firebase-crashlytics-gradle:${firebaseCrashlyticsVersion}"
+    const val firebaseCrashlytics =
+        "com.google.firebase:firebase-crashlytics-gradle:${firebaseCrashlyticsVersion}"
     const val hilt = "com.google.dagger:hilt-android-gradle-plugin:${HiltLibs.version}"
 }
 
@@ -135,7 +137,8 @@ object AndroidSupportLibs {
     const val material = "com.google.android.material:material:${materialVersion}"
     const val constraint = "androidx.constraintlayout:constraintlayout:${constraintVersion}"
     const val recyclerView = "androidx.recyclerview:recyclerview:${recyclerViewVersion}"
-    const val swipeRefreshLayout = "androidx.swiperefreshlayout:swiperefreshlayout:${swipeRefreshLayoutVersion}"
+    const val swipeRefreshLayout =
+        "androidx.swiperefreshlayout:swiperefreshlayout:${swipeRefreshLayoutVersion}"
 }
 
 object NavigationLibs {
@@ -143,6 +146,13 @@ object NavigationLibs {
 
     const val navigationFragment = "androidx.navigation:navigation-fragment-ktx:${version}"
     const val navigationUi = "androidx.navigation:navigation-ui-ktx:${version}"
+}
+
+object DataStoreLibs {
+    private const val version = "1.0.0"
+
+    const val dataStore = "androidx.datastore:datastore:$version"
+    const val dataStorePreferences = "androidx.datastore:datastore-preferences:$version"
 }
 
 object RoomLibs {

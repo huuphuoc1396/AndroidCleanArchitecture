@@ -64,6 +64,9 @@ dependencies {
     implementation(CoroutinesLibs.coroutinesCore)
     implementation(CoroutinesLibs.androidCoroutines)
 
+    implementation(DataStoreLibs.dataStore)
+    implementation(DataStoreLibs.dataStorePreferences)
+
     implementation(RoomLibs.roomRuntime)
     implementation(RoomLibs.roomKtx)
 

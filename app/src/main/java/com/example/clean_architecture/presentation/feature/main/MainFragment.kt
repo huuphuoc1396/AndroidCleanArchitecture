@@ -46,11 +46,11 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initViews()
-        observe()
+        initView()
+        initViewModel()
     }
 
-    private fun initViews() = with(viewDataBinding) {
+    private fun initView() = with(viewDataBinding) {
         mainListAdapter = MainListAdapter(
             onItemClickListener = { repoItem ->
                 findNavController().navigate(
@@ -68,9 +68,16 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
         }
     }
 
-    private fun observe() = with(viewModel) {
+    private fun initViewModel() = with(viewModel) {
         repoItems.observe(viewLifecycleOwner) {
             mainListAdapter.submitList(it)
+        }
+
+        firstRunChecking.observe(viewLifecycleOwner) { isFirstRun ->
+            if (isFirstRun) {
+                toast(R.string.msg_first_run)
+                setFistRun()
+            }
         }
     }
 
