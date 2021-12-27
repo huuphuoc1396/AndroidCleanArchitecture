@@ -6,8 +6,6 @@ plugins {
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 
-    implementation(project(Modules.coreLib))
-
     implementation(KotlinLibs.kotlinStdlib)
 
     implementation(CoroutinesLibs.coroutinesCore)
@@ -21,5 +19,4 @@ dependencies {
     testImplementation(AndroidTestLibs.archTestCore)
     testImplementation(AndroidTestLibs.hamcrest)
     testImplementation(MockKLibs.mockK)
-    testImplementation(project(Modules.coreUnitTest))
 }

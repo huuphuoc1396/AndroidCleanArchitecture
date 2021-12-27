@@ -1,3 +1,0 @@
-package com.example.clean_architecture.core_lib.error
-
-interface CoroutineError

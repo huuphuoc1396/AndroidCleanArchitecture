@@ -1,8 +1,8 @@
 package com.example.clean_architecture.data.remote.di
 
 import android.content.Context
-import com.example.clean_architecture.data.remote.retrofit.builder.DefaultRetrofitBuilder
 import com.example.clean_architecture.data.remote.retrofit.api.RepoApi
+import com.example.clean_architecture.data.remote.retrofit.builder.DefaultRetrofitBuilder
 import com.example.clean_architecture.data.remote.retrofit.interceptor.HeaderInterceptor
 import com.example.data.BuildConfig
 import dagger.Module

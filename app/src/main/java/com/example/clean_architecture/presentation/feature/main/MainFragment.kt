@@ -1,26 +1,32 @@
 package com.example.clean_architecture.presentation.feature.main
 
 import android.os.Bundle
-import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.EditorInfo
-import androidx.databinding.BindingAdapter
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.RecyclerView
-import com.example.clean_architecture.core_android.base.BaseFragment
-import com.example.clean_architecture.core_android.base.BaseViewModel
-import com.example.clean_architecture.core_android.extension.dismissKeyboard
+import com.example.clean_architecture.R
+import com.example.clean_architecture.core.extension.dismissKeyboard
+import com.example.clean_architecture.core.livedata.autoCleared
+import com.example.clean_architecture.core.platform.BaseFragment
+import com.example.clean_architecture.core.platform.BaseViewModel
 import com.example.clean_architecture.databinding.FragmentMainBinding
-import com.example.clean_architecture.presentation.feature.main.model.RepoItem
+import com.example.clean_architecture.presentation.feature.main.extension.setOnSearchAction
+import com.example.clean_architecture.presentation.feature.main.list.MainListAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainFragment : BaseFragment<FragmentMainBinding>() {
 
     private val viewModel: MainViewModel by viewModels()
+
+    private var mainListAdapter by autoCleared<MainListAdapter>()
+
+    private var isDoubleBackToExit = false
 
     override fun createViewDataBinding(
         inflater: LayoutInflater,
@@ -40,11 +46,12 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initViews()
+        initView()
+        initViewModel()
     }
 
-    private fun initViews() {
-        viewDataBinding.recyclerRepoItems.adapter = MainListAdapter(
+    private fun initView() = with(viewDataBinding) {
+        mainListAdapter = MainListAdapter(
             onItemClickListener = { repoItem ->
                 findNavController().navigate(
                     MainFragmentDirections.actionMainFragmentToDetailFragment(
@@ -54,34 +61,47 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
                 )
             }
         )
-        viewDataBinding.editQuery.setOnEditorActionListener { view: View, actionId: Int, _: KeyEvent? ->
-            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                search(view)
-                return@setOnEditorActionListener true
-            }
-            return@setOnEditorActionListener false
-        }
-        viewDataBinding.editQuery.setOnKeyListener { view: View, keyCode: Int, event: KeyEvent ->
-            if (event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
-                search(view)
-                return@setOnKeyListener true
-            }
-            return@setOnKeyListener false
+        recyclerRepoItems.adapter = mainListAdapter
+
+        editQuery.setOnSearchAction { view, query ->
+            search(view, query)
         }
     }
 
-    private fun search(view: View) {
+    private fun initViewModel() = with(viewModel) {
+        repoItems.observe(viewLifecycleOwner) {
+            mainListAdapter.submitList(it)
+        }
+
+        firstRunChecking.observe(viewLifecycleOwner) { isFirstRun ->
+            if (isFirstRun) {
+                toast(R.string.msg_first_run)
+                setFistRun()
+            }
+        }
+    }
+
+    private fun search(view: View, text: String) {
         activity?.dismissKeyboard(view.windowToken)
-        viewModel.searchRepos()
+        viewModel.searchRepos(text)
     }
 
-    object Binding {
-
-        @JvmStatic
-        @BindingAdapter("repoItems")
-        fun setRepoItems(recyclerView: RecyclerView, repoItem: List<RepoItem>) {
-            val adapter = recyclerView.adapter as? MainListAdapter
-            adapter?.submitList(repoItem)
+    override fun onBackPressed(): Boolean {
+        if (!isDoubleBackToExit) {
+            toast(R.string.msg_double_back_to_exit)
+            isDoubleBackToExit = true
+            lifecycleScope.launch {
+                delay(DELAY_TO_RESET_DOUBLE_BACK)
+                isDoubleBackToExit = false
+            }
+            return false
         }
+        isDoubleBackToExit = false
+        return true
+    }
+
+    companion object {
+
+        private const val DELAY_TO_RESET_DOUBLE_BACK = 1500L
     }
 }

@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    compileSdk= Android.targetSdk
+    compileSdk = Android.targetSdk
 
     defaultConfig {
         minSdk = Android.minSdk
@@ -57,13 +57,15 @@ dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 
     implementation(project(Modules.domain))
-    implementation(project(Modules.coreLib))
 
     implementation(KotlinLibs.kotlinStdlib)
     implementation(AndroidSupportLibs.androidxCore)
 
     implementation(CoroutinesLibs.coroutinesCore)
     implementation(CoroutinesLibs.androidCoroutines)
+
+    implementation(DataStoreLibs.dataStore)
+    implementation(DataStoreLibs.dataStorePreferences)
 
     implementation(RoomLibs.roomRuntime)
     implementation(RoomLibs.roomKtx)
@@ -94,7 +96,6 @@ dependencies {
     testImplementation(AndroidTestLibs.robolectric)
     testImplementation(RoomLibs.roomTesting)
     testImplementation(JunitDataProviderLibs.junitDataProvider)
-    testImplementation(project(Modules.coreUnitTest))
 
     androidTestImplementation(AndroidTestLibs.androidTestJunit)
 }

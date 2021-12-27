@@ -92,8 +92,6 @@ dependencies {
 
     implementation(project(Modules.data))
     implementation(project(Modules.domain))
-    implementation(project(Modules.coreLib))
-    implementation(project(Modules.coreAndroid))
 
     implementation(KotlinLibs.kotlinStdlib)
     implementation(AndroidSupportLibs.androidxCore)
@@ -138,7 +136,6 @@ dependencies {
     testImplementation(MockKLibs.androidMockK)
     testImplementation(AndroidTestLibs.robolectric)
     testImplementation(JunitDataProviderLibs.junitDataProvider)
-    testImplementation(project(Modules.coreUnitTest))
 
     androidTestImplementation(AndroidTestLibs.androidTestJunit)
     androidTestImplementation(AndroidTestLibs.espressoCore)

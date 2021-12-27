@@ -31,9 +31,6 @@ In this sample you'll find:
 * **Domain**: Holds all **business logic** and **use cases** represent all the possible actions able to being performed by the **presentation** module.
 * **Data**: Contains all **repository implements** to access **local** or **remote** data
 
-## Dependency Graph
-![](dependency-graph/project.dot.png)
-
 ## Testing
 The project uses local unit tests that run on your computer. To run it and generate a coverage report, you can run:
 `./gradlew jacocoFullReport`

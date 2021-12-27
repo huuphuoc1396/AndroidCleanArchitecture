@@ -1,6 +1,6 @@
 package com.example.clean_architecture.presentation.feature.main.mapper
 
-import com.example.clean_architecture.core_lib.mapper.Mapper
+import com.example.clean_architecture.domain.core.mapper.Mapper
 import com.example.clean_architecture.domain.model.Repo
 import com.example.clean_architecture.presentation.feature.main.model.RepoItem
 import javax.inject.Inject

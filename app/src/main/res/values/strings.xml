@@ -1,8 +1,14 @@
 <resources>
     <string name="app_name">Clean Architecture</string>
+    <string name="ok">OK</string>
+    <string name="msg_network_error">Network error</string>
+    <string name="msg_unexpected_error">Network connection failed. Please try again!</string>
+    <string name="msg_no_internet_error">Please check your internet connection and try again!</string>
 
     <!-- Main -->
     <string name="by_owner">by %s</string>
-    <string name="type_your_query">Type your query</string>
-    <string name="empty_search_result">No results</string>
+    <string name="msg_type_your_query">Type your query</string>
+    <string name="msg_empty_search_result">No results</string>
+    <string name="msg_double_back_to_exit">Please click BACK again to exit</string>
+    <string name="msg_first_run">This is first time app running</string>
 </resources>
