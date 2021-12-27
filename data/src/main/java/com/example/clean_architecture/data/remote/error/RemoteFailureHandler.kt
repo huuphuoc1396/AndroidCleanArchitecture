@@ -1,11 +1,10 @@
 package com.example.clean_architecture.data.remote.error
 
+import com.example.clean_architecture.data.remote.response.ServerErrorResponse
 import com.example.clean_architecture.domain.core.error.ApiFailure
-import com.example.clean_architecture.domain.core.error.Failure
 import com.example.clean_architecture.domain.core.error.FailureHandler
 import com.example.clean_architecture.domain.core.extension.default
 import com.example.clean_architecture.domain.core.extension.defaultEmpty
-import com.example.clean_architecture.data.remote.response.ServerErrorResponse
 import com.google.gson.Gson
 import retrofit2.HttpException
 import timber.log.Timber

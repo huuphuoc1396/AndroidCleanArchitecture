@@ -16,7 +16,6 @@ import com.example.clean_architecture.core.extension.isAvailable
 import com.example.clean_architecture.core.extension.showIfNotExist
 import com.example.clean_architecture.core.livedata.autoCleared
 import com.example.clean_architecture.domain.core.error.ApiFailure
-import com.example.clean_architecture.domain.core.error.DefaultFailure
 import com.example.clean_architecture.domain.core.error.Failure
 import com.example.clean_architecture.presentation.dialog.LoadingDialogFragment
 import com.example.clean_architecture.presentation.dialog.NetworkErrorDialogFragment

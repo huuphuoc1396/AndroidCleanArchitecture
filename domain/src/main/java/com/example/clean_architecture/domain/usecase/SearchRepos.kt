@@ -2,8 +2,8 @@ package com.example.clean_architecture.domain.usecase
 
 import com.example.clean_architecture.domain.core.error.Failure
 import com.example.clean_architecture.domain.core.functional.Either
-import com.example.clean_architecture.domain.core.interactor.usecase.CoroutineUseCase
 import com.example.clean_architecture.domain.core.interactor.params.UseCaseParams
+import com.example.clean_architecture.domain.core.interactor.usecase.CoroutineUseCase
 import com.example.clean_architecture.domain.model.Repo
 import com.example.clean_architecture.domain.repository.RepoRepository
 import javax.inject.Inject

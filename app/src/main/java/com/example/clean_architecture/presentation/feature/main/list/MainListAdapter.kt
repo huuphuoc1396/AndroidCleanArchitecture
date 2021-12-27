@@ -2,7 +2,6 @@ package com.example.clean_architecture.presentation.feature.main.list
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
 import com.example.clean_architecture.core.platform.BaseBindingListAdapter
 import com.example.clean_architecture.core.platform.BaseViewHolder
 import com.example.clean_architecture.databinding.ItemRepoBinding
