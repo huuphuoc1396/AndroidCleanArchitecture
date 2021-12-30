@@ -11,14 +11,14 @@ abstract class BaseBindingListAdapter<Item>(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<Item> {
         val layoutInflater = LayoutInflater.from(parent.context)
-        return createBindingViewHolder(viewType, layoutInflater, parent)
+        return onCreateBindingViewHolder(viewType, layoutInflater, parent)
     }
 
     override fun onBindViewHolder(holder: BaseViewHolder<Item>, position: Int) {
         holder.bind(getItem(position))
     }
 
-    abstract fun createBindingViewHolder(
+    abstract fun onCreateBindingViewHolder(
         viewType: Int,
         layoutInflater: LayoutInflater,
         parent: ViewGroup

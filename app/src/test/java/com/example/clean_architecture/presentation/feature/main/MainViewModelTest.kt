@@ -6,13 +6,17 @@ import com.example.clean_architecture.domain.core.error.ApiFailure
 import com.example.clean_architecture.domain.core.error.Failure
 import com.example.clean_architecture.domain.core.extension.nextString
 import com.example.clean_architecture.domain.core.functional.Either
+import com.example.clean_architecture.domain.core.interactor.params.EmptyParams
 import com.example.clean_architecture.domain.model.Owner
 import com.example.clean_architecture.domain.model.Repo
+import com.example.clean_architecture.domain.usecase.IsFirstRun
 import com.example.clean_architecture.domain.usecase.SearchRepos
+import com.example.clean_architecture.domain.usecase.SetFirstRun
 import com.example.clean_architecture.presentation.feature.main.mapper.RepoItemMapper
 import com.example.clean_architecture.presentation.feature.main.model.OwnerItem
 import com.example.clean_architecture.presentation.feature.main.model.RepoItem
 import io.mockk.*
+import kotlinx.coroutines.flow.flowOf
 import org.junit.Rule
 import org.junit.Test
 import kotlin.random.Random
@@ -24,19 +28,27 @@ class MainViewModelTest {
     @JvmField
     val instantExecutorRule = InstantTaskExecutorRule()
 
+    private val isFirstRun: IsFirstRun = mockk()
+    private val setFirstRun: SetFirstRun = mockk()
     private val searchRepos: SearchRepos = mockk()
     private val repoItemMapper: RepoItemMapper = mockk()
 
     private val repoItemObserver: Observer<List<RepoItem>> = mockk(relaxed = true)
     private val isLoadingObserver: Observer<Boolean> = mockk(relaxed = true)
     private val isNoResultsObserver: Observer<Boolean> = mockk(relaxed = true)
-    private val networkErrorObserver: Observer<Failure> = mockk(relaxed = true)
+    private val failureObserver: Observer<Failure> = mockk(relaxed = true)
 
     @Test
     fun `searchRepos query isn't empty and repoList isn't empty`() {
+        every {
+            isFirstRun(EmptyParams)
+        } returns flowOf(Either.Right(false))
+
         val mainViewModel = MainViewModel(
+            isFirstRun = isFirstRun,
+            setFirstRun = setFirstRun,
             searchRepos = searchRepos,
-            repoItemMapper = repoItemMapper
+            repoItemMapper = repoItemMapper,
         )
         val query = Random.nextString()
         val repo1 = Repo(
@@ -96,27 +108,27 @@ class MainViewModelTest {
         mainViewModel.searchRepos(query)
 
         verifyOrder {
-            // Initializing
-            repoItemObserver.onChanged(listOf())
-            isLoadingObserver.onChanged(false)
-            isNoResultsObserver.onChanged(false)
-
-            // Start search repos
             isLoadingObserver.onChanged(true)
             isNoResultsObserver.onChanged(false)
             repoItemObserver.onChanged(repoItemList)
             isLoadingObserver.onChanged(false)
             isNoResultsObserver.onChanged(false)
 
-            networkErrorObserver wasNot Called
+            failureObserver wasNot Called
         }
     }
 
     @Test
     fun `searchRepos query isn't empty and repoList is empty`() {
+        every {
+            isFirstRun(EmptyParams)
+        } returns flowOf(Either.Right(false))
+
         val mainViewModel = MainViewModel(
+            isFirstRun = isFirstRun,
+            setFirstRun = setFirstRun,
             searchRepos = searchRepos,
-            repoItemMapper = repoItemMapper
+            repoItemMapper = repoItemMapper,
         )
         val query = Random.nextString()
         val repoList: List<Repo> = listOf()
@@ -135,49 +147,46 @@ class MainViewModelTest {
         mainViewModel.searchRepos(query)
 
         verifyOrder {
-            // Initializing
-            repoItemObserver.onChanged(listOf())
-            isLoadingObserver.onChanged(false)
-            isNoResultsObserver.onChanged(false)
-
-            // Start search repos
             isLoadingObserver.onChanged(true)
             isNoResultsObserver.onChanged(false)
             repoItemObserver.onChanged(listOf())
             isLoadingObserver.onChanged(false)
             isNoResultsObserver.onChanged(true)
 
-            networkErrorObserver wasNot Called
+            failureObserver wasNot Called
         }
     }
 
     @Test
     fun `searchRepos query is empty`() {
+        every {
+            isFirstRun(EmptyParams)
+        } returns flowOf(Either.Right(false))
+
         val mainViewModel = MainViewModel(
+            isFirstRun = isFirstRun,
+            setFirstRun = setFirstRun,
             searchRepos = searchRepos,
-            repoItemMapper = repoItemMapper
+            repoItemMapper = repoItemMapper,
         )
         val query = ""
 
         registerObserver(mainViewModel)
 
         mainViewModel.searchRepos(query)
-
-        verifyOrder {
-            // Initializing
-            repoItemObserver.onChanged(listOf())
-            isLoadingObserver.onChanged(false)
-            isNoResultsObserver.onChanged(false)
-
-            networkErrorObserver wasNot Called
-        }
     }
 
     @Test
     fun `searchRepos is error`() {
+        every {
+            isFirstRun(EmptyParams)
+        } returns flowOf(Either.Right(false))
+
         val mainViewModel = MainViewModel(
+            isFirstRun = isFirstRun,
+            setFirstRun = setFirstRun,
             searchRepos = searchRepos,
-            repoItemMapper = repoItemMapper
+            repoItemMapper = repoItemMapper,
         )
         val query = Random.nextString()
         val error = ApiFailure.Connection
@@ -191,15 +200,9 @@ class MainViewModelTest {
         mainViewModel.searchRepos(query)
 
         verifyOrder {
-            // Initializing
-            repoItemObserver.onChanged(listOf())
-            isLoadingObserver.onChanged(false)
-            isNoResultsObserver.onChanged(false)
-
-            // Start search repos
             isLoadingObserver.onChanged(true)
             isNoResultsObserver.onChanged(false)
-            networkErrorObserver.onChanged(error)
+            failureObserver.onChanged(error)
             isLoadingObserver.onChanged(false)
             isNoResultsObserver.onChanged(true)
         }
@@ -209,6 +212,6 @@ class MainViewModelTest {
         mainViewModel.repoItems.observeForever(repoItemObserver)
         mainViewModel.isLoading.observeForever(isLoadingObserver)
         mainViewModel.isNoResults.observeForever(isNoResultsObserver)
-        mainViewModel.failure.observeForever(networkErrorObserver)
+        mainViewModel.failure.observeForever(failureObserver)
     }
 }

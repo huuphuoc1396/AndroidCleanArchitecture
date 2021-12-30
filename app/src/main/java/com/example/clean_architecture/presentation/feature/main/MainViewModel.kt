@@ -42,7 +42,7 @@ class MainViewModel @Inject constructor(
             searchJob?.cancel()
             searchJob = viewModelScope.launch {
                 setLoading(true)
-                searchRepos(SearchRepos.Params(text))
+                searchRepos(SearchRepos.Params(query))
                     .map { repoItemMapper.mapList(it) }
                     .fold(::handleFailure) { _repoItems.value = it }
                 setLoading(false)

@@ -11,7 +11,7 @@ class MainListAdapter(
     private val onItemClickListener: (RepoItem) -> Unit,
 ) : BaseBindingListAdapter<RepoItem>(RepoItemDiffCallback()) {
 
-    override fun createBindingViewHolder(
+    override fun onCreateBindingViewHolder(
         viewType: Int,
         layoutInflater: LayoutInflater,
         parent: ViewGroup
