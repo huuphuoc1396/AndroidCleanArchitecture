@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModel
 import com.example.clean_architecture.R
 import com.example.clean_architecture.core.extension.available
 import com.example.clean_architecture.core.extension.dismissIfAdded
@@ -21,7 +22,17 @@ import com.example.clean_architecture.presentation.dialog.LoadingDialogFragment
 import com.example.clean_architecture.presentation.dialog.NetworkErrorDialogFragment
 import timber.log.Timber
 
-abstract class BaseFragment<V : ViewDataBinding> : Fragment() {
+abstract class BaseFragment<VB : ViewDataBinding, VM : ViewModel> : Fragment() {
+
+    abstract val viewModel: VM
+
+    abstract fun onCreateViewDataBinding(inflater: LayoutInflater, container: ViewGroup?): VB
+
+    open fun onBindVariable() = Unit
+
+    open fun onBackPressed(): Boolean = true
+
+    var viewDataBinding: VB by autoCleared()
 
     private val onBackPressedCallback = object : OnBackPressedCallback(true) {
         override fun handleOnBackPressed() {
@@ -34,16 +45,6 @@ abstract class BaseFragment<V : ViewDataBinding> : Fragment() {
 
     private var loadingDialogFragment: LoadingDialogFragment? = null
 
-    var viewDataBinding: V by autoCleared()
-
-    abstract fun createViewDataBinding(inflater: LayoutInflater, container: ViewGroup?): V
-
-    open fun getViewModel(): BaseViewModel? = null
-
-    open fun setBindingVariable() = Unit
-
-    open fun onBackPressed(): Boolean = true
-
     override fun onAttach(context: Context) {
         Timber.tag(LIFECYCLE_TAG).i("${this::class.simpleName} onAttach")
         super.onAttach(context)
@@ -52,16 +53,23 @@ abstract class BaseFragment<V : ViewDataBinding> : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         Timber.tag(LIFECYCLE_TAG).i("${this::class.simpleName} onCreate")
         super.onCreate(savedInstanceState)
+        addBackPressedCallback()
+        observeBaseViewModel()
+    }
 
-        activity?.onBackPressedDispatcher?.addCallback(this, onBackPressedCallback)
-
-        getViewModel()?.failure?.observe(this, { coroutineError ->
+    private fun observeBaseViewModel() {
+        val baseViewModel = viewModel as? BaseViewModel ?: return
+        baseViewModel.failure.observe(this, { coroutineError ->
             showNetworkError(coroutineError)
         })
 
-        getViewModel()?.isLoading?.observe(this, { isLoading ->
+        baseViewModel.isLoading.observe(this, { isLoading ->
             showLoading(isLoading)
         })
+    }
+
+    private fun addBackPressedCallback() {
+        activity?.onBackPressedDispatcher?.addCallback(this, onBackPressedCallback)
     }
 
     override fun onCreateView(
@@ -70,14 +78,14 @@ abstract class BaseFragment<V : ViewDataBinding> : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         Timber.tag(LIFECYCLE_TAG).i("${this::class.simpleName} onCreateView")
-        viewDataBinding = createViewDataBinding(inflater, container)
+        viewDataBinding = onCreateViewDataBinding(inflater, container)
         return viewDataBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         Timber.tag(LIFECYCLE_TAG).i("${this::class.simpleName} onViewCreated")
         super.onViewCreated(view, savedInstanceState)
-        setBindingVariable()
+        onBindVariable()
         viewDataBinding.lifecycleOwner = viewLifecycleOwner
         viewDataBinding.executePendingBindings()
     }

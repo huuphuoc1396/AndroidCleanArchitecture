@@ -8,26 +8,26 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.DialogFragment
 import com.example.clean_architecture.core.livedata.autoCleared
 
-abstract class BaseDialogFragment<V : ViewDataBinding> : DialogFragment() {
+abstract class BaseDialogFragment<VB : ViewDataBinding> : DialogFragment() {
 
-    abstract fun createViewDataBinding(inflater: LayoutInflater, container: ViewGroup?): V
+    abstract fun onCreateViewDataBinding(inflater: LayoutInflater, container: ViewGroup?): VB
 
-    var viewDataBinding: V by autoCleared()
+    open fun onBindVariable() {}
 
-    open fun setBindingVariable() {}
+    var viewDataBinding: VB by autoCleared()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        viewDataBinding = createViewDataBinding(inflater, container)
+        viewDataBinding = onCreateViewDataBinding(inflater, container)
         return viewDataBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setBindingVariable()
+        onBindVariable()
         viewDataBinding.lifecycleOwner = viewLifecycleOwner
         viewDataBinding.executePendingBindings()
     }

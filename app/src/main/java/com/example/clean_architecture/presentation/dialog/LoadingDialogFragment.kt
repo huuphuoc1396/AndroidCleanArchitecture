@@ -9,7 +9,7 @@ import com.example.clean_architecture.databinding.DialogLoadingBinding
 
 class LoadingDialogFragment : BaseFullScreenDialogFragment<DialogLoadingBinding>() {
 
-    override fun createViewDataBinding(
+    override fun onCreateViewDataBinding(
         inflater: LayoutInflater,
         container: ViewGroup?
     ) = DialogLoadingBinding.inflate(inflater, container, false)

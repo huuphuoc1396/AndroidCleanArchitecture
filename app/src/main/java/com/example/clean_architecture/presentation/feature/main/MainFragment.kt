@@ -11,36 +11,32 @@ import com.example.clean_architecture.R
 import com.example.clean_architecture.core.extension.dismissKeyboard
 import com.example.clean_architecture.core.livedata.autoCleared
 import com.example.clean_architecture.core.platform.BaseFragment
-import com.example.clean_architecture.core.platform.BaseViewModel
 import com.example.clean_architecture.databinding.FragmentMainBinding
 import com.example.clean_architecture.presentation.feature.main.extension.setOnSearchAction
 import com.example.clean_architecture.presentation.feature.main.list.MainListAdapter
+import com.example.clean_architecture.presentation.feature.main.model.RepoItem
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class MainFragment : BaseFragment<FragmentMainBinding>() {
+class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel>() {
 
-    private val viewModel: MainViewModel by viewModels()
+    override val viewModel: MainViewModel by viewModels()
 
     private var mainListAdapter by autoCleared<MainListAdapter>()
 
     private var isDoubleBackToExit = false
 
-    override fun createViewDataBinding(
+    override fun onCreateViewDataBinding(
         inflater: LayoutInflater,
         container: ViewGroup?
     ): FragmentMainBinding {
         return FragmentMainBinding.inflate(inflater, container, false)
     }
 
-    override fun getViewModel(): BaseViewModel {
-        return viewModel
-    }
-
-    override fun setBindingVariable() {
-        super.setBindingVariable()
+    override fun onBindVariable() {
+        super.onBindVariable()
         viewDataBinding.viewModel = viewModel
     }
 
@@ -53,12 +49,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
     private fun initView() = with(viewDataBinding) {
         mainListAdapter = MainListAdapter(
             onItemClickListener = { repoItem ->
-                findNavController().navigate(
-                    MainFragmentDirections.actionMainFragmentToDetailFragment(
-                        repoName = repoItem.name,
-                        ownerLogin = repoItem.owner.login,
-                    )
-                )
+                navigateToDetail(repoItem)
             }
         )
         recyclerRepoItems.adapter = mainListAdapter
@@ -66,6 +57,15 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
         editQuery.setOnSearchAction { view, query ->
             search(view, query)
         }
+    }
+
+    private fun navigateToDetail(repoItem: RepoItem) {
+        findNavController().navigate(
+            MainFragmentDirections.actionMainFragmentToDetailFragment(
+                repoName = repoItem.name,
+                ownerLogin = repoItem.owner.login,
+            )
+        )
     }
 
     private fun initViewModel() = with(viewModel) {

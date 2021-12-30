@@ -9,7 +9,7 @@ class RepoViewHolder(
     onItemClickListener: (RepoItem) -> Unit,
 ) : BaseBindingViewHolder<RepoItem, ItemRepoBinding>(itemRepoBinding, onItemClickListener) {
 
-    override fun bindInternal(item: RepoItem) {
+    override fun onBind(item: RepoItem) {
         viewBinding.repoItem = item
     }
 }

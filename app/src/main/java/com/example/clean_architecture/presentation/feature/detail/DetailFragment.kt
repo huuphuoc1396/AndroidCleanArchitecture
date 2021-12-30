@@ -13,26 +13,22 @@ import com.example.clean_architecture.databinding.FragmentDetailBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class DetailFragment : BaseFragment<FragmentDetailBinding>() {
+class DetailFragment : BaseFragment<FragmentDetailBinding, DetailViewModel>() {
 
-    private val viewModel: DetailViewModel by viewModels()
+    override val viewModel: DetailViewModel by viewModels()
 
     private val args: DetailFragmentArgs by navArgs()
 
-    override fun createViewDataBinding(
+    override fun onCreateViewDataBinding(
         inflater: LayoutInflater,
         container: ViewGroup?
     ): FragmentDetailBinding {
         return FragmentDetailBinding.inflate(inflater, container, false)
     }
 
-    override fun setBindingVariable() {
-        super.setBindingVariable()
+    override fun onBindVariable() {
+        super.onBindVariable()
         viewDataBinding.viewModel = viewModel
-    }
-
-    override fun getViewModel(): BaseViewModel {
-        return viewModel
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

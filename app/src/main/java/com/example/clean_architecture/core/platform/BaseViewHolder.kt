@@ -16,10 +16,10 @@ abstract class BaseViewHolder<Item>(
         }
     }
 
-    protected abstract fun bindInternal(item: Item)
+    protected abstract fun onBind(item: Item)
 
     fun bind(item: Item) {
         this.item = item
-        bindInternal(item)
+        onBind(item)
     }
 }

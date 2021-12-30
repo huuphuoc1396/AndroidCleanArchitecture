@@ -8,26 +8,26 @@ import androidx.databinding.ViewDataBinding
 import com.example.clean_architecture.core.livedata.autoCleared
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-abstract class BaseBottomSheetDialogFragment<V : ViewDataBinding> : BottomSheetDialogFragment() {
+abstract class BaseBottomSheetDialogFragment<VB : ViewDataBinding> : BottomSheetDialogFragment() {
 
-    abstract fun createViewDataBinding(inflater: LayoutInflater, container: ViewGroup?): V
+    abstract fun onCreateViewDataBinding(inflater: LayoutInflater, container: ViewGroup?): VB
 
-    var viewDataBinding: V by autoCleared()
+    open fun onBindVariable() {}
 
-    open fun setBindingVariable() {}
+    var viewDataBinding: VB by autoCleared()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        viewDataBinding = createViewDataBinding(inflater, container)
+        viewDataBinding = onCreateViewDataBinding(inflater, container)
         return viewDataBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setBindingVariable()
+        onBindVariable()
         viewDataBinding.lifecycleOwner = viewLifecycleOwner
         viewDataBinding.executePendingBindings()
     }
