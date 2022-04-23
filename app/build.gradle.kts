@@ -26,11 +26,22 @@ android {
         testInstrumentationRunner = AndroidJUnitRunner.runner
     }
 
+    signingConfigs {
+        create(BuildTypes.release) {
+            storeFile = file("../debug-keystore.jks")
+            storePassword = "123456"
+            keyAlias = "key0"
+            keyPassword = "123456"
+        }
+    }
+
     buildTypes {
         getByName(BuildTypes.release) {
             isMinifyEnabled = BuildTypes.minifyRelease
             isShrinkResources = BuildTypes.isShrinkResourcesRelease
             proguardFiles(BuildTypes.proguardRelease)
+
+            signingConfig = signingConfigs.getByName(BuildTypes.release)
         }
 
         getByName(BuildTypes.debug) {
@@ -58,7 +69,7 @@ android {
     }
 
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "11"
     }
 
     buildFeatures {
@@ -67,8 +78,8 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
 
     testOptions {

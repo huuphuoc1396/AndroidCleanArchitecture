@@ -21,8 +21,8 @@ object BuildTypes {
     const val release = "release"
 
     // Release
-    const val minifyRelease = false
-    const val isShrinkResourcesRelease = false
+    const val minifyRelease = true
+    const val isShrinkResourcesRelease = true
     const val proguardRelease = "proguard-rules.pro"
 
     // Debug
