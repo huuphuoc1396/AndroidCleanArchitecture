@@ -1,8 +1,10 @@
-name: devDebug Build
+name: devRelease Build
 
 on:
   push:
     branches: [ master ]
+  workflow_dispatch:
+    branches: [ master, develop ]
 
 jobs:
   build:
@@ -15,7 +17,7 @@ jobs:
       - name: Set up our JDK environment
         uses: actions/setup-java@v1.4.3
         with:
-          java-version: 1.8
+          java-version: 11
 
       - name: Add google-services.json
         env:
@@ -23,16 +25,16 @@ jobs:
         run: echo $FIREBASE_SECRET > app/google-services.json
 
       - name: Run Unit Tests
-        run: ./gradlew jacocoFullReport
+        run: ./gradlew jacocoFullReport --no-configuration-cache
 
       - name: Generate Release APK
-        run: ./gradlew assembleDevDebug
+        run: ./gradlew assembleDevRelease --no-configuration-cache
 
       - name: Upload APK
         uses: actions/upload-artifact@v2.2.0
         with:
           name: release-bundle
-          path: app/build/outputs/apk/dev/debug/CleanArchitecture_*.apk
+          path: app/build/outputs/apk/dev/release/CleanArchitecture_*.apk
 
       - name: Upload JaCoCo report
         uses: actions/upload-artifact@v2.2.0
