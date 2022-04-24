@@ -84,8 +84,8 @@ fun <A, B, C> ((A) -> B).c(f: (B) -> C): (A) -> C = {
  */
 fun <T, L, R> Either<L, R>.flatMap(fn: (R) -> Either<L, T>): Either<L, T> =
     when (this) {
-        is Either.Left -> Either.Left(a)
-        is Either.Right -> fn(b)
+        is Left -> Left(a)
+        is Right -> fn(b)
     }
 
 /**
@@ -99,8 +99,8 @@ fun <T, L, R> Either<L, R>.map(fn: (R) -> (T)): Either<L, T> = this.flatMap(fn.c
  */
 fun <L, R> Either<L, R>.getOrElse(value: R): R =
     when (this) {
-        is Either.Left -> value
-        is Either.Right -> b
+        is Left -> value
+        is Right -> b
     }
 
 /**
@@ -109,7 +109,7 @@ fun <L, R> Either<L, R>.getOrElse(value: R): R =
  * object so you chain calls.
  */
 fun <L, R> Either<L, R>.onFailure(fn: (failure: L) -> Unit): Either<L, R> =
-    this.apply { if (this is Either.Left) fn(a) }
+    this.apply { if (this is Left) fn(a) }
 
 /**
  * Right-biased onSuccess() FP convention dictates that when this class is Right, it'll perform
@@ -117,4 +117,4 @@ fun <L, R> Either<L, R>.onFailure(fn: (failure: L) -> Unit): Either<L, R> =
  * object so you chain calls.
  */
 fun <L, R> Either<L, R>.onSuccess(fn: (success: R) -> Unit): Either<L, R> =
-    this.apply { if (this is Either.Right) fn(b) }
+    this.apply { if (this is Right) fn(b) }

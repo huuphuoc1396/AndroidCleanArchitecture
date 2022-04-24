@@ -4,6 +4,8 @@ import androidx.lifecycle.*
 import com.example.clean_architecture.core.platform.BaseViewModel
 import com.example.clean_architecture.domain.core.functional.getOrElse
 import com.example.clean_architecture.domain.core.functional.map
+import com.example.clean_architecture.domain.core.functional.onFailure
+import com.example.clean_architecture.domain.core.functional.onSuccess
 import com.example.clean_architecture.domain.core.interactor.params.EmptyParams
 import com.example.clean_architecture.domain.usecase.IsFirstRun
 import com.example.clean_architecture.domain.usecase.SearchRepos
@@ -44,7 +46,8 @@ class MainViewModel @Inject constructor(
                 setLoading(true)
                 searchRepos(SearchRepos.Params(query))
                     .map { repoItemMapper.mapList(it) }
-                    .fold(::handleFailure) { _repoItems.value = it }
+                    .onSuccess { _repoItems.value = it }
+                    .onFailure { handleFailure(it) }
                 setLoading(false)
             }
         }

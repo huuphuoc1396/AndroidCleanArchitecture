@@ -59,13 +59,13 @@ abstract class BaseFragment<VB : ViewDataBinding, VM : ViewModel> : Fragment() {
 
     private fun observeBaseViewModel() {
         val baseViewModel = viewModel as? BaseViewModel ?: return
-        baseViewModel.failure.observe(this, { coroutineError ->
+        baseViewModel.failure.observe(this) { coroutineError ->
             showNetworkError(coroutineError)
-        })
+        }
 
-        baseViewModel.isLoading.observe(this, { isLoading ->
+        baseViewModel.isLoading.observe(this) { isLoading ->
             showLoading(isLoading)
-        })
+        }
     }
 
     private fun addBackPressedCallback() {
@@ -133,10 +133,7 @@ abstract class BaseFragment<VB : ViewDataBinding, VM : ViewModel> : Fragment() {
                 getString(R.string.msg_no_internet_error)
             }
             is ApiFailure.Server -> {
-                val errorMessage = failure.errorMessage
-                if (errorMessage.isNotEmpty()) {
-                    errorMessage
-                } else {
+                failure.errorMessage.ifEmpty {
                     getString(R.string.msg_unexpected_error)
                 }
             }
