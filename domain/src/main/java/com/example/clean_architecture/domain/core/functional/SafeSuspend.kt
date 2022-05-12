@@ -9,15 +9,15 @@ import kotlinx.coroutines.flow.map
 
 suspend fun <R> safeSuspend(
     failureHandler: FailureHandler? = null,
-    action: suspend () -> Either<Failure, R>
-): Either<Failure, R> = try {
+    action: suspend () -> ResultWrapper<Failure, R>
+): ResultWrapper<Failure, R> = try {
     action()
 } catch (exception: Exception) {
     val failure = failureHandler?.handleThrowable(exception)
     if (failure != null) {
-        Either.Left(failure)
+        ResultWrapper.Failure(failure)
     } else {
-        Either.Left(DefaultFailure(exception))
+        ResultWrapper.Failure(DefaultFailure(exception))
     }
 }
 
@@ -29,12 +29,13 @@ suspend fun safeSuspendIgnoreFailure(
     // ignore
 }
 
-fun <T> Flow<T>.toEither(
+@Suppress("USELESS_CAST")
+fun <T> Flow<T>.resultWrapper(
     failureHandler: FailureHandler? = null
-): Flow<Either<Failure, T>> = map {
-    Either.Right(it) as Either<Failure, T>
+): Flow<ResultWrapper<Failure, T>> = map {
+    ResultWrapper.Success(it) as ResultWrapper<Failure, T>
 }.catch { exception ->
     failureHandler?.handleThrowable(exception)?.let {
-        emit(Either.Left(it))
+        emit(ResultWrapper.Failure(it))
     }
 }
