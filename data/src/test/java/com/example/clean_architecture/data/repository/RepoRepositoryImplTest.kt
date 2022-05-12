@@ -7,7 +7,7 @@ import com.example.clean_architecture.data.remote.response.RepoListResponse
 import com.example.clean_architecture.data.remote.retrofit.api.RepoApi
 import com.example.clean_architecture.domain.core.error.ApiFailure
 import com.example.clean_architecture.domain.core.extension.nextString
-import com.example.clean_architecture.domain.core.functional.Either
+import com.example.clean_architecture.domain.core.functional.ResultWrapper
 import com.example.clean_architecture.domain.model.Repo
 import io.mockk.coEvery
 import io.mockk.every
@@ -49,7 +49,7 @@ class RepoRepositoryImplTest {
         } returns repoList
 
         val actual = repoRepositoryImpl.searchRepos(query)
-        val expected = Either.Right(repoList)
+        val expected = ResultWrapper.Success(repoList)
 
         Assert.assertEquals(expected, actual)
     }
@@ -69,7 +69,7 @@ class RepoRepositoryImplTest {
         } returns error
 
         val actual = repoRepositoryImpl.searchRepos(query)
-        val expected = Either.Left(error)
+        val expected = ResultWrapper.Failure(error)
         Assert.assertEquals(expected, actual)
     }
 }

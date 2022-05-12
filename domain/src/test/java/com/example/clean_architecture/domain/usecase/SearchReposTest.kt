@@ -2,7 +2,7 @@ package com.example.clean_architecture.domain.usecase
 
 import com.example.clean_architecture.domain.core.error.ApiFailure
 import com.example.clean_architecture.domain.core.extension.nextString
-import com.example.clean_architecture.domain.core.functional.Either
+import com.example.clean_architecture.domain.core.functional.ResultWrapper
 import com.example.clean_architecture.domain.model.Repo
 import com.example.clean_architecture.domain.repository.RepoRepository
 import io.mockk.coEvery
@@ -23,7 +23,7 @@ class SearchReposTest {
     fun `searchRepos is Success`() = runBlocking {
         val query = Random.nextString()
         val repoList: List<Repo> = mockk()
-        val expected = Either.Right(repoList)
+        val expected = ResultWrapper.Success(repoList)
 
         coEvery {
             repoRepository.searchRepos(query)
@@ -40,7 +40,7 @@ class SearchReposTest {
     fun `searchRepos is Error`() = runBlocking {
         val query = Random.nextString()
         val error = ApiFailure.Connection
-        val expected = Either.Left(error)
+        val expected = ResultWrapper.Failure(error)
 
         coEvery {
             repoRepository.searchRepos(query)

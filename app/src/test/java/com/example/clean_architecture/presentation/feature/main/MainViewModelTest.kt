@@ -5,7 +5,7 @@ import androidx.lifecycle.Observer
 import com.example.clean_architecture.domain.core.error.ApiFailure
 import com.example.clean_architecture.domain.core.error.Failure
 import com.example.clean_architecture.domain.core.extension.nextString
-import com.example.clean_architecture.domain.core.functional.Either
+import com.example.clean_architecture.domain.core.functional.ResultWrapper
 import com.example.clean_architecture.domain.core.interactor.params.EmptyParams
 import com.example.clean_architecture.domain.model.Owner
 import com.example.clean_architecture.domain.model.Repo
@@ -42,7 +42,7 @@ class MainViewModelTest {
     fun `searchRepos query isn't empty and repoList isn't empty`() {
         every {
             isFirstRun(EmptyParams)
-        } returns flowOf(Either.Right(false))
+        } returns flowOf(ResultWrapper.Success(false))
 
         val mainViewModel = MainViewModel(
             isFirstRun = isFirstRun,
@@ -97,7 +97,7 @@ class MainViewModelTest {
 
         coEvery {
             searchRepos(params = SearchRepos.Params(query.lowercase()))
-        } returns Either.Right(repoList)
+        } returns ResultWrapper.Success(repoList)
 
         every {
             repoItemMapper.mapList(repoList)
@@ -122,7 +122,7 @@ class MainViewModelTest {
     fun `searchRepos query isn't empty and repoList is empty`() {
         every {
             isFirstRun(EmptyParams)
-        } returns flowOf(Either.Right(false))
+        } returns flowOf(ResultWrapper.Success(false))
 
         val mainViewModel = MainViewModel(
             isFirstRun = isFirstRun,
@@ -136,7 +136,7 @@ class MainViewModelTest {
 
         coEvery {
             searchRepos(params = SearchRepos.Params(query.lowercase()))
-        } returns Either.Right(repoList)
+        } returns ResultWrapper.Success(repoList)
 
         every {
             repoItemMapper.mapList(repoList)
@@ -161,7 +161,7 @@ class MainViewModelTest {
     fun `searchRepos query is empty`() {
         every {
             isFirstRun(EmptyParams)
-        } returns flowOf(Either.Right(false))
+        } returns flowOf(ResultWrapper.Success(false))
 
         val mainViewModel = MainViewModel(
             isFirstRun = isFirstRun,
@@ -180,7 +180,7 @@ class MainViewModelTest {
     fun `searchRepos is error`() {
         every {
             isFirstRun(EmptyParams)
-        } returns flowOf(Either.Right(false))
+        } returns flowOf(ResultWrapper.Success(false))
 
         val mainViewModel = MainViewModel(
             isFirstRun = isFirstRun,
@@ -193,7 +193,7 @@ class MainViewModelTest {
 
         coEvery {
             searchRepos(params = SearchRepos.Params(query.lowercase()))
-        } returns Either.Left(error)
+        } returns ResultWrapper.Failure(error)
 
         registerObserver(mainViewModel)
 
