@@ -53,17 +53,14 @@
                 android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerRepoItems"
+        <androidx.compose.ui.platform.ComposeView
+            android:id="@+id/composeView"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="8dp"
-            app:layoutManager="LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInput"
-            tools:listitem="@layout/item_repo" />
+            app:layout_constraintTop_toBottomOf="@+id/textInput" />
 
         <TextView
             android:layout_width="wrap_content"

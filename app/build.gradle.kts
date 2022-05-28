@@ -75,6 +75,7 @@ android {
     buildFeatures {
         viewBinding = true
         dataBinding = true
+        compose = true
     }
 
     compileOptions {
@@ -95,6 +96,17 @@ android {
             val output = this as? BaseVariantOutputImpl
             output?.outputFileName = outputFileName
         }
+    }
+
+    packagingOptions {
+        resources.excludes.apply {
+            add("META-INF/AL2.0")
+            add("META-INF/LGPL2.1")
+        }
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = ComposeLibs.version
     }
 }
 
@@ -125,6 +137,17 @@ dependencies {
     implementation(AndroidSupportLibs.material)
     implementation(AndroidSupportLibs.recyclerView)
     implementation(AndroidSupportLibs.swipeRefreshLayout)
+
+    implementation(ComposeLibs.ui)
+    implementation(ComposeLibs.uiTooling)
+    implementation(ComposeLibs.foundation)
+    implementation(ComposeLibs.material)
+    implementation(ComposeLibs.materialIconsCore)
+    implementation(ComposeLibs.materialIconsExtended)
+    implementation(ComposeLibs.livedata)
+    implementation(ComposeLibs.uiTest)
+
+    implementation(CoilLibs.coil)
 
     implementation(platform(FirebaseLibs.firebaseBom))
     implementation(FirebaseLibs.firebaseCrashlytics)

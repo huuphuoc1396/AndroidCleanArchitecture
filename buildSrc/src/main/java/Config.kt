@@ -105,7 +105,7 @@ object AndroidTestLibs {
 }
 
 object KotlinLibs {
-    internal const val version = "1.5.31"
+    internal const val version = "1.6.10"
 
     const val kotlinStdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${version}"
     const val kotlinReflect = "org.jetbrains.kotlin:kotlin-reflect:${version}"
@@ -239,4 +239,37 @@ object HiltLibs {
     const val hiltCore = "com.google.dagger:hilt-core:$version"
     const val hiltAndroid = "com.google.dagger:hilt-android:$version"
     const val hiltCompiler = "com.google.dagger:hilt-compiler:$version"
+}
+
+object ComposeLibs {
+    const val version = "1.1.1"
+
+    const val ui = "androidx.compose.ui:ui:$version"
+
+    // Tooling support (Previews, etc.)
+    const val uiTooling = "androidx.compose.ui:ui-tooling:$version"
+
+    // Foundation (Border, Background, Box, Image, Scroll, shapes, animations, etc.)
+    const val foundation = "androidx.compose.foundation:foundation:$version"
+
+    // Material Design
+    const val material = "androidx.compose.material:material:$version"
+
+    // Material design icons
+    const val materialIconsCore = "androidx.compose.material:material-icons-core:$version"
+    const val materialIconsExtended = "androidx.compose.material:material-icons-extended:$version"
+
+    // Integration with observables
+    const val livedata = "androidx.compose.runtime:runtime-livedata:$version"
+    const val rxJava2 = "androidx.compose.runtime:runtime-rxjava2:$version"
+
+    // UI Tests
+    const val uiTest = "androidx.compose.ui:ui-test-junit4:$version"
+}
+
+object CoilLibs {
+    private const val version = "2.1.0"
+
+    // Async image loader extensions for Compose
+    const val coil = "io.coil-kt:coil-compose:$version"
 }

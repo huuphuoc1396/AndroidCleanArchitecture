@@ -4,16 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.material.MaterialTheme
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.clean_architecture.R
 import com.example.clean_architecture.core.extension.dismissKeyboard
-import com.example.clean_architecture.core.livedata.autoCleared
 import com.example.clean_architecture.core.platform.BaseFragment
 import com.example.clean_architecture.databinding.FragmentMainBinding
 import com.example.clean_architecture.presentation.feature.main.extension.setOnSearchAction
-import com.example.clean_architecture.presentation.feature.main.list.MainListAdapter
+import com.example.clean_architecture.presentation.feature.main.list.RepoList
 import com.example.clean_architecture.presentation.feature.main.model.RepoItem
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
@@ -24,15 +24,21 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel>() {
 
     override val viewModel: MainViewModel by viewModels()
 
-    private var mainListAdapter by autoCleared<MainListAdapter>()
-
     private var isDoubleBackToExit = false
 
     override fun onCreateViewDataBinding(
         inflater: LayoutInflater,
         container: ViewGroup?
     ): FragmentMainBinding {
-        return FragmentMainBinding.inflate(inflater, container, false)
+        return FragmentMainBinding.inflate(inflater, container, false).apply {
+            composeView.setContent {
+                MaterialTheme {
+                    RepoList(mainViewModel = viewModel!!, onItemClick = { repoItem ->
+                        navigateToDetail(repoItem)
+                    })
+                }
+            }
+        }
     }
 
     override fun onBindVariable() {
@@ -47,13 +53,6 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel>() {
     }
 
     private fun initView() = with(viewDataBinding) {
-        mainListAdapter = MainListAdapter(
-            onItemClickListener = { repoItem ->
-                navigateToDetail(repoItem)
-            }
-        )
-        recyclerRepoItems.adapter = mainListAdapter
-
         editQuery.setOnSearchAction { view, query ->
             search(view, query)
         }
@@ -69,10 +68,6 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel>() {
     }
 
     private fun initViewModel() = with(viewModel) {
-        repoItems.observe(viewLifecycleOwner) {
-            mainListAdapter.submitList(it)
-        }
-
         firstRunChecking.observe(viewLifecycleOwner) { isFirstRun ->
             if (isFirstRun) {
                 toast(R.string.msg_first_run)
