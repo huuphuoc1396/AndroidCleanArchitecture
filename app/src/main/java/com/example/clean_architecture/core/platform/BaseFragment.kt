@@ -150,7 +150,9 @@ abstract class BaseFragment<VB : ViewDataBinding, VM : ViewModel> : Fragment() {
 
     open fun showLoading(isLoading: Boolean) {
         if (isLoading && activity.isAvailable()) {
-            loadingDialogFragment = LoadingDialogFragment.newInstance()
+            if (loadingDialogFragment == null) {
+                loadingDialogFragment = LoadingDialogFragment.newInstance()
+            }
             loadingDialogFragment?.showIfNotExist(childFragmentManager, LoadingDialogFragment.TAG)
         } else {
             loadingDialogFragment?.dismissIfAdded()
