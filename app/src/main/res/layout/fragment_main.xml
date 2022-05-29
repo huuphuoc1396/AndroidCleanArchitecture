@@ -32,27 +32,6 @@
 
         </com.google.android.material.appbar.AppBarLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInput"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:hint="@string/msg_type_your_query"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/appBar">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/editQuery"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:imeOptions="actionSearch"
-                android:inputType="text" />
-        </com.google.android.material.textfield.TextInputLayout>
-
         <androidx.compose.ui.platform.ComposeView
             android:id="@+id/composeView"
             android:layout_width="0dp"
@@ -60,7 +39,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInput" />
+            app:layout_constraintTop_toBottomOf="@+id/appBar" />
 
         <TextView
             android:layout_width="wrap_content"

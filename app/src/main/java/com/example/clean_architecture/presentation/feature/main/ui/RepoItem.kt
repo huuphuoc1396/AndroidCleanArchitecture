@@ -1,4 +1,4 @@
-package com.example.clean_architecture.presentation.feature.main.list
+package com.example.clean_architecture.presentation.feature.main.ui
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
