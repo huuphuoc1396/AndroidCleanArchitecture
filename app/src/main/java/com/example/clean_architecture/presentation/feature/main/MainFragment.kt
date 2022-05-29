@@ -6,10 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Scaffold
+import androidx.compose.material.Text
+import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -48,6 +52,19 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel>() {
 
     @Composable
     private fun MainScreen() {
+        Scaffold(
+            topBar = {
+                TopAppBar(title = {
+                    Text(text = stringResource(id = R.string.app_name))
+                })
+            },
+        ) {
+            MainBody()
+        }
+    }
+
+    @Composable
+    private fun MainBody() {
         val isNoResults: Boolean by viewModel.isNoResults.observeAsState(false)
         val repoList: List<RepoItem> by viewModel.repoItems.observeAsState(listOf())
         var query: String by remember { mutableStateOf("") }
@@ -71,11 +88,6 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel>() {
                 modifier = Modifier.fillMaxSize()
             )
         }
-    }
-
-    override fun onBindVariable() {
-        super.onBindVariable()
-        viewDataBinding.viewModel = viewModel
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
