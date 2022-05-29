@@ -4,15 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -21,6 +19,7 @@ import com.example.clean_architecture.core.extension.dismissKeyboard
 import com.example.clean_architecture.core.platform.BaseFragment
 import com.example.clean_architecture.databinding.FragmentMainBinding
 import com.example.clean_architecture.presentation.feature.main.model.RepoItem
+import com.example.clean_architecture.presentation.feature.main.ui.NoResults
 import com.example.clean_architecture.presentation.feature.main.ui.RepoList
 import com.example.clean_architecture.presentation.feature.main.ui.SearchInput
 import dagger.hilt.android.AndroidEntryPoint
@@ -49,8 +48,13 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel>() {
 
     @Composable
     private fun MainScreen() {
-        Column {
-            var query: String by remember { mutableStateOf("") }
+        val isNoResults: Boolean by viewModel.isNoResults.observeAsState(false)
+        val repoList: List<RepoItem> by viewModel.repoItems.observeAsState(listOf())
+        var query: String by remember { mutableStateOf("") }
+        if (isNoResults) {
+            NoResults(modifier = Modifier.fillMaxSize())
+        }
+        Column(Modifier.fillMaxSize()) {
             SearchInput(
                 text = query,
                 label = stringResource(id = R.string.msg_type_your_query),
@@ -58,7 +62,7 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel>() {
                 onActionSearch = { search(requireView(), query) },
                 modifier = Modifier.fillMaxWidth()
             )
-            val repoList: List<RepoItem> by viewModel.repoItems.observeAsState(listOf())
+            Spacer(Modifier.size(16.dp))
             RepoList(
                 repoList,
                 onItemClick = { repoItem ->
