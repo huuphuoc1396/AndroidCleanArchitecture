@@ -13,7 +13,6 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -43,15 +42,28 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel>() {
     ): FragmentMainBinding {
         return FragmentMainBinding.inflate(inflater, container, false).apply {
             composeView.setContent {
+                val isNoResults: Boolean by viewModel.isNoResults.observeAsState(false)
+                val repoList: List<RepoItem> by viewModel.repoItems.observeAsState(listOf())
+                var query: String by remember { mutableStateOf("") }
                 MaterialTheme {
-                    MainScreen()
+                    MainScreen(
+                        isNoResults = isNoResults,
+                        query = query,
+                        onQueryChanged = { query = it },
+                        repoList = repoList
+                    )
                 }
             }
         }
     }
 
     @Composable
-    private fun MainScreen() {
+    private fun MainScreen(
+        isNoResults: Boolean,
+        query: String,
+        onQueryChanged: (query: String) -> Unit,
+        repoList: List<RepoItem>,
+    ) {
         Scaffold(
             topBar = {
                 TopAppBar(title = {
@@ -59,15 +71,22 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel>() {
                 })
             },
         ) {
-            MainBody()
+            MainBody(
+                isNoResults = isNoResults,
+                query = query,
+                onQueryChanged = onQueryChanged,
+                repoList = repoList
+            )
         }
     }
 
     @Composable
-    private fun MainBody() {
-        val isNoResults: Boolean by viewModel.isNoResults.observeAsState(false)
-        val repoList: List<RepoItem> by viewModel.repoItems.observeAsState(listOf())
-        var query: String by remember { mutableStateOf("") }
+    private fun MainBody(
+        isNoResults: Boolean,
+        query: String,
+        onQueryChanged: (query: String) -> Unit,
+        repoList: List<RepoItem>,
+    ) {
         if (isNoResults) {
             NoResults(modifier = Modifier.fillMaxSize())
         }
@@ -75,7 +94,7 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel>() {
             SearchInput(
                 text = query,
                 label = stringResource(id = R.string.msg_type_your_query),
-                onValueChanged = { text -> query = text },
+                onValueChanged = onQueryChanged,
                 onActionSearch = { search(requireView(), query) },
                 modifier = Modifier.fillMaxWidth()
             )

@@ -29,7 +29,7 @@ fun PreviewRepoItem() {
             owner = OwnerItem(
                 id = 0,
                 login = "me",
-                avatarUrl = ""
+                avatarUrl = "https://developer.android.com/images/logos/android.svg"
             )
         ),
         Modifier.fillMaxWidth()
