@@ -13,9 +13,9 @@ import org.junit.Test
 import kotlin.random.Random
 
 @ExperimentalStdlibApi
-class SearchReposTest {
+class SearchReposUseCaseTest {
     private val repoRepository: RepoRepository = mockk()
-    private val searchReposUseCase = SearchRepos(
+    private val searchReposUseCase = SearchReposUseCase(
         repoRepository = repoRepository
     )
 
@@ -30,7 +30,7 @@ class SearchReposTest {
         } returns expected
 
         val actual = searchReposUseCase(
-            params = SearchRepos.Params(query)
+            params = SearchReposUseCase.Params(query)
         )
 
         Assert.assertEquals(expected, actual)
@@ -47,7 +47,7 @@ class SearchReposTest {
         } returns expected
 
         val actual = searchReposUseCase(
-            params = SearchRepos.Params(query)
+            params = SearchReposUseCase.Params(query)
         )
 
         Assert.assertEquals(expected, actual)

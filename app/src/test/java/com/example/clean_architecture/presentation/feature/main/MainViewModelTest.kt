@@ -9,14 +9,13 @@ import com.example.clean_architecture.domain.core.functional.ResultWrapper
 import com.example.clean_architecture.domain.core.interactor.params.EmptyParams
 import com.example.clean_architecture.domain.model.Owner
 import com.example.clean_architecture.domain.model.Repo
-import com.example.clean_architecture.domain.usecase.IsFirstRun
-import com.example.clean_architecture.domain.usecase.SearchRepos
-import com.example.clean_architecture.domain.usecase.SetFirstRun
+import com.example.clean_architecture.domain.usecase.IsFirstRunUseCase
+import com.example.clean_architecture.domain.usecase.SearchReposUseCase
+import com.example.clean_architecture.domain.usecase.SetFirstRunUseCase
 import com.example.clean_architecture.presentation.feature.main.mapper.RepoItemMapper
 import com.example.clean_architecture.presentation.feature.main.model.OwnerItem
 import com.example.clean_architecture.presentation.feature.main.model.RepoItem
 import io.mockk.*
-import kotlinx.coroutines.flow.flowOf
 import org.junit.Rule
 import org.junit.Test
 import kotlin.random.Random
@@ -28,9 +27,9 @@ class MainViewModelTest {
     @JvmField
     val instantExecutorRule = InstantTaskExecutorRule()
 
-    private val isFirstRun: IsFirstRun = mockk()
-    private val setFirstRun: SetFirstRun = mockk()
-    private val searchRepos: SearchRepos = mockk()
+    private val isFirstRunUseCase: IsFirstRunUseCase = mockk()
+    private val setFirstRunUseCase: SetFirstRunUseCase = mockk()
+    private val searchReposUseCase: SearchReposUseCase = mockk()
     private val repoItemMapper: RepoItemMapper = mockk()
 
     private val repoItemObserver: Observer<List<RepoItem>> = mockk(relaxed = true)
@@ -40,14 +39,14 @@ class MainViewModelTest {
 
     @Test
     fun `searchRepos query isn't empty and repoList isn't empty`() {
-        every {
-            isFirstRun(EmptyParams)
-        } returns flowOf(ResultWrapper.Success(false))
+        coEvery {
+            isFirstRunUseCase(EmptyParams)
+        } returns ResultWrapper.Success(false)
 
         val mainViewModel = MainViewModel(
-            isFirstRun = isFirstRun,
-            setFirstRun = setFirstRun,
-            searchRepos = searchRepos,
+            isFirstRunUseCase = isFirstRunUseCase,
+            setFirstRunUseCase = setFirstRunUseCase,
+            searchReposUseCase = searchReposUseCase,
             repoItemMapper = repoItemMapper,
         )
         val query = Random.nextString()
@@ -96,7 +95,7 @@ class MainViewModelTest {
         val repoItemList: List<RepoItem> = listOf(repoItem1, repoItem2)
 
         coEvery {
-            searchRepos(params = SearchRepos.Params(query.lowercase()))
+            searchReposUseCase(params = SearchReposUseCase.Params(query.lowercase()))
         } returns ResultWrapper.Success(repoList)
 
         every {
@@ -120,14 +119,14 @@ class MainViewModelTest {
 
     @Test
     fun `searchRepos query isn't empty and repoList is empty`() {
-        every {
-            isFirstRun(EmptyParams)
-        } returns flowOf(ResultWrapper.Success(false))
+        coEvery {
+            isFirstRunUseCase(EmptyParams)
+        } returns ResultWrapper.Success(false)
 
         val mainViewModel = MainViewModel(
-            isFirstRun = isFirstRun,
-            setFirstRun = setFirstRun,
-            searchRepos = searchRepos,
+            isFirstRunUseCase = isFirstRunUseCase,
+            setFirstRunUseCase = setFirstRunUseCase,
+            searchReposUseCase = searchReposUseCase,
             repoItemMapper = repoItemMapper,
         )
         val query = Random.nextString()
@@ -135,7 +134,7 @@ class MainViewModelTest {
         val repoItemList: List<RepoItem> = listOf()
 
         coEvery {
-            searchRepos(params = SearchRepos.Params(query.lowercase()))
+            searchReposUseCase(params = SearchReposUseCase.Params(query.lowercase()))
         } returns ResultWrapper.Success(repoList)
 
         every {
@@ -159,14 +158,14 @@ class MainViewModelTest {
 
     @Test
     fun `searchRepos query is empty`() {
-        every {
-            isFirstRun(EmptyParams)
-        } returns flowOf(ResultWrapper.Success(false))
+        coEvery {
+            isFirstRunUseCase(EmptyParams)
+        } returns ResultWrapper.Success(false)
 
         val mainViewModel = MainViewModel(
-            isFirstRun = isFirstRun,
-            setFirstRun = setFirstRun,
-            searchRepos = searchRepos,
+            isFirstRunUseCase = isFirstRunUseCase,
+            setFirstRunUseCase = setFirstRunUseCase,
+            searchReposUseCase = searchReposUseCase,
             repoItemMapper = repoItemMapper,
         )
         val query = ""
@@ -178,21 +177,21 @@ class MainViewModelTest {
 
     @Test
     fun `searchRepos is error`() {
-        every {
-            isFirstRun(EmptyParams)
-        } returns flowOf(ResultWrapper.Success(false))
+        coEvery {
+            isFirstRunUseCase(EmptyParams)
+        } returns ResultWrapper.Success(false)
 
         val mainViewModel = MainViewModel(
-            isFirstRun = isFirstRun,
-            setFirstRun = setFirstRun,
-            searchRepos = searchRepos,
+            isFirstRunUseCase = isFirstRunUseCase,
+            setFirstRunUseCase = setFirstRunUseCase,
+            searchReposUseCase = searchReposUseCase,
             repoItemMapper = repoItemMapper,
         )
         val query = Random.nextString()
         val error = ApiFailure.Connection
 
         coEvery {
-            searchRepos(params = SearchRepos.Params(query.lowercase()))
+            searchReposUseCase(params = SearchReposUseCase.Params(query.lowercase()))
         } returns ResultWrapper.Failure(error)
 
         registerObserver(mainViewModel)

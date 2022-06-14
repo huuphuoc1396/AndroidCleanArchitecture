@@ -35,6 +35,11 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel>() {
         return FragmentMainBinding.inflate(inflater, container, false)
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        observeOnFragment()
+    }
+
     override fun onBindVariable() {
         super.onBindVariable()
         viewDataBinding.viewModel = viewModel
@@ -43,20 +48,27 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView()
-        initViewModel()
+        observeOnView()
     }
 
-    private fun initView() = with(viewDataBinding) {
+    private fun initView() {
+        setupListView()
+        setupQueryInput()
+    }
+
+    private fun setupQueryInput() = with(viewDataBinding) {
+        editQuery.setOnSearchAction { view, query ->
+            search(view, query)
+        }
+    }
+
+    private fun setupListView() = with(viewDataBinding) {
         mainListAdapter = MainListAdapter(
             onItemClickListener = { repoItem ->
                 navigateToDetail(repoItem)
             }
         )
         recyclerRepoItems.adapter = mainListAdapter
-
-        editQuery.setOnSearchAction { view, query ->
-            search(view, query)
-        }
     }
 
     private fun navigateToDetail(repoItem: RepoItem) {
@@ -68,16 +80,18 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel>() {
         )
     }
 
-    private fun initViewModel() = with(viewModel) {
-        repoItems.observe(viewLifecycleOwner) {
-            mainListAdapter.submitList(it)
-        }
-
-        firstRunChecking.observe(viewLifecycleOwner) { isFirstRun ->
+    private fun observeOnFragment() {
+        viewModel.firstRunChecking.observe(this@MainFragment) { isFirstRun ->
             if (isFirstRun) {
                 toast(R.string.msg_first_run)
-                setFistRun()
+                viewModel.setFistRun()
             }
+        }
+    }
+
+    private fun observeOnView() = with(viewModel) {
+        repoItems.observe(viewLifecycleOwner) {
+            mainListAdapter.submitList(it)
         }
     }
 

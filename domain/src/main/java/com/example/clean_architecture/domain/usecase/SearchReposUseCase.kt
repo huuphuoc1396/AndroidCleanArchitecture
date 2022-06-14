@@ -8,9 +8,9 @@ import com.example.clean_architecture.domain.model.Repo
 import com.example.clean_architecture.domain.repository.RepoRepository
 import javax.inject.Inject
 
-class SearchRepos @Inject constructor(
+class SearchReposUseCase @Inject constructor(
     private val repoRepository: RepoRepository,
-) : CoroutineUseCase<SearchRepos.Params, ResultWrapper<Failure, List<Repo>>>() {
+) : CoroutineUseCase<SearchReposUseCase.Params, ResultWrapper<Failure, List<Repo>>>() {
 
     override suspend fun execute(params: Params): ResultWrapper<Failure, List<Repo>> {
         return repoRepository.searchRepos(params.query)

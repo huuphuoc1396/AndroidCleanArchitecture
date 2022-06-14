@@ -1,15 +1,17 @@
 package com.example.clean_architecture.presentation.feature.main
 
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
+import androidx.lifecycle.viewModelScope
 import com.example.clean_architecture.core.platform.BaseViewModel
-import com.example.clean_architecture.domain.core.functional.getOrElse
 import com.example.clean_architecture.domain.core.functional.map
 import com.example.clean_architecture.domain.core.functional.onFailure
 import com.example.clean_architecture.domain.core.functional.onSuccess
 import com.example.clean_architecture.domain.core.interactor.params.EmptyParams
-import com.example.clean_architecture.domain.usecase.IsFirstRun
-import com.example.clean_architecture.domain.usecase.SearchRepos
-import com.example.clean_architecture.domain.usecase.SetFirstRun
+import com.example.clean_architecture.domain.usecase.IsFirstRunUseCase
+import com.example.clean_architecture.domain.usecase.SearchReposUseCase
+import com.example.clean_architecture.domain.usecase.SetFirstRunUseCase
 import com.example.clean_architecture.presentation.feature.main.mapper.RepoItemMapper
 import com.example.clean_architecture.presentation.feature.main.model.RepoItem
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -19,9 +21,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    isFirstRun: IsFirstRun,
-    private val setFirstRun: SetFirstRun,
-    private val searchRepos: SearchRepos,
+    private val isFirstRunUseCase: IsFirstRunUseCase,
+    private val setFirstRunUseCase: SetFirstRunUseCase,
+    private val searchReposUseCase: SearchReposUseCase,
     private val repoItemMapper: RepoItemMapper,
 ) : BaseViewModel() {
 
@@ -34,9 +36,12 @@ class MainViewModel @Inject constructor(
         repoItems.value.isNullOrEmpty() && !isLoading
     }
 
-    val firstRunChecking: LiveData<Boolean> = isFirstRun(EmptyParams)
-        .asLiveData()
-        .map { it.getOrElse(false) }
+    private val _firstRunChecking = MutableLiveData<Boolean>()
+    val firstRunChecking: LiveData<Boolean> = _firstRunChecking
+
+    init {
+        checkFirstRun()
+    }
 
     fun searchRepos(text: String) {
         val query = text.trim().lowercase()
@@ -44,7 +49,7 @@ class MainViewModel @Inject constructor(
             searchJob?.cancel()
             searchJob = viewModelScope.launch {
                 setLoading(true)
-                searchRepos(SearchRepos.Params(query))
+                searchReposUseCase(SearchReposUseCase.Params(query))
                     .map { repoItemMapper.mapList(it) }
                     .onSuccess { _repoItems.value = it }
                     .onFailure { handleFailure(it) }
@@ -54,6 +59,14 @@ class MainViewModel @Inject constructor(
     }
 
     fun setFistRun() {
-        viewModelScope.launch { setFirstRun(EmptyParams) }
+        viewModelScope.launch { setFirstRunUseCase(EmptyParams) }
+    }
+
+    private fun checkFirstRun() {
+        viewModelScope.launch {
+            isFirstRunUseCase(EmptyParams)
+                .onSuccess { _firstRunChecking.value = it }
+                .onFailure { handleFailure(it) }
+        }
     }
 }
