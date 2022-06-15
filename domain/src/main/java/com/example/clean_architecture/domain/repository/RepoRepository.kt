@@ -2,9 +2,9 @@ package com.example.clean_architecture.domain.repository
 
 import com.example.clean_architecture.domain.core.error.Failure
 import com.example.clean_architecture.domain.core.functional.ResultWrapper
-import com.example.clean_architecture.domain.model.Repo
+import com.example.clean_architecture.domain.model.RepoModel
 
 interface RepoRepository {
 
-    suspend fun searchRepos(query: String): ResultWrapper<Failure, List<Repo>>
+    suspend fun searchRepos(query: String): ResultWrapper<Failure, List<RepoModel>>
 }

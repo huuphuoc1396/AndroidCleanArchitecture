@@ -1,20 +1,20 @@
 package com.example.clean_architecture.data.remote.api
 
-import com.example.clean_architecture.domain.core.extension.nextString
 import com.example.clean_architecture.data.remote.api.common.BaseApiTest
 import com.example.clean_architecture.data.remote.api.common.HttpMethod
 import com.example.clean_architecture.data.remote.response.ItemResponse
 import com.example.clean_architecture.data.remote.response.OwnerResponse
 import com.example.clean_architecture.data.remote.response.RepoListResponse
 import com.example.clean_architecture.data.remote.response.ServerErrorResponse
-import com.example.clean_architecture.data.remote.retrofit.builder.DefaultRetrofitBuilder
 import com.example.clean_architecture.data.remote.retrofit.api.RepoApi
+import com.example.clean_architecture.data.remote.retrofit.builder.DefaultRetrofitBuilder
+import com.example.clean_architecture.domain.core.extension.nextString
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert
 import org.junit.Test
 import kotlin.random.Random
 
-class RepoApiTest : BaseApiTest() {
+class RepoModelApiTest : BaseApiTest() {
 
     private lateinit var repoApi: RepoApi
 

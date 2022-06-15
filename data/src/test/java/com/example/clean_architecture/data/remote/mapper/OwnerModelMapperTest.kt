@@ -1,7 +1,7 @@
 package com.example.clean_architecture.data.remote.mapper
 
 import com.example.clean_architecture.data.remote.response.OwnerResponse
-import com.example.clean_architecture.domain.model.Owner
+import com.example.clean_architecture.domain.model.OwnerModel
 import com.tngtech.java.junit.dataprovider.DataProvider
 import com.tngtech.java.junit.dataprovider.DataProviderRunner
 import com.tngtech.java.junit.dataprovider.UseDataProvider
@@ -10,14 +10,14 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(DataProviderRunner::class)
-class OwnerMapperTest {
+class OwnerModelMapperTest {
 
-    private val ownerMapper = OwnerMapper()
+    private val ownerModelMapper = OwnerModelMapper()
 
     @Test
     @UseDataProvider("dataProvider")
-    fun map(response: OwnerResponse?, expected: Owner) {
-        val actual = ownerMapper.map(response)
+    fun map(response: OwnerResponse?, expected: OwnerModel) {
+        val actual = ownerModelMapper.map(response)
         Assert.assertEquals(expected, actual)
     }
 
@@ -28,7 +28,7 @@ class OwnerMapperTest {
         fun dataProvider() = listOf(
             listOf(
                 null,
-                Owner(
+                OwnerModel(
                     id = 0,
                     avatarUrl = "",
                     login = ""
@@ -40,7 +40,7 @@ class OwnerMapperTest {
                     avatarUrl = null,
                     login = null
                 ),
-                Owner(
+                OwnerModel(
                     id = 0,
                     avatarUrl = "",
                     login = ""
@@ -52,7 +52,7 @@ class OwnerMapperTest {
                     avatarUrl = "https://avatars2.githubusercontent.com/u/23095877?v=4",
                     login = "open-android"
                 ),
-                Owner(
+                OwnerModel(
                     id = 82128465,
                     avatarUrl = "https://avatars2.githubusercontent.com/u/23095877?v=4",
                     login = "open-android"

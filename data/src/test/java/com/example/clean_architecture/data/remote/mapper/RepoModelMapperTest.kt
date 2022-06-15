@@ -2,8 +2,8 @@ package com.example.clean_architecture.data.remote.mapper
 
 import com.example.clean_architecture.data.remote.response.ItemResponse
 import com.example.clean_architecture.data.remote.response.OwnerResponse
-import com.example.clean_architecture.domain.model.Owner
-import com.example.clean_architecture.domain.model.Repo
+import com.example.clean_architecture.domain.model.OwnerModel
+import com.example.clean_architecture.domain.model.RepoModel
 import com.tngtech.java.junit.dataprovider.DataProvider
 import com.tngtech.java.junit.dataprovider.DataProviderRunner
 import com.tngtech.java.junit.dataprovider.UseDataProvider
@@ -14,38 +14,38 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(DataProviderRunner::class)
-class RepoMapperTest {
+class RepoModelMapperTest {
 
-    private val ownerMapper: OwnerMapper = mockk()
+    private val ownerModelMapper: OwnerModelMapper = mockk()
 
-    private val repoMapper = RepoMapper(
-        ownerMapper = ownerMapper
+    private val repoModelMapper = RepoModelMapper(
+        ownerModelMapper = ownerModelMapper
     )
 
     @Test
     @UseDataProvider("dataProvider")
-    fun map(response: ItemResponse?, expected: Repo) {
+    fun map(response: ItemResponse?, expected: RepoModel) {
         every {
-            ownerMapper.map(response?.owner)
-        } returns owner
-        val actual = repoMapper.map(response)
+            ownerModelMapper.map(response?.owner)
+        } returns ownerModel
+        val actual = repoModelMapper.map(response)
         Assert.assertEquals(expected, actual)
     }
 
     companion object {
         private val ownerResponse: OwnerResponse = mockk()
-        private val owner: Owner = mockk()
+        private val ownerModel: OwnerModel = mockk()
 
         @JvmStatic
         @DataProvider
         fun dataProvider() = listOf(
             listOf(
                 null,
-                Repo(
+                RepoModel(
                     id = 0,
                     name = "",
                     description = "",
-                    owner = owner
+                    ownerModel = ownerModel
                 )
             ),
             listOf(
@@ -55,11 +55,11 @@ class RepoMapperTest {
                     description = null,
                     owner = null
                 ),
-                Repo(
+                RepoModel(
                     id = 0,
                     name = "",
                     description = "",
-                    owner = owner
+                    ownerModel = ownerModel
                 )
             ),
             listOf(
@@ -69,11 +69,11 @@ class RepoMapperTest {
                     description = "Android App Example",
                     owner = ownerResponse
                 ),
-                Repo(
+                RepoModel(
                     id = 82128465,
                     name = "Android",
                     description = "Android App Example",
-                    owner = owner
+                    ownerModel = ownerModel
                 )
             )
         )

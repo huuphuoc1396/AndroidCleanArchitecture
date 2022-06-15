@@ -1,7 +1,7 @@
 package com.example.clean_architecture.presentation.mapper
 
-import com.example.clean_architecture.domain.model.Owner
-import com.example.clean_architecture.domain.model.Repo
+import com.example.clean_architecture.domain.model.OwnerModel
+import com.example.clean_architecture.domain.model.RepoModel
 import com.example.clean_architecture.presentation.feature.main.mapper.OwnerItemMapper
 import com.example.clean_architecture.presentation.feature.main.mapper.RepoItemMapper
 import com.example.clean_architecture.presentation.feature.main.model.OwnerItem
@@ -17,7 +17,7 @@ import org.junit.runner.RunWith
 
 
 @RunWith(DataProviderRunner::class)
-class RepoItemMapperTest {
+class RepoModelItemMapperTest {
 
     private val ownerItemMapper: OwnerItemMapper = mockk()
 
@@ -28,27 +28,27 @@ class RepoItemMapperTest {
 
     @Test
     @UseDataProvider("dataProvider")
-    fun map(repo: Repo, expected: RepoItem) {
+    fun map(repoModel: RepoModel, expected: RepoItem) {
         every {
-            ownerItemMapper.map(repo.owner)
+            ownerItemMapper.map(repoModel.ownerModel)
         } returns ownerItem
-        val actual = repoItemMapper.map(repo)
+        val actual = repoItemMapper.map(repoModel)
         Assert.assertEquals(expected, actual)
     }
 
     companion object {
-        private val owner: Owner = mockk()
+        private val ownerModel: OwnerModel = mockk()
         private val ownerItem: OwnerItem = mockk()
 
         @JvmStatic
         @DataProvider
         fun dataProvider() = listOf(
             listOf(
-                Repo(
+                RepoModel(
                     id = 82128465,
                     name = "Android",
                     description = "Android App Example",
-                    owner = owner
+                    ownerModel = ownerModel
                 ),
                 RepoItem(
                     id = 82128465,

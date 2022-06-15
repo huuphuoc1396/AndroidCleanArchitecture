@@ -1,14 +1,14 @@
 package com.example.clean_architecture.data.repository
 
 import com.example.clean_architecture.data.remote.error.RemoteFailureHandler
-import com.example.clean_architecture.data.remote.mapper.RepoMapper
+import com.example.clean_architecture.data.remote.mapper.RepoModelMapper
 import com.example.clean_architecture.data.remote.response.ItemResponse
 import com.example.clean_architecture.data.remote.response.RepoListResponse
 import com.example.clean_architecture.data.remote.retrofit.api.RepoApi
 import com.example.clean_architecture.domain.core.error.ApiFailure
 import com.example.clean_architecture.domain.core.extension.nextString
 import com.example.clean_architecture.domain.core.functional.ResultWrapper
-import com.example.clean_architecture.domain.model.Repo
+import com.example.clean_architecture.domain.model.RepoModel
 import io.mockk.coEvery
 import io.mockk.every
 import io.mockk.mockk
@@ -18,14 +18,14 @@ import org.junit.Test
 import kotlin.random.Random
 
 @ExperimentalStdlibApi
-class RepoRepositoryImplTest {
+class RepoModelRepositoryImplTest {
     private val repoApi: RepoApi = mockk()
-    private val repoMapper: RepoMapper = mockk()
+    private val repoModelMapper: RepoModelMapper = mockk()
     private val remoteCoroutineErrorHandler: RemoteFailureHandler = mockk()
 
     private val repoRepositoryImpl = RepoRepositoryImpl(
         repoApi = repoApi,
-        repoMapper = repoMapper,
+        repoModelMapper = repoModelMapper,
         remoteCoroutineErrorHandler = remoteCoroutineErrorHandler
     )
 
@@ -38,18 +38,18 @@ class RepoRepositoryImplTest {
             incompleteResults = false,
             items = repoItemListResponse
         )
-        val repoList: List<Repo> = mockk()
+        val repoModelList: List<RepoModel> = mockk()
 
         coEvery {
             repoApi.searchRepos(query)
         } returns repoListResponse
 
         every {
-            repoMapper.mapList(repoItemListResponse)
-        } returns repoList
+            repoModelMapper.mapList(repoItemListResponse)
+        } returns repoModelList
 
         val actual = repoRepositoryImpl.searchRepos(query)
-        val expected = ResultWrapper.Success(repoList)
+        val expected = ResultWrapper.Success(repoModelList)
 
         Assert.assertEquals(expected, actual)
     }

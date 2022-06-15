@@ -3,7 +3,7 @@ package com.example.clean_architecture.domain.usecase
 import com.example.clean_architecture.domain.core.error.ApiFailure
 import com.example.clean_architecture.domain.core.extension.nextString
 import com.example.clean_architecture.domain.core.functional.ResultWrapper
-import com.example.clean_architecture.domain.model.Repo
+import com.example.clean_architecture.domain.model.RepoModel
 import com.example.clean_architecture.domain.repository.RepoRepository
 import io.mockk.coEvery
 import io.mockk.mockk
@@ -22,8 +22,8 @@ class SearchReposUseCaseTest {
     @Test
     fun `searchRepos is Success`() = runBlocking {
         val query = Random.nextString()
-        val repoList: List<Repo> = mockk()
-        val expected = ResultWrapper.Success(repoList)
+        val repoModelList: List<RepoModel> = mockk()
+        val expected = ResultWrapper.Success(repoModelList)
 
         coEvery {
             repoRepository.searchRepos(query)

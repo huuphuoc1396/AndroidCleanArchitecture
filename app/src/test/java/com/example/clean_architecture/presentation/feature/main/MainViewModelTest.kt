@@ -7,8 +7,8 @@ import com.example.clean_architecture.domain.core.error.Failure
 import com.example.clean_architecture.domain.core.extension.nextString
 import com.example.clean_architecture.domain.core.functional.ResultWrapper
 import com.example.clean_architecture.domain.core.interactor.params.EmptyParams
-import com.example.clean_architecture.domain.model.Owner
-import com.example.clean_architecture.domain.model.Repo
+import com.example.clean_architecture.domain.model.OwnerModel
+import com.example.clean_architecture.domain.model.RepoModel
 import com.example.clean_architecture.domain.usecase.IsFirstRunUseCase
 import com.example.clean_architecture.domain.usecase.SearchReposUseCase
 import com.example.clean_architecture.domain.usecase.SetFirstRunUseCase
@@ -50,27 +50,27 @@ class MainViewModelTest {
             repoItemMapper = repoItemMapper,
         )
         val query = Random.nextString()
-        val repo1 = Repo(
+        val repoModel1 = RepoModel(
             id = 1,
             name = "name 1",
             description = "description 1",
-            owner = Owner(
+            ownerModel = OwnerModel(
                 id = 1,
                 login = "login 1",
                 avatarUrl = "avatarUrl1"
             )
         )
-        val repo2 = Repo(
+        val repoModel2 = RepoModel(
             id = 2,
             name = "name 2",
             description = "description 2",
-            owner = Owner(
+            ownerModel = OwnerModel(
                 id = 2,
                 login = "login 2",
                 avatarUrl = "avatarUrl2"
             )
         )
-        val repoList: List<Repo> = listOf(repo1, repo2)
+        val repoModelList: List<RepoModel> = listOf(repoModel1, repoModel2)
 
         val repoItem1 = RepoItem(
             id = 1,
@@ -96,10 +96,10 @@ class MainViewModelTest {
 
         coEvery {
             searchReposUseCase(params = SearchReposUseCase.Params(query.lowercase()))
-        } returns ResultWrapper.Success(repoList)
+        } returns ResultWrapper.Success(repoModelList)
 
         every {
-            repoItemMapper.mapList(repoList)
+            repoItemMapper.mapList(repoModelList)
         } returns repoItemList
 
         registerObserver(mainViewModel)
@@ -130,15 +130,15 @@ class MainViewModelTest {
             repoItemMapper = repoItemMapper,
         )
         val query = Random.nextString()
-        val repoList: List<Repo> = listOf()
+        val repoModelList: List<RepoModel> = listOf()
         val repoItemList: List<RepoItem> = listOf()
 
         coEvery {
             searchReposUseCase(params = SearchReposUseCase.Params(query.lowercase()))
-        } returns ResultWrapper.Success(repoList)
+        } returns ResultWrapper.Success(repoModelList)
 
         every {
-            repoItemMapper.mapList(repoList)
+            repoItemMapper.mapList(repoModelList)
         } returns repoItemList
 
         registerObserver(mainViewModel)
